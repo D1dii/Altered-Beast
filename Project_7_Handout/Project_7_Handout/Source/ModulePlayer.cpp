@@ -14,7 +14,7 @@
 ModulePlayer::ModulePlayer()
 {
 	// idle animation - just one sprite
-	idleAnim.PushBack({ 66, 1, 32, 14 });
+	idleAnim.PushBack({ 35 , 12, 40, 75 });
 
 	// move upwards
 	upAnim.PushBack({ 100, 1, 32, 14 });
@@ -27,6 +27,19 @@ ModulePlayer::ModulePlayer()
 	downAnim.PushBack({ 0, 1, 32, 14 });
 	downAnim.loop = false;
 	downAnim.speed = 0.1f;
+	
+	// Move right
+	rightAnim.PushBack({ 75, 12, 40, 75 });
+	rightAnim.PushBack({ 125, 12, 40, 75 });
+	rightAnim.PushBack({ 170, 12, 40, 75 });
+	rightAnim.speed = 0.1f;
+	
+	// Move left 
+	leftAnim.PushBack({ 75, 12, 40, 75 });
+	leftAnim.PushBack({ 125, 12, 40,75 });
+	leftAnim.PushBack({ 170, 12, 40, 75 });
+	leftAnim.speed = 0.1f;
+
 }
 
 ModulePlayer::~ModulePlayer()
@@ -40,14 +53,15 @@ bool ModulePlayer::Start()
 
 	bool ret = true;
 
-	texture = App->textures->Load("Assets/ship.png");
+	texture = App->textures->Load("Assets/protagonist.png");
+	
 	currentAnimation = &idleAnim;
 
 	laserFx = App->audio->LoadFx("Assets/laser.wav");
 	explosionFx = App->audio->LoadFx("Assets/explosion.wav");
 
-	position.x = 150;
-	position.y = 120;
+	position.x = 20;
+	position.y = 130;
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
 
@@ -58,15 +72,26 @@ update_status ModulePlayer::Update()
 {
 	// Moving the player with the camera scroll
 	App->player->position.x += 1;
-
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x -= speed;
+		if (currentAnimation != &leftAnim)
+		{
+			leftAnim.Reset();
+			flipType = true;
+			currentAnimation = &leftAnim;
+		}
 	}
 
 	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x += speed;
+		if (currentAnimation != &rightAnim)
+		{
+			rightAnim.Reset();
+			flipType = false;
+			currentAnimation = &rightAnim;
+		}
 	}
 
 	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
@@ -97,7 +122,9 @@ update_status ModulePlayer::Update()
 
 	// If no up/down movement detected, set the current animation back to idle
 	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE)
+		&& App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE)
 		currentAnimation = &idleAnim;
 
 	collider->SetPos(position.x, position.y);
@@ -119,7 +146,8 @@ update_status ModulePlayer::PostUpdate()
 	if (!destroyed)
 	{
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
-		App->render->Blit(texture, position.x, position.y, &rect);
+
+		App->render->Blit(texture, position.x, position.y, &rect, speed, flipType);
 	}
 
 	return update_status::UPDATE_CONTINUE;

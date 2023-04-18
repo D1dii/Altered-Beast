@@ -24,8 +24,10 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/background.png");
-	App->audio->PlayMusic("Assets/stage1.ogg", 1.0f);
+	bgTexture = App->textures->Load("Assets/firstBackground.png");
+	bg2Texture = App->textures->Load("Assets/secondBackground.png");
+	bg3Texture = App->textures->Load("Assets/thirdBackground.png");
+	App->audio->PlayMusic("Assets/round1.ogg", 1.0f);
 
 	//Bottomside collider
 	App->collisions->AddCollider({ 0, 224, 3930, 16 }, Collider::Type::WALL);
@@ -69,7 +71,10 @@ update_status ModuleScene::Update()
 update_status ModuleScene::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	App->render->Blit(bgTexture, 0, 0, NULL);
+	App->render->Blit(bg2Texture, 0, 0, NULL, 0.6f);
+	App->render->Blit(bgTexture, 0, -120, NULL, 0.7f);
+	
+	App->render->Blit(bg3Texture, 0, -20, NULL, 0.8f);
 
 	return update_status::UPDATE_CONTINUE;
 }

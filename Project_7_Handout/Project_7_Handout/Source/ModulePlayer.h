@@ -5,6 +5,8 @@
 #include "Animation.h"
 #include "p2Point.h"
 
+#include <SDL/include/SDL_render.h>
+
 struct SDL_Texture;
 struct Collider;
 
@@ -50,12 +52,16 @@ public:
 	Animation idleAnim;
 	Animation upAnim;
 	Animation downAnim;
+	Animation leftAnim;
+	Animation rightAnim;
 
 	// The player's collider
 	Collider* collider = nullptr;
 
 	// A flag to detect when the player has been destroyed
 	bool destroyed = false;
+
+	bool flipType;
 
 	// A countdown to when the player gets destroyed. After a while, the game exits
 	uint destroyedCountdown = 120;

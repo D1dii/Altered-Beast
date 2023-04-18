@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "SDL/include/SDL_Rect.h"
+#include <SDL/include/SDL_render.h>
 
 struct SDL_Texture;
 struct SDL_Renderer;
@@ -42,13 +43,15 @@ public:
 	// Param x,y		- Position x,y in the screen (upper left axis)
 	// Param section	- The portion of the texture we want to copy. nullptr for the entire texture
 	// Param speed		- The amount of effect that is applied to the sprite depending on the camera
-	bool Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section = nullptr, float speed = 1.0f);
+	bool Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section = nullptr, float speed = 1.0f, bool flip = false);
 
 	bool DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, float speed = 1.0f);
 
 public:
 	// Rendering context used for any rendering action
 	SDL_Renderer* renderer = nullptr;
+
+	SDL_RendererFlip flipType = SDL_FLIP_NONE;
 
 	// A rectangle that represents the camera section
 	// Sprites will be rendered to the screen depending on the camera position
