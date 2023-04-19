@@ -30,12 +30,19 @@ public:
 public:
 	
 	// The scene sprite sheet loaded into an SDL_Texture
-	SDL_Texture* bgTexture = nullptr;
-	SDL_Texture* bg2Texture = nullptr;
-	SDL_Texture* bg3Texture = nullptr;
+	SDL_Texture* bgbackTexture = nullptr;
+	SDL_Texture* bgfrontTexture = nullptr;
+	
+	
 	
 	// The sprite rectangle for the ground
 	SDL_Texture* starsTexture = nullptr;
+
+	Collider* bg3;
+	Collider* bg4;
+
+	//Screen scroll
+	int bg4counter = 639;
 };
 
 #endif

@@ -1,4 +1,4 @@
-﻿  Enemy_BrownShip.cpp
-C:\Users\didacgp\Desktop\Project_7_Handout\Project_7_Handout\Source\Animation.h(54,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\didacgp\Desktop\Project_7_Handout\Project_7_Handout\Source\Animation.h(56,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Project_7_Handout.vcxproj -> C:\Users\didacgp\Desktop\Project_7_Handout\Debug\Project_7_Handout.exe
+﻿  ModuleScene.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Project_7_Handout.vcxproj -> C:\Users\didac\Documents\GitHub\Altered-Beast\Main Game\Debug\Project_7_Handout.exe

@@ -24,17 +24,19 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/firstBackground.png");
-	bg2Texture = App->textures->Load("Assets/secondBackground.png");
-	bg3Texture = App->textures->Load("Assets/thirdBackground.png");
+	bgbackTexture = App->textures->Load("Assets/backbg.png");
+	bgfrontTexture = App->textures->Load("Assets/frontbg.png");
+	
 	App->audio->PlayMusic("Assets/round1.ogg", 1.0f);
 
 	//Bottomside collider
-	App->collisions->AddCollider({ 0, 224, 3930, 16 }, Collider::Type::WALL);
+	bg3 = App->collisions->AddCollider({ 0, 220, 639, 240 }, Collider::Type::WALL);
+	bg4 = App->collisions->AddCollider({ 639, 220, 639, 240 }, Collider::Type::WALL);
 
 	//First two columns colliders
 	App->collisions->AddCollider({ 1375, 0, 111, 96 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 1375, 145, 111, 96 }, Collider::Type::WALL);
+
 
 	// Enemies ---
 	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 600, 80);
@@ -62,7 +64,12 @@ bool ModuleScene::Start()
 
 update_status ModuleScene::Update()
 {
-	App->render->camera.x += 3;
+	App->render->camera.x += 1;
+
+	if (App->render->camera.x == bg4counter) {
+
+	}
+
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -71,10 +78,8 @@ update_status ModuleScene::Update()
 update_status ModuleScene::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	App->render->Blit(bg2Texture, 0, 0, NULL, 0.6f);
-	App->render->Blit(bgTexture, 0, -120, NULL, 0.7f);
-	
-	App->render->Blit(bg3Texture, 0, -20, NULL, 0.8f);
+	App->render->Blit(bgbackTexture, 0, 0, NULL, 0.6f);
+	App->render->Blit(bgfrontTexture, 0, 187, NULL, 0.7f);
 
 	return update_status::UPDATE_CONTINUE;
 }
