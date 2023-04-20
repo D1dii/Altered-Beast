@@ -16,15 +16,8 @@ ModulePlayer::ModulePlayer()
 	// idle animation - just one sprite
 	idleAnim.PushBack({ 35 , 12, 40, 75 });
 
-	// move upwards
-	upAnim.PushBack({ 100, 1, 32, 14 });
-	upAnim.PushBack({ 132, 0, 32, 14 });
-	upAnim.loop = false;
-	upAnim.speed = 0.1f;
-
 	// Move down
-	downAnim.PushBack({ 33, 1, 32, 14 });
-	downAnim.PushBack({ 0, 1, 32, 14 });
+	downAnim.PushBack({ 183, 176, 34, 43});
 	downAnim.loop = false;
 	downAnim.speed = 0.1f;
 	
@@ -40,6 +33,13 @@ ModulePlayer::ModulePlayer()
 	leftAnim.PushBack({ 170, 12, 40, 75 });
 	leftAnim.speed = 0.1f;
 
+	// Punch Attack
+	punchAnim.PushBack({ 7, 86, 52, 72 });
+	punchAnim.PushBack({ 66, 87, 35, 72 });
+	punchAnim.PushBack({ 107, 88, 61, 71 });
+	punchAnim.speed = 0.1f;
+	punchAnim.loop = false;
+	
 }
 
 ModulePlayer::~ModulePlayer()
@@ -75,6 +75,8 @@ update_status ModulePlayer::Update()
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x -= speed;
+		position.y = 150;
+		collider->rect.h = 50;
 		if (currentAnimation != &leftAnim)
 		{
 			leftAnim.Reset();
@@ -86,6 +88,8 @@ update_status ModulePlayer::Update()
 	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x += speed;
+		position.y = 150;
+		collider->rect.h = 50;
 		if (currentAnimation != &rightAnim)
 		{
 			rightAnim.Reset();
@@ -93,19 +97,38 @@ update_status ModulePlayer::Update()
 			currentAnimation = &rightAnim;
 		}
 	}
+	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+	{
+		position.y = 175;
+		collider->rect.h = 25;
+		if (currentAnimation != &downAnim)
+		{
+			downAnim.Reset();
+			currentAnimation = &downAnim;
+		}
+	}
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
-		App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
-		App->audio->PlayFx(laserFx);
+		if (currentAnimation != &punchAnim) {
+			punchAnim.Reset();
+			currentAnimation = &punchAnim;
+		}
+		
 	}
-
+	
 	// If no up/down movement detected, set the current animation back to idle
 	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE)
+		&& App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE:: KEY_IDLE) {
 		currentAnimation = &idleAnim;
+		position.y = 150;
+		collider->rect.h = 50;
+	}
+
+	
+
 
 	collider->SetPos(position.x + 8, position.y + 8);
 
@@ -129,6 +152,8 @@ update_status ModulePlayer::PostUpdate()
 
 		App->render->Blit(texture, position.x, position.y, &rect, speed, flipType);
 	}
+
+	
 
 	return update_status::UPDATE_CONTINUE;
 }

@@ -1,5 +1,5 @@
 ﻿  ModulePlayer.cpp
-C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(54,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(56,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\ModulePlayer.cpp(130,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Project_7_Handout.vcxproj -> C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Debug\Project_7_Handout.exe
+C:\Users\didac\Documents\GitHub\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Main Game\Project_7_Handout\Source\ModulePlayer.cpp(153,61): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+  Project_7_Handout.vcxproj -> C:\Users\didac\Documents\GitHub\Altered-Beast\Main Game\Debug\Project_7_Handout.exe
