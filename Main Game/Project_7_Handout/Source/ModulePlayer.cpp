@@ -61,9 +61,9 @@ bool ModulePlayer::Start()
 	explosionFx = App->audio->LoadFx("Assets/explosion.wav");
 
 	position.x = 20;
-	position.y = 130;
+	position.y = 150;
 
-	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
+	collider = App->collisions->AddCollider({ position.x + 8, position.y + 8, 20, 50 }, Collider::Type::PLAYER, this);
 
 	return ret;
 }
@@ -94,26 +94,6 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
-	{
-		position.y += speed;
-		if (currentAnimation != &downAnim)
-		{
-			downAnim.Reset();
-			currentAnimation = &downAnim;
-		}
-	}
-
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
-	{
-		position.y -= speed;
-		if (currentAnimation != &upAnim)
-		{
-			upAnim.Reset();
-			currentAnimation = &upAnim;
-		}
-	}
-
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
 		App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
@@ -127,7 +107,7 @@ update_status ModulePlayer::Update()
 		&& App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE)
 		currentAnimation = &idleAnim;
 
-	collider->SetPos(position.x, position.y);
+	collider->SetPos(position.x + 8, position.y + 8);
 
 	currentAnimation->Update();
 

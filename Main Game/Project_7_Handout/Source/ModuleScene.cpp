@@ -30,8 +30,8 @@ bool ModuleScene::Start()
 	App->audio->PlayMusic("Assets/round1.ogg", 1.0f);
 
 	//Bottomside collider
-	bg3 = App->collisions->AddCollider({ 0, 220, 639, 240 }, Collider::Type::WALL);
-	bg4 = App->collisions->AddCollider({ 639, 220, 639, 240 }, Collider::Type::WALL);
+	bgfront = App->collisions->AddCollider({ 0, 217, 1600, 24}, Collider::Type::WALL);
+	
 
 	//First two columns colliders
 	App->collisions->AddCollider({ 1375, 0, 111, 96 }, Collider::Type::WALL);
@@ -66,9 +66,7 @@ update_status ModuleScene::Update()
 {
 	App->render->camera.x += 1;
 
-	if (App->render->camera.x == bg4counter) {
-
-	}
+	
 
 
 	return update_status::UPDATE_CONTINUE;

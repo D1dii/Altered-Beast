@@ -38,8 +38,7 @@ public:
 	// The sprite rectangle for the ground
 	SDL_Texture* starsTexture = nullptr;
 
-	Collider* bg3;
-	Collider* bg4;
+	Collider* bgfront;
 
 	//Screen scroll
 	int bg4counter = 639;
