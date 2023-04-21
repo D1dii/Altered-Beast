@@ -25,6 +25,10 @@ public:
 	{
 		frames[totalFrames++] = rect;
 	}
+	void PullBack(int numFrames)
+	{
+		frames[totalFrames -= numFrames];
+	}
 
 	void Reset()
 	{

@@ -14,33 +14,32 @@
 ModulePlayer::ModulePlayer()
 {
 	// idle animation - just one sprite
-	idleAnim.PushBack({ 35 , 12, 40, 75 });
+	idleAnim.PushBack({ 35 , 12 + 280 * phase, 40, 75 });
 
 	// Move down
-	downAnim.PushBack({ 183, 176, 34, 43});
+	downAnim.PushBack({ 183, 176, 34, 43 });
 	downAnim.loop = false;
 	downAnim.speed = 0.1f;
-	
+
 	// Move right
-	rightAnim.PushBack({75, 12, 40, 75});
-	rightAnim.PushBack({ 125, 12, 40, 75 });
-	rightAnim.PushBack({ 170, 12, 40, 75 });
+	rightAnim.PushBack({ 75, 12 + 280 * phase, 40, 75 });
+	rightAnim.PushBack({ 125, 12 + 280 * phase, 40, 75 });
+	rightAnim.PushBack({ 170, 12 + 280 * phase, 40, 75 });
 	rightAnim.speed = 0.1f;
-	rightAnim.speed = 0.1f;
-	
+
 	// Move left 
-	leftAnim.PushBack({ 75, 12, 40, 75 });
-	leftAnim.PushBack({ 125, 12, 40,75 });
-	leftAnim.PushBack({ 170, 12, 40, 75 });
+	leftAnim.PushBack({ 75, 12 + 280 * phase, 40, 75 });
+	leftAnim.PushBack({ 125, 12 + 280 * phase, 40,75 });
+	leftAnim.PushBack({ 170, 12 + 280 * phase, 40, 75 });
 	leftAnim.speed = 0.1f;
 
 	// Punch Attack
-	punchAnim.PushBack({ 7, 86, 52, 72 });
-	punchAnim.PushBack({ 66, 87, 35, 72 });
-	punchAnim.PushBack({ 107, 88, 61, 71 });
+	punchAnim.PushBack({ 7, 86 + 280 * phase, 52, 72 });
+	punchAnim.PushBack({ 66, 87 + 280 * phase, 35, 72 });
+	punchAnim.PushBack({ 107, 88 + 280 * phase, 61, 71 });
 	punchAnim.speed = 0.1f;
 	punchAnim.loop = false;
-	
+
 }
 
 ModulePlayer::~ModulePlayer()
@@ -55,8 +54,7 @@ bool ModulePlayer::Start()
 	bool ret = true;
 
 	texture = App->textures->Load("Assets/protagonist.png");
-	
-	
+
 	currentAnimation = &idleAnim;
 
 	laserFx = App->audio->LoadFx("Assets/laser.wav");
@@ -116,20 +114,52 @@ update_status ModulePlayer::Update()
 			punchAnim.Reset();
 			currentAnimation = &punchAnim;
 		}
-		
 	}
-	
+	if (App->input->keys[SDL_SCANCODE_0] == KEY_STATE::KEY_REPEAT)
+	{
+		phase = 0;
+	}
+	if (App->input->keys[SDL_SCANCODE_1] == KEY_STATE::KEY_REPEAT)
+	{
+		phase = 1;
+	}
+	if (App->input->keys[SDL_SCANCODE_2] == KEY_STATE::KEY_REPEAT)
+	{
+		phase = 2;
+	}
+
+	//This is for loading the new animations 
+	idleAnim.PullBack(1);
+	idleAnim.PushBack({ 35 , 12 + 280 * phase, 40, 75 });
+	rightAnim.PullBack(3);
+	rightAnim.PushBack({ 75, 12 + 280 * phase, 40, 75 });
+	rightAnim.PushBack({ 125, 12 + 280 * phase, 40, 75 });
+	rightAnim.PushBack({ 170, 12 + 280 * phase, 40, 75 });
+	leftAnim.PullBack(3);
+	leftAnim.PushBack({ 75, 12 + 280 * phase, 40, 75 });
+	leftAnim.PushBack({ 125, 12 + 280 * phase, 40,75 });
+	leftAnim.PushBack({ 170, 12 + 280 * phase, 40, 75 });
+	punchAnim.PullBack(3);
+	punchAnim.PushBack({ 7, 86 + 280 * phase, 52, 72 });
+	punchAnim.PushBack({ 66, 87 + 280 * phase, 35, 72 });
+	punchAnim.PushBack({ 107, 88 + 280 * phase, 61, 71 });
+
+
+
+
+
 	// If no up/down movement detected, set the current animation back to idle
 	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE:: KEY_IDLE) {
+		&& App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_IDLE)
+	{
 		currentAnimation = &idleAnim;
 		position.y = 150;
 		collider->rect.h = 50;
 	}
 
-	
+
 
 
 	collider->SetPos(position.x + 8, position.y + 8);
@@ -155,7 +185,7 @@ update_status ModulePlayer::PostUpdate()
 		App->render->Blit(texture, position.x, position.y, &rect, speed, flipType);
 	}
 
-	
+
 
 	return update_status::UPDATE_CONTINUE;
 }

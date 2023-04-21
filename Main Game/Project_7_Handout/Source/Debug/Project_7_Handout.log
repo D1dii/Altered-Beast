@@ -1,5 +1,15 @@
-﻿  ModulePlayer.cpp
-C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(54,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(56,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\ModulePlayer.cpp(155,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Project_7_Handout.vcxproj -> C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Debug\Project_7_Handout.exe
+﻿  Application.cpp
+C:\Users\samuelm1\Desktop\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\samuelm1\Desktop\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  ModuleScene.cpp
+C:\Users\samuelm1\Desktop\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\samuelm1\Desktop\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  ModulePlayer.cpp
+C:\Users\samuelm1\Desktop\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\samuelm1\Desktop\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\samuelm1\Desktop\Altered-Beast\Main Game\Project_7_Handout\Source\ModulePlayer.cpp(185,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Path.cpp
+C:\Users\samuelm1\Desktop\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\samuelm1\Desktop\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  Project_7_Handout.vcxproj -> C:\Users\samuelm1\Desktop\Altered-Beast\Main Game\Debug\Project_7_Handout.exe
