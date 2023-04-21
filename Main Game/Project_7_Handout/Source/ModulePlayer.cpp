@@ -22,9 +22,10 @@ ModulePlayer::ModulePlayer()
 	downAnim.speed = 0.1f;
 	
 	// Move right
-	rightAnim.PushBack({ 75, 12, 40, 75 });
+	rightAnim.PushBack({75, 12, 40, 75});
 	rightAnim.PushBack({ 125, 12, 40, 75 });
 	rightAnim.PushBack({ 170, 12, 40, 75 });
+	rightAnim.speed = 0.1f;
 	rightAnim.speed = 0.1f;
 	
 	// Move left 
@@ -54,6 +55,7 @@ bool ModulePlayer::Start()
 	bool ret = true;
 
 	texture = App->textures->Load("Assets/protagonist.png");
+	
 	
 	currentAnimation = &idleAnim;
 
