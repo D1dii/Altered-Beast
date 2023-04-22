@@ -57,11 +57,31 @@ public:
 	Animation leftAnim;
 	Animation rightAnim;
 	Animation punchAnim;
-
+	Animation kickAnim;
+	Animation crouchpunchAnim;
+	Animation crouchkickAnim;
 	
+	//States of Player
+
+	enum class state
+	{
+		IDLE,
+		MOVEMENT,
+		CROUCH,
+		PUNCH,
+		CROUCH_PUNCH,
+		KICK,
+		CROUCH_KICK
+	};
+
+	state playerState = state::IDLE;
+
+	int frame = 0;
 
 	// The player's collider
 	Collider* collider = nullptr;
+	Collider* punch = nullptr;
+	Collider* kick = nullptr;
 
 	// A flag to detect when the player has been destroyed
 	bool destroyed = false;

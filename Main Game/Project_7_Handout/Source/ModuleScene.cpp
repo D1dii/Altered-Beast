@@ -64,7 +64,7 @@ bool ModuleScene::Start()
 
 update_status ModuleScene::Update()
 {
-	App->render->camera.x += 1;
+	//App->render->camera.x += 1;
 
 	
 
