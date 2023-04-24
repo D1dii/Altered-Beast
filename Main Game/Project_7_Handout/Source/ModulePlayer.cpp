@@ -25,19 +25,19 @@ ModulePlayer::ModulePlayer()
 	rightAnim.PushBack({ 75, 12 + 280 * phase, 40, 75 });
 	rightAnim.PushBack({ 125, 12 + 280 * phase, 40, 75 });
 	rightAnim.PushBack({ 170, 12 + 280 * phase, 40, 75 });
-	rightAnim.speed = 0.1f;
+	rightAnim.speed = 0.2f;
 
 	// Move left 
 	leftAnim.PushBack({ 75, 12 + 280 * phase, 40, 75 });
 	leftAnim.PushBack({ 125, 12 + 280 * phase, 40,75 });
 	leftAnim.PushBack({ 170, 12 + 280 * phase, 40, 75 });
-	leftAnim.speed = 0.1f;
+	leftAnim.speed = 0.2f;
 
 	// Punch Attack
 	punchAnim.PushBack({ 7, 86 + 280 * phase, 52, 72 });
 	punchAnim.PushBack({ 66, 87 + 280 * phase, 35, 72 });
 	punchAnim.PushBack({ 107, 88 + 280 * phase, 61, 71 });
-	punchAnim.speed = 0.5f;
+	punchAnim.speed = 0.3f;
 	punchAnim.loop = false;
 
 	// Crouch Punch Attack
@@ -51,7 +51,7 @@ ModulePlayer::ModulePlayer()
 	// Crouch Kick Attack
 	crouchkickAnim.PushBack({ 287, 188, 52, 30 });
 	crouchkickAnim.PushBack({ 346, 165, 49, 53 });
-	crouchkickAnim.speed = 0.1f;
+	crouchkickAnim.speed = 0.3f;
 	crouchkickAnim.loop = false;
 
 
@@ -256,9 +256,6 @@ update_status ModulePlayer::Update()
 	}
 	//If Punch state / crunch / punch crunch / crunch kick
 	
-
-
-
 	collider->SetPos(position.x + 8, position.y + 8);
 	if (flipType) {
 		punch->SetPos(position.x - 2, position.y + 8);
@@ -290,7 +287,7 @@ update_status ModulePlayer::PostUpdate()
 		App->render->Blit(texture, position.x, position.y, &rect, speed, flipType);
 	}
 
-
+	
 
 	return update_status::UPDATE_CONTINUE;
 }
