@@ -66,7 +66,7 @@ bool ModuleScene::Start()
 
 update_status ModuleScene::Update()
 {
-	App->render->camera.x += 1;
+	//App->render->camera.x += 1;
 	bgleft->SetPos(App->render->camera.x*0.334, 0);
 	bgright->SetPos(App->render->camera.x*0.334+ 374, 0);
 	

@@ -46,7 +46,11 @@ ModulePlayer::ModulePlayer()
 	crouchpunchAnim.loop = false;
 
 	// Kick Attack
-
+	kickAnim.PushBack({ 174, 87 + 280 * phase, 46, 65 });
+	kickAnim.PushBack({ 227, 87 + 280 * phase, 36, 65 });
+	kickAnim.PushBack({ 269, 86 + 280 * phase, 61, 66 });
+	kickAnim.speed = 0.3f;
+	kickAnim.loop = false;
 
 	// Crouch Kick Attack
 	crouchkickAnim.PushBack({ 287, 188, 52, 30 });
@@ -81,7 +85,9 @@ bool ModulePlayer::Start()
 	collider = App->collisions->AddCollider({ position.x + 8, position.y + 8, 20, 50 }, Collider::Type::PLAYER, this);
 	punch = App->collisions->AddCollider({ position.x + 20, position.y + 8, 0, 0 }, Collider::Type::PLAYER_ATTACK, this);
 	kick = App->collisions->AddCollider({ position.x + 20, position.y + 8, 0, 0 }, Collider::Type::PLAYER_ATTACK, this);
-	
+	crouchkick = App->collisions->AddCollider({ position.x + 20, position.y + 8, 0, 0 }, Collider::Type::PLAYER_ATTACK, this);
+
+
 
 	return ret;
 }
@@ -149,9 +155,16 @@ update_status ModulePlayer::Update()
 		punch->rect.h = 0;
 		kick->rect.w = 0;
 		kick->rect.h = 0;
+		crouchkick->rect.w = 0;
+		crouchkick->rect.h = 0;
 		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN) {
 			punchAnim.Reset();
 			playerState = state::PUNCH;
+		}
+		else if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_DOWN)
+		{
+			kickAnim.Reset();
+			playerState = state::KICK;
 		}
 		break;
 		
@@ -171,6 +184,8 @@ update_status ModulePlayer::Update()
 		punch->rect.h = 0;
 		kick->rect.w = 0;
 		kick->rect.h = 0;
+		crouchkick->rect.w = 0;
+		crouchkick->rect.h = 0;
 		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN) 
 		{
 			crouchpunchAnim.Reset();
@@ -195,6 +210,21 @@ update_status ModulePlayer::Update()
 			frame = 0;
 		}
 		break;
+	case state::KICK:
+		currentAnimation = &kickAnim;
+		kickAnim.Update();
+		frame++;
+		position.y = 152;
+		kick->rect.w = 45;
+		kick->rect.h = 20;
+		kick->rect.x = position.x + 20;
+		kick->rect.y = position.y + 35;
+		if (frame >= 30)
+		{
+			playerState = state::IDLE;
+			frame = 0;
+		}
+		break;
 	case state::CROUCH_PUNCH:
 		currentAnimation = &crouchpunchAnim;
 		crouchpunchAnim.Update();
@@ -212,10 +242,10 @@ update_status ModulePlayer::Update()
 		crouchkickAnim.Update();
 		frame++;
 		position.y = 165;
-		kick->rect.x = position.x + 25;
-		kick->rect.y = position.y - 2;
-		kick->rect.w = 18;
-		kick->rect.h = 40;
+		crouchkick->rect.x = position.x + 25;
+		crouchkick->rect.y = position.y - 2;
+		crouchkick->rect.w = 18;
+		crouchkick->rect.h = 40;
 		if (frame >= 20) 
 		{
 			playerState = state::CROUCH;
@@ -247,7 +277,8 @@ update_status ModulePlayer::Update()
 	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE
-		&& playerState != state::PUNCH)
+		&& playerState != state::PUNCH
+		&& playerState != state::KICK)
 	{
 		currentAnimation = &idleAnim;
 		position.y = 150;
@@ -259,11 +290,13 @@ update_status ModulePlayer::Update()
 	collider->SetPos(position.x + 8, position.y + 8);
 	if (flipType) {
 		punch->SetPos(position.x - 2, position.y + 8);
-		kick->SetPos(position.x + 3, position.y - 2);
+		crouchkick->SetPos(position.x + 3, position.y - 2);
+		kick->SetPos(position.x - 5, position.y + 35);
 	}
 	else {
 		punch->SetPos(position.x + 20, position.y + 8);
-		kick->SetPos(position.x + 25, position.y - 2);
+		crouchkick->SetPos(position.x + 25, position.y - 2);
+		kick->SetPos(position.x + 20, position.y + 35);
 	}
 
 	currentAnimation->Update();
