@@ -1,5 +1,42 @@
-﻿  ModulePlayer.cpp
-C:\Users\didac\Documents\GitHub\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
-C:\Users\didac\Documents\GitHub\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\didac\Documents\GitHub\Altered-Beast\Main Game\Project_7_Handout\Source\ModulePlayer.cpp(280,61): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-  Project_7_Handout.vcxproj -> C:\Users\didac\Documents\GitHub\Altered-Beast\Main Game\Debug\Project_7_Handout.exe
+﻿  Application.cpp
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Collider.cpp
+  Enemy.cpp
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Enemy_BrownShip.cpp
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Enemy_RedBird.cpp
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Enemy_RedBird.cpp(27,26): warning C4244: '=': conversion from 'float' to 'TYPE', possible loss of data
+          with
+          [
+              TYPE=int
+          ]
+  ModuleCollisions.cpp
+  ModuleEnemies.cpp
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  ModuleParticles.cpp
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  ModulePlayer.cpp
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\ModulePlayer.cpp(290,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  ModuleRender.cpp
+  ModuleScene.cpp
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\ModuleScene.cpp(70,38): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\ModuleScene.cpp(71,45): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  ModuleTextures.cpp
+  Particle.cpp
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Project_7_Handout\Source\Particle.cpp(39,19): warning C4018: '>=': signed/unsigned mismatch
+  Generating Code...
+  Project_7_Handout.vcxproj -> C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Main Game\Debug\Project_7_Handout.exe
