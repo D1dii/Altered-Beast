@@ -39,6 +39,8 @@ public:
 	SDL_Texture* starsTexture = nullptr;
 
 	Collider* bgfront;
+	Collider* bgleft;
+	Collider* bgright;
 
 	//Screen scroll
 	int bg4counter = 639;

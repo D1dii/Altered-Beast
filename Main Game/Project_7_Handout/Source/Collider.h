@@ -13,8 +13,10 @@ struct Collider
 		WALL,
 		PLAYER,
 		ENEMY,
-		PLAYER_SHOT,
+		PLAYER_ATTACK,
 		ENEMY_SHOT,
+		SCREEN_LEFT,
+		SCREEN_RIGHT,
 
 		MAX
 	};

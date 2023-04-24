@@ -31,6 +31,8 @@ bool ModuleScene::Start()
 
 	//Bottomside collider
 	bgfront = App->collisions->AddCollider({ 0, 217, 1600, 24}, Collider::Type::WALL);
+	bgright = App->collisions->AddCollider({ 374, 0, 10, 240}, Collider::Type::SCREEN_RIGHT);
+	bgleft = App->collisions->AddCollider({ 0, 0, 10, 240}, Collider::Type::SCREEN_LEFT);
 	
 
 	//First two columns colliders
@@ -65,7 +67,8 @@ bool ModuleScene::Start()
 update_status ModuleScene::Update()
 {
 	App->render->camera.x += 1;
-
+	bgleft->SetPos(App->render->camera.x*0.334, 0);
+	bgright->SetPos(App->render->camera.x*0.334+ 374, 0);
 	
 
 

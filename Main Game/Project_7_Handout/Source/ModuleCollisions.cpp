@@ -14,32 +14,58 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::WALL][Collider::Type::WALL] = false;
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::WALL][Collider::Type::ENEMY] = true;
-	matrix[Collider::Type::WALL][Collider::Type::PLAYER_SHOT] = true;
+	matrix[Collider::Type::WALL][Collider::Type::PLAYER_ATTACK] = true;
 	matrix[Collider::Type::WALL][Collider::Type::ENEMY_SHOT] = true;
+	matrix[Collider::Type::WALL][Collider::Type::SCREEN_LEFT] = true;
+	matrix[Collider::Type::WALL][Collider::Type::SCREEN_RIGHT] = true;
 
 	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY] = true;
-	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER_ATTACK] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::SCREEN_LEFT] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::SCREEN_RIGHT] = true;
 
 	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY] = false;
-	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_ATTACK] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::SCREEN_LEFT] = true;
+	matrix[Collider::Type::ENEMY][Collider::Type::SCREEN_RIGHT] = true;
 
-	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALL] = true;
-	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER] = false;
-	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY] = true;
-	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER_SHOT] = false;
-	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::PLAYER_ATTACK][Collider::Type::WALL] = false;
+	matrix[Collider::Type::PLAYER_ATTACK][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::PLAYER_ATTACK][Collider::Type::ENEMY] = true;
+	matrix[Collider::Type::PLAYER_ATTACK][Collider::Type::PLAYER_ATTACK] = false;
+	matrix[Collider::Type::PLAYER_ATTACK][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::PLAYER_ATTACK][Collider::Type::SCREEN_LEFT] = true;
+	matrix[Collider::Type::PLAYER_ATTACK][Collider::Type::SCREEN_RIGHT] = true;
 
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WALL] = true;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ENEMY] = false;
-	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER_ATTACK] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::SCREEN_LEFT] = true;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::SCREEN_RIGHT] = true;
+
+	matrix[Collider::Type::SCREEN_LEFT][Collider::Type::WALL] = false;
+	matrix[Collider::Type::SCREEN_LEFT][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::SCREEN_LEFT][Collider::Type::ENEMY] = true;
+	matrix[Collider::Type::SCREEN_LEFT][Collider::Type::PLAYER_ATTACK] = true;
+	matrix[Collider::Type::SCREEN_LEFT][Collider::Type::ENEMY_SHOT] = true;
+	matrix[Collider::Type::SCREEN_LEFT][Collider::Type::SCREEN_LEFT] = false;
+	matrix[Collider::Type::SCREEN_LEFT][Collider::Type::SCREEN_RIGHT] = false;
+	
+	matrix[Collider::Type::SCREEN_RIGHT][Collider::Type::WALL] = false;
+	matrix[Collider::Type::SCREEN_RIGHT][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::SCREEN_RIGHT][Collider::Type::ENEMY] = true;
+	matrix[Collider::Type::SCREEN_RIGHT][Collider::Type::PLAYER_ATTACK] = true;
+	matrix[Collider::Type::SCREEN_RIGHT][Collider::Type::ENEMY_SHOT] = true;
+	matrix[Collider::Type::SCREEN_RIGHT][Collider::Type::SCREEN_LEFT] = false;
+	matrix[Collider::Type::SCREEN_RIGHT][Collider::Type::SCREEN_RIGHT] = false;
 }
 
 // Destructor
@@ -132,11 +158,17 @@ void ModuleCollisions::DebugDraw()
 			case Collider::Type::ENEMY: // red
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 			break;
-			case Collider::Type::PLAYER_SHOT: // yellow
+			case Collider::Type::PLAYER_ATTACK: // yellow
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);
 			break;
 			case Collider::Type::ENEMY_SHOT: // magenta
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
+			break;
+			case Collider::Type::SCREEN_LEFT: // purple
+			App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
+			break;
+			case Collider::Type::SCREEN_RIGHT: // purple
+			App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
 			break;
 		}
 	}
