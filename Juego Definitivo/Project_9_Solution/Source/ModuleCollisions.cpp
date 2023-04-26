@@ -53,17 +53,17 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 
 	matrix[Collider::Type::SCREEN_LEFT][Collider::Type::WALL] = false;
 	matrix[Collider::Type::SCREEN_LEFT][Collider::Type::PLAYER] = true;
-	matrix[Collider::Type::SCREEN_LEFT][Collider::Type::ENEMY] = true;
-	matrix[Collider::Type::SCREEN_LEFT][Collider::Type::PLAYER_ATTACK] = true;
-	matrix[Collider::Type::SCREEN_LEFT][Collider::Type::ENEMY_SHOT] = true;
+	matrix[Collider::Type::SCREEN_LEFT][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::SCREEN_LEFT][Collider::Type::PLAYER_ATTACK] = false;
+	matrix[Collider::Type::SCREEN_LEFT][Collider::Type::ENEMY_SHOT] = false;
 	matrix[Collider::Type::SCREEN_LEFT][Collider::Type::SCREEN_LEFT] = false;
 	matrix[Collider::Type::SCREEN_LEFT][Collider::Type::SCREEN_RIGHT] = false;
 
 	matrix[Collider::Type::SCREEN_RIGHT][Collider::Type::WALL] = false;
 	matrix[Collider::Type::SCREEN_RIGHT][Collider::Type::PLAYER] = true;
-	matrix[Collider::Type::SCREEN_RIGHT][Collider::Type::ENEMY] = true;
-	matrix[Collider::Type::SCREEN_RIGHT][Collider::Type::PLAYER_ATTACK] = true;
-	matrix[Collider::Type::SCREEN_RIGHT][Collider::Type::ENEMY_SHOT] = true;
+	matrix[Collider::Type::SCREEN_RIGHT][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::SCREEN_RIGHT][Collider::Type::PLAYER_ATTACK] = false;
+	matrix[Collider::Type::SCREEN_RIGHT][Collider::Type::ENEMY_SHOT] = false;
 	matrix[Collider::Type::SCREEN_RIGHT][Collider::Type::SCREEN_LEFT] = false;
 	matrix[Collider::Type::SCREEN_RIGHT][Collider::Type::SCREEN_RIGHT] = false;
 }
