@@ -136,7 +136,7 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &rightAnim;
 		}
 	}
-	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_REPEAT && playerState != state::JUMP)
+	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_DOWN && playerState != state::JUMP)
 	{
 
 		position.y = 175;
@@ -174,12 +174,15 @@ Update_Status ModulePlayer::Update()
 
 	switch (playerState) {
 	case state::IDLE:
-		punch->rect.w = 0;
+		punch->rect.w = 40;
 		punch->rect.h = 0;
+		punch->rect.y = 0;
 		kick->rect.w = 0;
 		kick->rect.h = 0;
+		kick->rect.y = 0;
 		crouchkick->rect.w = 0;
 		crouchkick->rect.h = 0;
+		crouchkick->rect.y = 10;
 		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN) {
 			punchAnim.Reset();
 			playerState = state::PUNCH;
@@ -205,10 +208,13 @@ Update_Status ModulePlayer::Update()
 		position.y = 175;
 		punch->rect.w = 0;
 		punch->rect.h = 0;
+		punch->rect.y = 0;
 		kick->rect.w = 0;
 		kick->rect.h = 0;
+		kick->rect.y = 0;
 		crouchkick->rect.w = 0;
 		crouchkick->rect.h = 0;
+		crouchkick->rect.y = 0;
 		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN)
 		{
 			crouchpunchAnim.Reset();

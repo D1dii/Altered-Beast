@@ -15,7 +15,9 @@ public:
 	// Position will be updated depending on the speed defined at each step
 	void Update() override;
 
-	void OnCollision(Collider* collider);
+	void OnCollision(Collider* collider) override;
+
+	void SetToDelete() override;
 
 private:
 
@@ -24,6 +26,16 @@ private:
 	// Zombie animations
 	Animation walking;
 	Animation exploding;
+
+	enum class state
+	{
+		WALK,
+		EXPLOSION
+	};
+
+	state zombieState = state::WALK;
+
+	int frame = 0;
 };
 
 

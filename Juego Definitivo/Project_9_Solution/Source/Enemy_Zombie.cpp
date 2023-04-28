@@ -2,6 +2,8 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
+#include "ModuleAudio.h"
+#include "ModuleParticles.h"
 
 Enemy_Zombie::Enemy_Zombie(int x, int y) : Enemy(x,y) {
 
@@ -13,12 +15,16 @@ Enemy_Zombie::Enemy_Zombie(int x, int y) : Enemy(x,y) {
 
 	// Explosion animation
 	exploding.PushBack({ 172, 11, 30, 60 });
+	exploding.PushBack({ 3, 8, 30, 60 });
 	exploding.PushBack({ 172, 11, 30, 60 });
+	exploding.PushBack({ 3, 8, 30, 60 });
 	exploding.PushBack({ 172, 11, 30, 60 });
-	exploding.PushBack({ 172, 11, 30, 60 });
+	exploding.PushBack({ 3, 8, 30, 60 });
+	
 	exploding.PushBack({ 7, 82, 38, 42 });
 	exploding.PushBack({ 68, 88, 34, 40 });
 	exploding.PushBack({ 124, 82, 33, 45 });
+	exploding.speed = 0.05f;
 
 	path.PushBack({ -0.2f, 0.0f }, 150, &walking);
 
@@ -29,13 +35,40 @@ void Enemy_Zombie::Update() {
 
 	//path.Update();
 	position = spawnPos + path.GetRelativePosition();
-	currentAnim = path.GetCurrentAnimation();
+
+	if (zombieState == state::EXPLOSION) {
+		
+		currentAnim = &exploding;
+		exploding.Update();
+		frame++;
+		if (frame >= 150) {
+			App->audio->PlayFx(destroyedFx);
+			SetToDelete();
+		}
+
+	}
+	//currentAnim = path.GetCurrentAnimation();
 
 	Enemy::Update();
 }
 
-void Enemy_Zombie::OnCollision(Collider* collider) {
-	if (collider->type == collider->PLAYER) {
-		currentAnim = &exploding;
+void Enemy_Zombie::OnCollision(Collider* col) {
+	
+	if (col->type == col->PLAYER_ATTACK) {
+		App->particles->AddParticle(App->particles->explosion, position.x, position.y);
+		App->audio->PlayFx(destroyedFx);
+		SetToDelete();
 	}
+	else if (col->type == col->PLAYER) {
+		zombieState = state::EXPLOSION;
+	}
+
+	
 }
+
+void Enemy_Zombie::SetToDelete() {
+	pendingToDelete = true;
+	if (collider != nullptr)
+		collider->pendingToDelete = true;
+}
+	

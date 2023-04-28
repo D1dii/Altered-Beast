@@ -40,10 +40,10 @@ void Enemy::Draw()
 
 void Enemy::OnCollision(Collider* collider)
 {
-	if (collider->type == collider->PLAYER_ATTACK) {
-		App->particles->AddParticle(App->particles->explosion, position.x, position.y);
-		App->audio->PlayFx(destroyedFx);
-	}
+	
+		//App->particles->AddParticle(App->particles->explosion, position.x, position.y);
+		//App->audio->PlayFx(destroyedFx);
+	
 
 	SetToDelete();
 }
