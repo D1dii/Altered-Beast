@@ -5,6 +5,7 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleRender.h"
+#include "Enemy_Zombie.h"
 
 Enemy::Enemy(int x, int y) : position(x, y)
 {
@@ -39,8 +40,10 @@ void Enemy::Draw()
 
 void Enemy::OnCollision(Collider* collider)
 {
-	App->particles->AddParticle(App->particles->explosion, position.x, position.y);
-	App->audio->PlayFx(destroyedFx);
+	if (collider->type == collider->PLAYER_ATTACK) {
+		App->particles->AddParticle(App->particles->explosion, position.x, position.y);
+		App->audio->PlayFx(destroyedFx);
+	}
 
 	SetToDelete();
 }

@@ -27,6 +27,7 @@ bool SceneLevel1::Start()
 
 	bgbackTexture = App->textures->Load("Assets/Sprites/backbg.png");
 	bgfrontTexture = App->textures->Load("Assets/Sprites/frontbg.png");
+	zombie = App->textures->Load("Assets/Sprites/Zombie.png");
 
 	App->audio->PlayMusic("Assets/Music/round1.ogg", 1.0f);
 
@@ -40,20 +41,8 @@ bool SceneLevel1::Start()
 	App->collisions->AddCollider({ 1375, 145, 111, 96 }, Collider::Type::WALL);
 
 	// Enemies ---
-	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 600, 80);
-	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 625, 80);
-	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 640, 80);
-	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 665, 80);
-
-	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 735, 120);
-	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 750, 120);
-	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 775, 120);
-	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 790, 120);
-
-	App->enemies->AddEnemy(Enemy_Type::BROWNSHIP, 830, 100);
-	App->enemies->AddEnemy(Enemy_Type::BROWNSHIP, 850, 100);
-	App->enemies->AddEnemy(Enemy_Type::BROWNSHIP, 870, 100);
-	App->enemies->AddEnemy(Enemy_Type::BROWNSHIP, 890, 100);
+	
+	App->enemies->AddEnemy(Enemy_Type::ZOMBIE, 200, 158);
 
 	App->enemies->AddEnemy(Enemy_Type::MECH, 900, 195);
 

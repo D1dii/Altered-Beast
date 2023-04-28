@@ -50,6 +50,10 @@ protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
 
+	// Variable to know which enemy is
+
+	int EnemyType = 0;
+
 	// The enemy's collider
 	Collider* collider = nullptr;
 

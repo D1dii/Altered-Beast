@@ -1,5 +1,4 @@
-﻿  ModulePlayer.cpp
+﻿  Enemy_Zombie.cpp
 C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
 C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\ModulePlayer.cpp(352,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Project_9_Solution.vcxproj -> C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Juego Definitivo\Debug\Project_9_Solution.exe
