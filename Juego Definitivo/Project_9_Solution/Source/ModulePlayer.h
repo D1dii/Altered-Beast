@@ -39,6 +39,10 @@ public:
 	// The speed in which we move the player (pixels per frame)
 	int speed = 1;
 
+	// Jumping
+	int speedY = 16;
+	int gravity = -1;
+
 	// Player Form
 	int phase = 0;
 
@@ -58,6 +62,7 @@ public:
 	Animation kickAnim;
 	Animation crouchpunchAnim;
 	Animation crouchkickAnim;
+	Animation jumpAnim;
 
 	//States of Player
 
@@ -65,6 +70,7 @@ public:
 	{
 		IDLE,
 		MOVEMENT,
+		JUMP,
 		CROUCH,
 		PUNCH,
 		CROUCH_PUNCH,

@@ -17,6 +17,9 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	// idle animation - just one sprite
 	idleAnim.PushBack({ 35 , 12 + 280 * phase, 40, 75 });
 
+	// jump animation
+	jumpAnim.PushBack({ 7, 155 + 280 * phase, 40, 68 });
+
 	// Move down
 	downAnim.PushBack({ 183, 176, 34, 43 });
 	downAnim.loop = false;
@@ -102,7 +105,9 @@ Update_Status ModulePlayer::Update()
 {
 	// Moving the player with the camera scroll
 
-	if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT 
+		&& playerState != state::JUMP
+		&& playerState != state::CROUCH)
 	{
 		position.x -= speed;
 		position.y = 150;
@@ -116,7 +121,9 @@ Update_Status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT 
+		&& playerState != state::JUMP
+		&& playerState != state::CROUCH)
 	{
 		position.x += speed;
 		position.y = 150;
@@ -129,7 +136,7 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &rightAnim;
 		}
 	}
-	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_REPEAT && playerState != state::JUMP)
 	{
 
 		position.y = 175;
@@ -139,6 +146,16 @@ Update_Status ModulePlayer::Update()
 		{
 			downAnim.Reset();
 			currentAnimation = &downAnim;
+		}
+	}
+	if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN)
+	{
+		collider->rect.h = 25;
+		playerState = state::JUMP;
+		if (currentAnimation != &jumpAnim)
+		{
+			jumpAnim.Reset();
+			currentAnimation = &jumpAnim;
 		}
 	}
 
@@ -202,12 +219,28 @@ Update_Status ModulePlayer::Update()
 			crouchkickAnim.Reset();
 			playerState = state::CROUCH_KICK;
 		}
-
+		break;
+	case state::JUMP:
+		currentAnimation = &jumpAnim;
+		jumpAnim.Update();
+		frame++;
+		if (frame <= 32) {
+			position.y -= speedY;
+			speedY += gravity;
+		}
+		else {
+			frame = 0;
+			speedY = 16;
+			playerState = state::IDLE;
+		}
+			
+		
 		break;
 	case state::PUNCH:
 		currentAnimation = &punchAnim;
 		punchAnim.Update();
 		frame++;
+		position.y = 153;
 		punch->rect.w = 42;
 		punch->rect.h = 10;
 		if (frame >= 20)
@@ -225,7 +258,7 @@ Update_Status ModulePlayer::Update()
 		kick->rect.h = 20;
 		kick->rect.x = position.x + 20;
 		kick->rect.y = position.y + 35;
-		if (frame >= 60)
+		if (frame >= 30)
 		{
 			playerState = state::IDLE;
 			frame = 0;
@@ -252,7 +285,7 @@ Update_Status ModulePlayer::Update()
 		crouchkick->rect.y = position.y - 2;
 		crouchkick->rect.w = 18;
 		crouchkick->rect.h = 40;
-		if (frame >= 40)
+		if (frame >= 30)
 		{
 			playerState = state::CROUCH;
 			frame = 0;
@@ -284,7 +317,8 @@ Update_Status ModulePlayer::Update()
 		&& App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE
 		&& playerState != state::PUNCH
-		&& playerState != state::KICK)
+		&& playerState != state::KICK
+		&& playerState != state::JUMP)
 	{
 		currentAnimation = &idleAnim;
 		position.y = 150;
