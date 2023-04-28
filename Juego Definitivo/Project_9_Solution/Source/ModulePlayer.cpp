@@ -298,23 +298,44 @@ Update_Status ModulePlayer::Update()
 		}
 	}
 
+	
 	//This is for loading the new animations 
-	idleAnim.PullBack(1);
-	idleAnim.PushBack({ 35 , 12 + 280 * phase, 40, 75 });
-	rightAnim.PullBack(3);
-	rightAnim.PushBack({ 75, 12 + 280 * phase, 40, 75 });
-	rightAnim.PushBack({ 125, 12 + 280 * phase, 40, 75 });
-	rightAnim.PushBack({ 170, 12 + 280 * phase, 40, 75 });
-	leftAnim.PullBack(3);
-	leftAnim.PushBack({ 75, 12 + 280 * phase, 40, 75 });
-	leftAnim.PushBack({ 125, 12 + 280 * phase, 40,75 });
-	leftAnim.PushBack({ 170, 12 + 280 * phase, 40, 75 });
-	punchAnim.PullBack(3);
-	punchAnim.PushBack({ 7, 86 + 280 * phase, 52, 72 });
-	punchAnim.PushBack({ 66, 87 + 280 * phase, 35, 72 });
-	punchAnim.PushBack({ 107, 88 + 280 * phase, 61, 71 });
+	if (phase == 1 || phase == 0) {
+		idleAnim.PullBack(1);
+		idleAnim.PushBack({ 35 , 12 + 280 * phase, 40, 73 });
+		rightAnim.PullBack(3);
+		rightAnim.PushBack({ 75, 12 + 280 * phase, 40, 73 });
+		rightAnim.PushBack({ 125, 12 + 280 * phase, 40, 73 });
+		rightAnim.PushBack({ 170, 12 + 280 * phase, 40, 73 });
+		leftAnim.PullBack(3);
+		leftAnim.PushBack({ 75, 12 + 280 * phase, 40, 73 });
+		leftAnim.PushBack({ 125, 12 + 280 * phase, 40,73 });
+		leftAnim.PushBack({ 170, 12 + 280 * phase, 40, 73 });
+		punchAnim.PullBack(3);
+		punchAnim.PushBack({ 7, 86 + 280 * phase, 52, 71 });
+		punchAnim.PushBack({ 66, 87 + 280 * phase, 35, 71 });
+		punchAnim.PushBack({ 107, 88 + 280 * phase, 61, 71 }); 
+		downAnim.PullBack(1);
+		downAnim.PushBack({ 183, 176 + 280 * phase , 35, 43 });
+	
+	}
+	if (phase == 2) {
 
-
+		idleAnim.PullBack(1);
+		idleAnim.PushBack({ 40 , 579, 45 , 75 });
+		rightAnim.PullBack(3);
+		rightAnim.PushBack({ 85, 579, 44, 75 });
+		rightAnim.PushBack({ 135, 579, 44, 75 });
+		rightAnim.PushBack({ 180, 579, 44, 75 });
+		leftAnim.PullBack(3);
+		leftAnim.PushBack({ 85, 579, 44, 75 });
+		leftAnim.PushBack({ 135, 579, 44,75 });
+		leftAnim.PushBack({ 180, 579, 44, 75 });
+		punchAnim.PullBack(3);
+		punchAnim.PushBack({ 7, 86 + 280 * phase, 52, 72 });
+		punchAnim.PushBack({ 66, 87 + 280 * phase, 35, 72 });
+		punchAnim.PushBack({ 107, 88 + 280 * phase, 61, 71 });
+	}
 
 
 
