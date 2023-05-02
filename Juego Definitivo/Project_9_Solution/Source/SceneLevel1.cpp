@@ -33,7 +33,7 @@ bool SceneLevel1::Start()
 
 	//Bottomside collider
 	bgfront = App->collisions->AddCollider({ 0, 217, 1600, 24 }, Collider::Type::WALL);
-	bgright = App->collisions->AddCollider({ 374, 0, 10, 240 }, Collider::Type::SCREEN_RIGHT);
+	bgright = App->collisions->AddCollider({ 320, 0, 10, 240 }, Collider::Type::SCREEN_RIGHT);
 	bgleft = App->collisions->AddCollider({ 0, 0, 10, 240 }, Collider::Type::SCREEN_LEFT);
 
 	//First two columns colliders
@@ -57,7 +57,7 @@ bool SceneLevel1::Start()
 
 Update_Status SceneLevel1::Update()
 {
-	//App->render->camera.x += 1;
+	App->render->camera.x += 1;
 	bgleft->SetPos(App->render->camera.x * 0.334, 0);
 	bgright->SetPos(App->render->camera.x * 0.334 + 374, 0);
 

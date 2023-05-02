@@ -24,8 +24,11 @@ bool SceneIntro::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Sprites/startScreen.png");
-	App->audio->PlayMusic("Assets/Music/introTitle.ogg", 1.0f);
+	Intro2 = App->textures->Load("Assets/Sprites/Intro 2.png");
+	Intro1v1 = App->textures->Load("Assets/Sprites/Intro 1 v1.png");
+	Intro1v2 = App->textures->Load("Assets/Sprites/Intro 1 v2.png");
+	Sega = App->textures->Load("Assets/Sprites/Sega.png");
+	//App->audio->PlayMusic("Assets/Music/introTitle.ogg", 1.0f);
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
@@ -35,6 +38,8 @@ bool SceneIntro::Start()
 
 Update_Status SceneIntro::Update()
 {
+	frame++;
+
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 90);
@@ -47,7 +52,17 @@ Update_Status SceneIntro::Update()
 Update_Status SceneIntro::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	App->render->Blit(bgTexture, 0, 0, NULL);
+	App->render->Blit(Intro2, 0, 40, NULL);
+	App->render->Blit(Sega, 320, 200, NULL);
+
+	if (frame <= 210) {
+		App->render->Blit(Sega, 320 - frame, 170, NULL);
+	}
+
+	if (frame >= 210) {
+		App->render->Blit(Intro1v1, -25, 23, NULL);
+		App->render->Blit(Sega, 320 - 210, 170, NULL);
+	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }

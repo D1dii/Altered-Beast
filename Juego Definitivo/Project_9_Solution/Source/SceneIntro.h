@@ -29,7 +29,13 @@ public:
 
 public:
 	// The scene sprite sheet loaded into an SDL_Texture
-	SDL_Texture* bgTexture = nullptr;
+	SDL_Texture* Intro2 = nullptr;
+	SDL_Texture* Intro1v1 = nullptr;
+	SDL_Texture* Intro1v2 = nullptr;
+	SDL_Texture* Sega = nullptr;
+
+	int frame = 0;
+	
 };
 
 #endif
