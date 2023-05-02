@@ -45,7 +45,7 @@ void Enemy::OnCollision(Collider* collider)
 		//App->audio->PlayFx(destroyedFx);
 	
 
-	SetToDelete();
+	//SetToDelete();
 }
 
 void Enemy::SetToDelete()

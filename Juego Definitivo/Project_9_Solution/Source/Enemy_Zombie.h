@@ -23,17 +23,28 @@ private:
 
 	Path path;
 
+	bool touch = true;
+
+	Collider* explosion = nullptr;
+
 	// Zombie animations
 	Animation walking;
-	Animation exploding;
+	Animation noHead;
+	Animation headExplosion;
+	Animation noHeadExplosion;
+	Animation firstHit;
 
 	enum class state
 	{
 		WALK,
-		EXPLOSION
+		NO_HEAD,
+		EXPLOSIONHEAD,
+		EXPLOSION_NO_HEAD
 	};
 
 	state zombieState = state::WALK;
+
+	int life = 2;
 
 	int frame = 0;
 };
