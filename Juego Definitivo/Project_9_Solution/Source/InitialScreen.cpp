@@ -24,7 +24,7 @@ bool InitialScreen::Start()
 
 	bool ret = true;
 
-	intro = App->textures->Load("Assets/Sprites/InitialScreen1.png");
+	intro = App->textures->Load("Assets/Sprites/InitialScreen3.png");
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
