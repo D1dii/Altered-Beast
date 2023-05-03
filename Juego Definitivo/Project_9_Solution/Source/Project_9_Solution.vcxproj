@@ -83,6 +83,7 @@
     <ClInclude Include="Enemy_NoSkull.h" />
     <ClInclude Include="Enemy_RedBird.h" />
     <ClInclude Include="Enemy_Zombie.h" />
+    <ClInclude Include="InitialScreen.h" />
     <ClInclude Include="ModuleAudio.h" />
     <ClInclude Include="ModuleCollisions.h" />
     <ClInclude Include="ModuleEnemies.h" />
@@ -113,6 +114,7 @@
     <ClCompile Include="Enemy_RedBird.cpp" />
     <ClCompile Include="Enemy_Zombie.cpp" />
     <ClCompile Include="Globals.cpp" />
+    <ClCompile Include="InitialScreen.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleCollisions.cpp" />
     <ClCompile Include="ModuleEnemies.cpp" />
