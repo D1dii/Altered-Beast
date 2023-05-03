@@ -12,6 +12,7 @@ enum class Enemy_Type
 	BROWNSHIP,
 	MECH,
 	ZOMBIE,
+	NO_SKULL,
 
 };
 
@@ -78,7 +79,8 @@ private:
 	Enemy* enemies[MAX_ENEMIES] = { nullptr };
 
 	// The enemies sprite sheet
-	SDL_Texture* texture = nullptr;
+	SDL_Texture* Enemy1 = nullptr;
+	SDL_Texture* Enemy2 = nullptr;
 
 	// The audio fx for destroying an enemy
 	int enemyDestroyedFx = 0;

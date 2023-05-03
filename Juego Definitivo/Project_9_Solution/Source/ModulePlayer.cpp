@@ -85,7 +85,7 @@ bool ModulePlayer::Start()
 
 	destroyed = false;
 
-	collider = App->collisions->AddCollider({ position.x + 8, position.y + 8, 20, 50 }, Collider::Type::PLAYER, this);
+	collider = App->collisions->AddCollider({ position.x + 8, position.y + 8, 25, 50 }, Collider::Type::PLAYER, this);
 	punch = App->collisions->AddCollider({ position.x + 20, position.y + 8, 0, 0 }, Collider::Type::PLAYER_ATTACK, this);
 	kick = App->collisions->AddCollider({ position.x + 20, position.y + 8, 0, 0 }, Collider::Type::PLAYER_ATTACK, this);
 	crouchkick = App->collisions->AddCollider({ position.x + 20, position.y + 8, 0, 0 }, Collider::Type::PLAYER_ATTACK, this);
@@ -174,7 +174,7 @@ Update_Status ModulePlayer::Update()
 
 	switch (playerState) {
 	case state::IDLE:
-		punch->rect.w = 40;
+		punch->rect.w = 0;
 		punch->rect.h = 0;
 		punch->rect.y = 0;
 		kick->rect.w = 0;
@@ -387,8 +387,9 @@ Update_Status ModulePlayer::PostUpdate()
 
 	App->fonts->BlitText(150, 248, scoreFont, "this is just a font test");
 
-	if (score >= 100) {
+	if (score >= 200) {
 		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
+		score = 0;
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

@@ -42,9 +42,10 @@ bool SceneLevel1::Start()
 
 	// Enemies ---
 	
-	App->enemies->AddEnemy(Enemy_Type::ZOMBIE, 200, 158);
+	App->enemies->AddEnemy(Enemy_Type::NO_SKULL, 250, 156);
+	App->enemies->AddEnemy(Enemy_Type::ZOMBIE, 400, 158);
 
-	App->enemies->AddEnemy(Enemy_Type::MECH, 900, 195);
+	
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;

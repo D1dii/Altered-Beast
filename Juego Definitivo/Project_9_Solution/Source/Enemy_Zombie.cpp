@@ -93,12 +93,12 @@ void Enemy_Zombie::Update() {
 	case state::NO_HEAD:
 		frame++;
 		path.Update();
-		if (frame <= 20) {
+		if (frame <= 30) {
 			currentAnim = &firstHit;
 			firstHit.Update();
 			
 		}
-		else if (frame > 20) {
+		else if (frame > 30) {
 			currentAnim = &noHead;
 			noHead.Update();
 			touch = true;

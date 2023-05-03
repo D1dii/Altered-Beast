@@ -11,6 +11,7 @@
 #include "Enemy_BrownShip.h"
 #include "Enemy_Mech.h"
 #include "Enemy_Zombie.h"
+#include "Enemy_NoSkull.h"
 
 #define SPAWN_MARGIN 50
 
@@ -28,7 +29,8 @@ ModuleEnemies::~ModuleEnemies()
 
 bool ModuleEnemies::Start()
 {
-	texture = App->textures->Load("Assets/Sprites/Zombie.png");
+	Enemy1 = App->textures->Load("Assets/Sprites/Zombie.png");
+	Enemy2 = App->textures->Load("Assets/Sprites/NoSkull.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
 	return true;
@@ -169,8 +171,14 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					break;
 				case Enemy_Type::ZOMBIE:
 					enemies[i] = new Enemy_Zombie(info.x, info.y);
+					enemies[i]->texture = Enemy1;
+					break;
+				case Enemy_Type::NO_SKULL:
+					enemies[i] = new Enemy_NoSkull(info.x, info.y);
+					enemies[i]->texture = Enemy2;
+					break;
 			}
-			enemies[i]->texture = texture;
+			
 			enemies[i]->destroyedFx = enemyDestroyedFx;
 			break;
 		}
