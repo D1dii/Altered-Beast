@@ -6,11 +6,12 @@
 
 struct SDL_Texture;
 
-class Initial_Screen :public Module {
+class InitialScreen : public Module {
 
-	Initial_Screen(bool startEnabled);
+public:
+	InitialScreen(bool isEnabled);
 
-	~Initial_Screen();
+	~InitialScreen();
 
 	bool Start() override;
 

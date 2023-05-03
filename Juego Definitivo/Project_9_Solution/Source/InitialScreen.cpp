@@ -7,18 +7,18 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 
-Initial_Screen::Initial_Screen(bool startEnabled) : Module(startEnabled)
+InitialScreen::InitialScreen(bool startEnabled) : Module(startEnabled)
 {
 
 }
 
-Initial_Screen::~Initial_Screen()
+InitialScreen::~InitialScreen()
 {
 
 }
 
 // Load assets
-bool Initial_Screen::Start()
+bool InitialScreen::Start()
 {
 	LOG("Loading background assets");
 
@@ -26,18 +26,14 @@ bool Initial_Screen::Start()
 
 	intro = App->textures->Load("Assets/Sprites/InitialScreen1.png");
 
-	
-	
-
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
 	return ret;
 }
 
-Update_Status Initial_Screen::Update()
+Update_Status InitialScreen::Update()
 {
-	frame++;
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
 	{
@@ -49,10 +45,10 @@ Update_Status Initial_Screen::Update()
 }
 
 // Update: draw background
-Update_Status Initial_Screen::PostUpdate()
+Update_Status InitialScreen::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	App->render->Blit(intro, 0, 40, NULL);
+	App->render->Blit(intro, 0, 0, NULL);
 	
 
 	return Update_Status::UPDATE_CONTINUE;

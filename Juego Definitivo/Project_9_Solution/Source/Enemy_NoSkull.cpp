@@ -48,6 +48,9 @@ void Enemy_NoSkull::Update() {
 			currentAnim = &punchZombie;
 			punchZombie.Update();
 		}
+		else if (punchFrame > 15) {
+			App->collisions->RemoveCollider(attack);
+		}
 		break;
 	case state::WALK_2:
 		frame++;

@@ -83,6 +83,7 @@ bool SceneLevel1::CleanUp()
 	App->collisions->RemoveCollider(bgleft);
 	App->collisions->RemoveCollider(bgright);
 	App->collisions->RemoveCollider(bgfront);
+	
 
 	// TODO 5 (old): Remove All Memory Leaks - no solution here guys ;)
 

@@ -6,6 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
+#include "ModulePlayer.h"
 
 SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
 {
@@ -45,6 +46,7 @@ Update_Status SceneIntro::Update()
 	{
 		App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 90);
 		App->audio->PlayFx(coin);
+		App->player->score = 0;
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

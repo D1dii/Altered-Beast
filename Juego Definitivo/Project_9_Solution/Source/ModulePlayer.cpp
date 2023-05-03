@@ -404,7 +404,7 @@ Update_Status ModulePlayer::PostUpdate()
 
 	if (score >= 200) {
 		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
-		score = 0;
+		
 	}
 
 	return Update_Status::UPDATE_CONTINUE;
