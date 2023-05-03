@@ -352,7 +352,7 @@ Update_Status ModulePlayer::Update()
 		collider->rect.h = 50;
 		playerState = state::IDLE;
 	}
-	//If Punch state / crunch / punch crunch / crunch kick
+	//If Punch state / crounch / punch crounch / crounch kick
 
 	collider->SetPos(position.x + 8, position.y + 8);
 	if (flipType) {
@@ -387,6 +387,10 @@ Update_Status ModulePlayer::PostUpdate()
 
 	App->fonts->BlitText(150, 248, scoreFont, "this is just a font test");
 
+	if (score >= 100) {
+		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
+	}
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -416,10 +420,12 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (c1->type == Collider::Type::PLAYER_ATTACK && c2->type == Collider::Type::ENEMY)
 	{
-		score += 23;
+		//score += 23;
 	}
 
 	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ENEMY_SHOT && destroyed == false) {
+		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
+		
 		destroyed = true;
 	}
 }

@@ -59,7 +59,7 @@ Update_Status SceneLevel1::Update()
 {
 	App->render->camera.x += 1;
 	bgleft->SetPos(App->render->camera.x * 0.334, 0);
-	bgright->SetPos(App->render->camera.x * 0.334 + 374, 0);
+	bgright->SetPos(App->render->camera.x * 0.334 + 310, 0);
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -78,6 +78,10 @@ bool SceneLevel1::CleanUp()
 {
 	App->player->Disable();
 	App->enemies->Disable();
+	App->collisions->RemoveCollider(App->player->collider);
+	App->collisions->RemoveCollider(bgleft);
+	App->collisions->RemoveCollider(bgright);
+	App->collisions->RemoveCollider(bgfront);
 
 	// TODO 5 (old): Remove All Memory Leaks - no solution here guys ;)
 

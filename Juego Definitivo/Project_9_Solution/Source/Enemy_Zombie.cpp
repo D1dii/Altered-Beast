@@ -4,6 +4,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
+#include "ModulePlayer.h"
 
 Enemy_Zombie::Enemy_Zombie(int x, int y) : Enemy(x,y) {
 
@@ -138,6 +139,7 @@ void Enemy_Zombie::OnCollision(Collider* col) {
 	}
 	else if (col->type == col->PLAYER_ATTACK && zombieState == state::NO_HEAD && touch == true) {
 		App->audio->PlayFx(destroyedFx);
+		App->player->score += 100;
 		SetToDelete();
 	}
 	else if (col->type == col->PLAYER && zombieState == state::WALK) {
