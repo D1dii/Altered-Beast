@@ -97,6 +97,10 @@ public:
 	// Sound effects indices
 	uint laserFx = 0;
 	uint explosionFx = 0;
+	uint punchFx = 0;
+	uint jumpFx = 0;
+	uint playerDeathFx = 0;
+	uint powerUpFx = 0;
 
 	// Font score index
 	uint score = 000;

@@ -79,6 +79,10 @@ bool ModulePlayer::Start()
 
 	laserFx = App->audio->LoadFx("Assets/Fx/laser.wav");
 	explosionFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
+	punchFx = App->audio->LoadFx("Assets/Fx/punch.wav");
+	jumpFx = App->audio->LoadFx("Assets/Fx/jump.wav");
+	playerDeathFx = App->audio->LoadFx("Assets/Fx/screamPlayerDeath.ogg");
+	powerUpFx = App->audio->LoadFx("Assets/Fx/power.ogg");
 
 	position.x = 20;
 	position.y = 150;
@@ -95,8 +99,8 @@ bool ModulePlayer::Start()
 	//scoreFont = App->fonts->Load("Assets/Fonts/rtype_font.png", "! @,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz", 1);
 
 	// TODO 4: Try loading "rtype_font3.png" that has two rows to test if all calculations are correct
-	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
-	scoreFont = App->fonts->Load("Assets/Fonts/rtype_font3.png", lookupTable, 2);
+	char lookupTable[] = { "abcdefghijklmnopqrstuvwxyz 1234567890.,'=(?!)+-*/      " };
+	scoreFont = App->fonts->Load("Assets/Fonts/typography.png", lookupTable, 2);
 
 	return ret;
 }
@@ -157,18 +161,22 @@ Update_Status ModulePlayer::Update()
 			jumpAnim.Reset();
 			currentAnimation = &jumpAnim;
 		}
+		App->audio->PlayFx(jumpFx);
 	}
 
 	if (App->input->keys[SDL_SCANCODE_0] == Key_State::KEY_REPEAT)
 	{
+		App->audio->PlayFx(powerUpFx);
 		phase = 0;
 	}
 	if (App->input->keys[SDL_SCANCODE_1] == Key_State::KEY_REPEAT)
 	{
+		App->audio->PlayFx(powerUpFx);
 		phase = 1;
 	}
 	if (App->input->keys[SDL_SCANCODE_2] == Key_State::KEY_REPEAT)
 	{
+		App->audio->PlayFx(powerUpFx);
 		phase = 2;
 	}
 
@@ -186,11 +194,14 @@ Update_Status ModulePlayer::Update()
 		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN) {
 			punchAnim.Reset();
 			playerState = state::PUNCH;
+			App->audio->PlayFx(punchFx);
+			
 		}
 		else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN)
 		{
 			kickAnim.Reset();
 			playerState = state::KICK;
+			App->audio->PlayFx(punchFx);
 		}
 		break;
 
@@ -219,11 +230,13 @@ Update_Status ModulePlayer::Update()
 		{
 			crouchpunchAnim.Reset();
 			playerState = state::CROUCH_PUNCH;
+			App->audio->PlayFx(punchFx);
 		}
 		else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN)
 		{
 			crouchkickAnim.Reset();
 			playerState = state::CROUCH_KICK;
+			App->audio->PlayFx(punchFx);
 		}
 		break;
 	case state::JUMP:
@@ -254,6 +267,7 @@ Update_Status ModulePlayer::Update()
 			playerState = state::IDLE;
 			frame = 0;
 		}
+		
 		break;
 	case state::KICK:
 		currentAnimation = &kickAnim;
@@ -383,9 +397,10 @@ Update_Status ModulePlayer::PostUpdate()
 	sprintf_s(scoreText, 10, "%7d", score);
 
 	// TODO 3: Blit the text of the score in at the bottom of the screen
-	App->fonts->BlitText(58, 248, scoreFont, scoreText);
+	App->fonts->BlitText(0, 20, scoreFont, scoreText);
+	App->fonts->BlitText(100, 20, scoreFont, scoreText);
 
-	App->fonts->BlitText(150, 248, scoreFont, "this is just a font test");
+	App->fonts->BlitText(200, 20, scoreFont, "insert coin");
 
 	if (score >= 200) {
 		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);

@@ -34,6 +34,8 @@ public:
 	SDL_Texture* Intro1v2 = nullptr;
 	SDL_Texture* Sega = nullptr;
 
+	uint coin = 0;
+
 	int frame = 0;
 	
 };
