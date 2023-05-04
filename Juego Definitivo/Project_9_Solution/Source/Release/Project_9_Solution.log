@@ -1,0 +1,80 @@
+﻿  Application.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Collider.cpp
+  Enemy.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Enemy_BrownShip.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Enemy_Mech.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Enemy_NoSkull.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Enemy_RedBird.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Enemy_RedBird.cpp(27,26): warning C4244: '=': conversión de 'float' a 'TYPE'; posible pérdida de datos
+          with
+          [
+              TYPE=int
+          ]
+  Enemy_Zombie.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Globals.cpp
+  InitialScreen.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  ModuleAudio.cpp
+  ModuleCollisions.cpp
+  ModuleEnemies.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  ModuleFadeToBlack.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\ModuleFadeToBlack.cpp(78,19): warning C4244: '=': conversión de 'float' a 'Uint32'; posible pérdida de datos
+  ModuleFonts.cpp
+  ModuleParticles.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  SceneIntro.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  SceneLevel1.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\SceneLevel1.cpp(63,39): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\SceneLevel1.cpp(64,48): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+  ModuleInput.cpp
+  ModulePlayer.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\ModulePlayer.cpp(412,61): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+  Compilando...
+  ModuleRender.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\ModuleRender.cpp(105,34): warning C4244: '-=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\ModuleRender.cpp(106,34): warning C4244: '-=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\ModuleRender.cpp(143,34): warning C4244: '-=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\ModuleRender.cpp(144,34): warning C4244: '-=': conversión de 'float' a 'int'; posible pérdida de datos
+  ModuleTextures.cpp
+  ModuleWindow.cpp
+  Main.cpp
+  Module.cpp
+  Particle.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Particle.cpp(39,19): warning C4018: '>=': no coinciden signed/unsigned
+  Path.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Spirit_Ball.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Generando código
+  Previous IPDB not found, fall back to full compilation.
+  All 191 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Generación de código finalizada
+  Project_9_Solution.vcxproj -> C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Release\Project_9_Solution.exe
