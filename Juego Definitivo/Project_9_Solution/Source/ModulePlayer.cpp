@@ -331,7 +331,15 @@ Update_Status ModulePlayer::Update()
 		punchAnim.PushBack({ 107, 88 + 280 * phase, 61, 71 }); 
 		downAnim.PullBack(1);
 		downAnim.PushBack({ 183, 176 + 280 * phase , 35, 43 });
-	
+
+		kickAnim.PullBack(3);
+		kickAnim.PushBack({ 174, 87 + 280 * phase, 46, 65 });
+		kickAnim.PushBack({ 227, 87 + 280 * phase, 36, 65 });
+		kickAnim.PushBack({ 269, 86 + 280 * phase, 61, 66 });
+
+
+		jumpAnim.PullBack(1);
+		jumpAnim.PushBack({ 7, 155 + 280 * phase, 40, 68 });
 	}
 	if (phase == 2) {
 
@@ -345,10 +353,21 @@ Update_Status ModulePlayer::Update()
 		leftAnim.PushBack({ 85, 579, 44, 75 });
 		leftAnim.PushBack({ 135, 579, 44,75 });
 		leftAnim.PushBack({ 180, 579, 44, 75 });
-		punchAnim.PullBack(3);
-		punchAnim.PushBack({ 7, 86 + 280 * phase, 52, 72 });
-		punchAnim.PushBack({ 66, 87 + 280 * phase, 35, 72 });
-		punchAnim.PushBack({ 107, 88 + 280 * phase, 61, 71 });
+
+		punchAnim.PullBack(2);
+		punchAnim.PushBack({ 0, 657, 44, 75 });
+		punchAnim.PushBack({ 67, 657, 60, 75 });
+		
+		kickAnim.PullBack(3);
+		kickAnim.PushBack({ 167, 657, 44, 75 });
+		kickAnim.PushBack({ 228, 657, 44, 75 });
+		kickAnim.PushBack({ 272,657, 75, 75 });
+
+		downAnim.PullBack(1);
+		downAnim.PushBack({ 254, 747, 50, 43 });
+
+		jumpAnim.PullBack(1);
+		jumpAnim.PushBack({ 5, 735, 45, 55 });
 	}
 
 
@@ -399,8 +418,14 @@ Update_Status ModulePlayer::PostUpdate()
 	// TODO 3: Blit the text of the score in at the bottom of the screen
 	App->fonts->BlitText(0, 20, scoreFont, scoreText);
 	App->fonts->BlitText(100, 20, scoreFont, scoreText);
+    secondscounter++;
+if (secondscounter %100 ==0){
 
+	secondscounter=0;
+}
+else if (secondscounter >50){
 	App->fonts->BlitText(200, 20, scoreFont, "insert coin");
+}
 
 	if (score >= 200) {
 		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);

@@ -61,10 +61,23 @@ Update_Status SceneIntro::PostUpdate()
 
 	if (frame <= 210) {
 		App->render->Blit(Sega, 320 - frame, 170, NULL);
+		
 	}
 
-	if (frame >= 210) {
+	else  {
+
 		App->render->Blit(Intro1v1, -25, 23, NULL);
+
+		if (frame<220){
+
+          App->render->Blit(Intro1v2, -25, 23, NULL);
+
+		}
+		if(frame>225){
+
+			App->render->Blit(Intro1v1, -25, 23, NULL);
+		}
+
 		App->render->Blit(Sega, 320 - 210, 170, NULL);
 	}
 
