@@ -44,6 +44,7 @@ bool SceneLevel1::Start()
 	
 	App->enemies->AddEnemy(Enemy_Type::NO_SKULL, 250, 156);
 	App->enemies->AddEnemy(Enemy_Type::ZOMBIE, 400, 158);
+	App->enemies->AddEnemy(Enemy_Type::POWER_UP, 200, 150);
 
 	
 

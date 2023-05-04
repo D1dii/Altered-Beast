@@ -26,6 +26,9 @@
     <Filter Include="Source Files\Entities\Enemies">
       <UniqueIdentifier>{c465321a-28ed-404a-aa97-e9d0c6f722ee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Entities\Item">
+      <UniqueIdentifier>{6637fb04-47fd-4f3d-bd66-85f1574cd400}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -115,6 +118,9 @@
     <ClInclude Include="InitialScreen.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
+    <ClInclude Include="Spirit_Ball.h">
+      <Filter>Source Files\Entities\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -197,6 +203,9 @@
     </ClCompile>
     <ClCompile Include="InitialScreen.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Spirit_Ball.cpp">
+      <Filter>Source Files\Entities\Item</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

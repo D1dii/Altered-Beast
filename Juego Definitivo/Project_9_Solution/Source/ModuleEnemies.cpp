@@ -12,6 +12,7 @@
 #include "Enemy_Mech.h"
 #include "Enemy_Zombie.h"
 #include "Enemy_NoSkull.h"
+#include "Spirit_Ball.h"
 
 #define SPAWN_MARGIN 50
 
@@ -31,6 +32,7 @@ bool ModuleEnemies::Start()
 {
 	Enemy1 = App->textures->Load("Assets/Sprites/Zombie.png");
 	Enemy2 = App->textures->Load("Assets/Sprites/NoSkull.png");
+	Item = App->textures->Load("Assets/Sprites/Spirit_Ball.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
 	return true;
@@ -176,6 +178,10 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 				case Enemy_Type::NO_SKULL:
 					enemies[i] = new Enemy_NoSkull(info.x, info.y);
 					enemies[i]->texture = Enemy2;
+					break;
+				case Enemy_Type::POWER_UP:
+					enemies[i] = new Spirit_Ball(info.x, info.y);
+					enemies[i]->texture = Item;
 					break;
 			}
 			
