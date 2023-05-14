@@ -121,6 +121,12 @@
     <ClInclude Include="Spirit_Ball.h">
       <Filter>Source Files\Entities\Item</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy_Wolf.h">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_Wolf_Blue.h">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -206,6 +212,12 @@
     </ClCompile>
     <ClCompile Include="Spirit_Ball.cpp">
       <Filter>Source Files\Entities\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_Wolf.cpp">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_Wolf_Blue.cpp">
+      <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

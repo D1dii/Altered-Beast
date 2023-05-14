@@ -9,11 +9,14 @@
 Spirit_Ball::Spirit_Ball(int x, int y) : Enemy(x, y) {
 
 	// idle
-	idle.PushBack({ 27, 21, 16, 17});
+	idle.PushBack({ 326, 26, 18, 14});
+	idle.PushBack({ 358, 27, 18, 14 });
+	idle.PushBack({ 387, 26, 18, 14 });
+	idle.speed = 0.1f;
 	currentAnim = &idle;
 
-	path.PushBack({ -0.3f, 0.0f }, 150, &idle);
-	path.PushBack({ 0.3f, 0.0f }, 150, &idle);
+	path.PushBack({ -0.5f, 0.0f }, 75, &idle);
+	path.PushBack({ 1.5f, 0.0f }, 75, &idle);
 
 	collider = App->collisions->AddCollider({ 0, 0, 16, 17 }, Collider::Type::ITEM, (Module*)App->enemies);
 }

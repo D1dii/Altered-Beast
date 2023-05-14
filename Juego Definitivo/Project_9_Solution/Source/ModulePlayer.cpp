@@ -427,7 +427,7 @@ else if (secondscounter >50){
 	App->fonts->BlitText(200, 20, scoreFont, "insert coin");
 }
 
-	if (score >= 200) {
+	if (score >= 400) {
 		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
 		
 	}
