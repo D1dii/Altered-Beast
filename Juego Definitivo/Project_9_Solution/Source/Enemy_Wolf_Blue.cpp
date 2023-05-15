@@ -28,7 +28,7 @@ Enemy_Wolf_Blue::Enemy_Wolf_Blue(int x, int y) : Enemy(x, y) {
 
 	path.PushBack({ -1.5f, -1.5f }, 20, &jumpUp);
 	path.PushBack({ -1.5f, 1.5f }, 20, &jumpDown);
-	path.PushBack({ 0.0f, 0.0f }, 120, &idle);
+	path.PushBack({ 0.0f, 0.0f }, 40, &idle);
 
 	collider = App->collisions->AddCollider({ 0, 0, 55, 20 }, Collider::Type::ENEMY, (Module*)App->enemies);
 

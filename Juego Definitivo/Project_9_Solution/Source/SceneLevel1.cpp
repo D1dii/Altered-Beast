@@ -62,8 +62,8 @@ bool SceneLevel1::Start()
 Update_Status SceneLevel1::Update()
 {
 	App->render->camera.x += 1;
-	bgleft->SetPos(App->render->camera.x * 0.334, 0);
-	bgright->SetPos(App->render->camera.x * 0.334 + 310, 0);
+	bgleft->SetPos(App->render->camera.x, 0);
+	bgright->SetPos(App->render->camera.x + 310, 0);
 
 	return Update_Status::UPDATE_CONTINUE;
 }
