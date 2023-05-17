@@ -1,25 +1,9 @@
-<<<<<<< Updated upstream
-﻿  ModulePlayer.cpp
-C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\ModulePlayer.cpp(376,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  SceneLevel1.cpp
-C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Generating code
-  2 of 211 functions ( 0.9%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  Project_9_Solution.vcxproj -> C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Juego Definitivo\Release\Project_9_Solution.exe
-=======
-﻿  Enemy_Zombie.cpp
+﻿  Enemy_Wolf.cpp
 C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
 C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
   Generando código
-  1 of 205 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+  1 of 211 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
   Project_9_Solution.vcxproj -> C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Release\Project_9_Solution.exe
->>>>>>> Stashed changes

@@ -30,7 +30,8 @@ Enemy_Wolf_Blue::Enemy_Wolf_Blue(int x, int y) : Enemy(x, y) {
 	path.PushBack({ -1.5f, 1.5f }, 20, &jumpDown);
 	path.PushBack({ 0.0f, 0.0f }, 40, &idle);
 
-	collider = App->collisions->AddCollider({ 0, 0, 55, 20 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ 0, 0, 75, 30 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	collision = App->collisions->AddCollider({ 0, 0, 45, 20 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 
 }
 
@@ -63,7 +64,8 @@ void Enemy_Wolf_Blue::Update() {
 	}
 
 	Enemy::Update();
-	collider->SetPos(position.x + 10, position.y + 15);
+	collider->SetPos(position.x - 5, position.y + 10);
+	collision->SetPos(position.x + 10, position.y + 15);
 }
 
 void Enemy_Wolf_Blue::OnCollision(Collider* col) {
@@ -71,6 +73,7 @@ void Enemy_Wolf_Blue::OnCollision(Collider* col) {
 		App->player->score += 100;
 		WolfState = state::DEAD;
 		touch = false;
+		App->collisions->RemoveCollider(collision);
 	}
 }
 

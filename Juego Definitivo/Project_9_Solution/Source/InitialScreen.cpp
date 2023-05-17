@@ -34,7 +34,7 @@ bool InitialScreen::Start()
 
 Update_Status InitialScreen::Update()
 {
-	GamePad& pad = App->input->pads[0];
+	GamePad& pad = App->input->pads[0]; 
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN || pad.y == 1)
 	{

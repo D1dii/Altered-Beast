@@ -29,13 +29,13 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	rightAnim.PushBack({ 75, 12 + 280 * phase, 40, 75 });
 	rightAnim.PushBack({ 125, 12 + 280 * phase, 40, 75 });
 	rightAnim.PushBack({ 170, 12 + 280 * phase, 40, 75 });
-	rightAnim.speed = 0.2f;
+	rightAnim.speed = 0.1f;
 
 	// Move left 
 	leftAnim.PushBack({ 75, 12 + 280 * phase, 40, 75 });
 	leftAnim.PushBack({ 125, 12 + 280 * phase, 40,75 });
 	leftAnim.PushBack({ 170, 12 + 280 * phase, 40, 75 });
-	leftAnim.speed = 0.2f;
+	leftAnim.speed = 0.1f;
 
 	// Punch Attack
 	punchAnim.PushBack({ 7, 86 + 280 * phase, 52, 72 });
