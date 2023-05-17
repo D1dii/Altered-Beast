@@ -19,6 +19,7 @@ struct Collider
 		ENEMY_SHOT,
 		SCREEN_LEFT,
 		SCREEN_RIGHT,
+		ITEM,
 
 		MAX
 	};

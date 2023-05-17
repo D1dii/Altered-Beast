@@ -56,8 +56,9 @@ Enemy_Zombie::Enemy_Zombie(int x, int y) : Enemy(x,y) {
 
 	path.PushBack({ -0.15f, 0.0f }, 150, &walking);
 
-	collider = App->collisions->AddCollider({ 0, 0, 26, 55 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x - 10, position.y - 10, 40, 70 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	explosion = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
+	collision = App->collisions->AddCollider({ 0, 0, 16, 40 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 	
 }
 
@@ -65,6 +66,7 @@ void Enemy_Zombie::Update() {
 
 	
 	position = spawnPos + path.GetRelativePosition();
+	
 
 	switch (zombieState) {
 	case state::WALK:
@@ -81,8 +83,8 @@ void Enemy_Zombie::Update() {
 		}
 		else if (frame == 90) {
 			explosion->SetPos(position.x - 20, position.y);
-			explosion->rect.w = 30;
-			explosion->rect.h = 50;
+			explosion->rect.w = 90;
+			explosion->rect.h = 30;
 		}
 		else if (frame > 90) {
 			App->audio->PlayFx(destroyedFx);
@@ -127,6 +129,8 @@ void Enemy_Zombie::Update() {
 	
 
 	Enemy::Update();
+	collision->SetPos(position.x + 5, position.y + 7);
+	collider->SetPos(position.x - 10, position.y - 10);
 }
 
 void Enemy_Zombie::OnCollision(Collider* col) {
@@ -141,13 +145,16 @@ void Enemy_Zombie::OnCollision(Collider* col) {
 		App->audio->PlayFx(destroyedFx);
 		App->player->score += 100;
 		SetToDelete();
+		App->collisions->RemoveCollider(collision);
 	}
 	else if (col->type == col->PLAYER && zombieState == state::WALK) {
 		zombieState = state::EXPLOSIONHEAD;
+		App->collisions->RemoveCollider(collision);
 	}
 	else if (col->type == col->PLAYER && zombieState == state::NO_HEAD) {
 		frame = 0;
 		zombieState = state::EXPLOSION_NO_HEAD;
+		App->collisions->RemoveCollider(collision);
 	}
 
 	

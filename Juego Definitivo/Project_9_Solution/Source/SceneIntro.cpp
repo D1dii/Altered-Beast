@@ -42,11 +42,14 @@ Update_Status SceneIntro::Update()
 {
 	frame++;
 
-	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
+	GamePad& pad = App->input->pads[0];
+
+	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN || pad.y == 1)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 90);
 		App->audio->PlayFx(coin);
 		App->player->score = 0;
+		App->player->phase = 0;
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

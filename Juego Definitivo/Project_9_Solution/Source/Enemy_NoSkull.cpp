@@ -23,8 +23,9 @@ Enemy_NoSkull::Enemy_NoSkull(int x, int y) : Enemy(x, y) {
 
 	path.PushBack({ -0.15f, 0.0f }, 150, &walking);
 
-	collider = App->collisions->AddCollider({ 0, 0, 26, 55 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x - 10, position.y - 10, 40, 70 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	attack = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
+	collision = App->collisions->AddCollider({ 0, 0, 16, 40 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 
 }
 
@@ -71,6 +72,8 @@ void Enemy_NoSkull::Update() {
 
 
 	Enemy::Update();
+	collision->SetPos(position.x + 5, position.y + 7);
+	collider->SetPos(position.x - 10, position.y - 10);
 }
 
 void Enemy_NoSkull::OnCollision(Collider* col) {
@@ -84,6 +87,7 @@ void Enemy_NoSkull::OnCollision(Collider* col) {
 	else if (col->type == col->PLAYER_ATTACK && zombieState == state::WALK_2 && touch == true) {
 		App->audio->PlayFx(destroyedFx);
 		App->player->score += 100;
+		App->collisions->RemoveCollider(collision);
 		SetToDelete();
 	}
 	else if (col->type == col->PLAYER && zombieState == state::WALK) {

@@ -29,6 +29,8 @@ public:
 	// Performs the render call of the player sprite
 	Update_Status PostUpdate() override;
 
+	void phaseUpdate();
+
 	// Collision callback, called when the player intersects with another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
 

@@ -29,13 +29,13 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	rightAnim.PushBack({ 75, 12 + 280 * phase, 40, 75 });
 	rightAnim.PushBack({ 125, 12 + 280 * phase, 40, 75 });
 	rightAnim.PushBack({ 170, 12 + 280 * phase, 40, 75 });
-	rightAnim.speed = 0.2f;
+	rightAnim.speed = 0.1f;
 
 	// Move left 
 	leftAnim.PushBack({ 75, 12 + 280 * phase, 40, 75 });
 	leftAnim.PushBack({ 125, 12 + 280 * phase, 40,75 });
 	leftAnim.PushBack({ 170, 12 + 280 * phase, 40, 75 });
-	leftAnim.speed = 0.2f;
+	leftAnim.speed = 0.1f;
 
 	// Punch Attack
 	punchAnim.PushBack({ 7, 86 + 280 * phase, 52, 72 });
@@ -109,139 +109,157 @@ Update_Status ModulePlayer::Update()
 {
 	// Moving the player with the camera scroll
 
-	if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT 
-		&& playerState != state::JUMP
-		&& playerState != state::CROUCH)
+	GamePad& pad = App->input->pads[0];
+
+	//Debug key for gamepad rumble testing purposes
+	if (App->input->keys[SDL_SCANCODE_1] == Key_State::KEY_DOWN)
 	{
-		position.x -= speed;
-		position.y = 150;
-		collider->rect.h = 50;
-		playerState = state::MOVEMENT;
-		if (currentAnimation != &leftAnim)
-		{
-			leftAnim.Reset();
-			flipType = true;
-			currentAnimation = &leftAnim;
-		}
+		App->input->ShakeController(0, 12, 0.33f);
 	}
 
-	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT 
-		&& playerState != state::JUMP
-		&& playerState != state::CROUCH)
+	//Debug key for gamepad rumble testing purposes
+	if (App->input->keys[SDL_SCANCODE_2] == Key_State::KEY_DOWN)
 	{
-		position.x += speed;
-		position.y = 150;
-		collider->rect.h = 50;
-		playerState = state::MOVEMENT;
-		if (currentAnimation != &rightAnim)
-		{
-			rightAnim.Reset();
-			flipType = false;
-			currentAnimation = &rightAnim;
-		}
+		App->input->ShakeController(0, 36, 0.66f);
 	}
-	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_DOWN && playerState != state::JUMP)
-	{
 
-		position.y = 175;
-		collider->rect.h = 25;
-		playerState = state::CROUCH;
-		if (currentAnimation != &downAnim)
-		{
-			downAnim.Reset();
-			currentAnimation = &downAnim;
-		}
-	}
-	if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN)
+	//Debug key for gamepad rumble testing purposes
+	if (App->input->keys[SDL_SCANCODE_3] == Key_State::KEY_DOWN)
 	{
-		collider->rect.h = 25;
-		playerState = state::JUMP;
-		if (currentAnimation != &jumpAnim)
-		{
-			jumpAnim.Reset();
-			currentAnimation = &jumpAnim;
-		}
-		App->audio->PlayFx(jumpFx);
+		App->input->ShakeController(0, 60, 1.0f);
 	}
 
 	if (App->input->keys[SDL_SCANCODE_0] == Key_State::KEY_REPEAT)
 	{
 		App->audio->PlayFx(powerUpFx);
 		phase = 0;
+		phaseUpdate();
 	}
 	if (App->input->keys[SDL_SCANCODE_1] == Key_State::KEY_REPEAT)
 	{
 		App->audio->PlayFx(powerUpFx);
 		phase = 1;
+		phaseUpdate();
 	}
 	if (App->input->keys[SDL_SCANCODE_2] == Key_State::KEY_REPEAT)
 	{
 		App->audio->PlayFx(powerUpFx);
 		phase = 2;
+		phaseUpdate();
 	}
 
 	switch (playerState) {
 	case state::IDLE:
 		punch->rect.w = 0;
 		punch->rect.h = 0;
-		punch->rect.y = 0;
+		punch->SetPos(position.x + 20, 0);
 		kick->rect.w = 0;
 		kick->rect.h = 0;
-		kick->rect.y = 0;
+		kick->SetPos(position.x + 20, 0);
 		crouchkick->rect.w = 0;
 		crouchkick->rect.h = 0;
-		crouchkick->rect.y = 10;
-		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN) {
+		crouchkick->SetPos(position.x + 20, 0);
+		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN || pad.x == 1) {
 			punchAnim.Reset();
 			playerState = state::PUNCH;
 			App->audio->PlayFx(punchFx);
 			
 		}
-		else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN)
+		else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN || pad.b == 1)
 		{
 			kickAnim.Reset();
 			playerState = state::KICK;
 			App->audio->PlayFx(punchFx);
+		} 
+		else if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT 
+			|| pad.l_x < 0 
+			|| App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT 
+			|| pad.l_x > 0)
+		{
+			playerState = state::MOVEMENT;
+		} else if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_DOWN
+			|| (pad.l_x > -0.2f && pad.l_x < 0.2f && pad.l_y > 0)) {
+			playerState = state::CROUCH;
+		}
+		else if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN || pad.a == 1) {
+			playerState = state::JUMP;
 		}
 		break;
 
 	case state::MOVEMENT:
-		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN)
-		{
-			punchAnim.Reset();
-			playerState = state::PUNCH;
+		if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT || pad.l_x < 0) {
+			position.x -= speed;
+			position.y = 150;
+			collider->rect.h = 50;
+			if (currentAnimation != &leftAnim)
+			{
+				leftAnim.Reset();
+				flipType = true;
+				currentAnimation = &leftAnim;
+			}
+			leftAnim.Update();
+		}
+		else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT || pad.l_x > 0) {
+			position.x += speed * 2;
+			position.y = 150;
+			collider->rect.h = 50;
+			if (currentAnimation != &rightAnim)
+			{
+				rightAnim.Reset();
+				flipType = false;
+				currentAnimation = &rightAnim;
+			}
+			rightAnim.Update();
+		} 
+		else if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE
+			|| App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE) {
+			playerState = state::IDLE;
 		}
 		break;
-
 	case state::CROUCH:
-		currentAnimation = &downAnim;
-		downAnim.Update();
 		position.y = 175;
+		collider->rect.h = 25;
+		if (currentAnimation != &downAnim)
+		{
+			downAnim.Reset();
+			currentAnimation = &downAnim;
+		}
+		downAnim.Update();
+		
 		punch->rect.w = 0;
 		punch->rect.h = 0;
-		punch->rect.y = 0;
+		punch->SetPos(position.x + 20, 0);
 		kick->rect.w = 0;
 		kick->rect.h = 0;
-		kick->rect.y = 0;
+		kick->SetPos(position.x + 20, 0);
 		crouchkick->rect.w = 0;
 		crouchkick->rect.h = 0;
-		crouchkick->rect.y = 0;
-		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN)
+		crouchkick->SetPos(position.x + 20, 0);
+		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN || pad.x == 1)
 		{
 			crouchpunchAnim.Reset();
 			playerState = state::CROUCH_PUNCH;
 			App->audio->PlayFx(punchFx);
 		}
-		else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN)
+		else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN || pad.b == 1)
 		{
 			crouchkickAnim.Reset();
 			playerState = state::CROUCH_KICK;
 			App->audio->PlayFx(punchFx);
 		}
+		else if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN || pad.a == 1) {
+			playerState = state::JUMP;
+		}
 		break;
 	case state::JUMP:
-		currentAnimation = &jumpAnim;
+		collider->rect.h = 25;
+		if (currentAnimation != &jumpAnim)
+		{
+			jumpAnim.Reset();
+			currentAnimation = &jumpAnim;
+		}
 		jumpAnim.Update();
+		App->audio->PlayFx(jumpFx);
 		frame++;
 		if (frame <= 32) {
 			position.y -= speedY;
@@ -314,63 +332,7 @@ Update_Status ModulePlayer::Update()
 
 	
 	//This is for loading the new animations 
-	if (phase == 1 || phase == 0) {
-		idleAnim.PullBack(1);
-		idleAnim.PushBack({ 35 , 12 + 280 * phase, 40, 73 });
-		rightAnim.PullBack(3);
-		rightAnim.PushBack({ 75, 12 + 280 * phase, 40, 73 });
-		rightAnim.PushBack({ 125, 12 + 280 * phase, 40, 73 });
-		rightAnim.PushBack({ 170, 12 + 280 * phase, 40, 73 });
-		leftAnim.PullBack(3);
-		leftAnim.PushBack({ 75, 12 + 280 * phase, 40, 73 });
-		leftAnim.PushBack({ 125, 12 + 280 * phase, 40,73 });
-		leftAnim.PushBack({ 170, 12 + 280 * phase, 40, 73 });
-		punchAnim.PullBack(3);
-		punchAnim.PushBack({ 7, 86 + 280 * phase, 52, 71 });
-		punchAnim.PushBack({ 66, 87 + 280 * phase, 35, 71 });
-		punchAnim.PushBack({ 107, 88 + 280 * phase, 61, 71 }); 
-		downAnim.PullBack(1);
-		downAnim.PushBack({ 183, 176 + 280 * phase , 35, 43 });
-
-		kickAnim.PullBack(3);
-		kickAnim.PushBack({ 174, 87 + 280 * phase, 46, 65 });
-		kickAnim.PushBack({ 227, 87 + 280 * phase, 36, 65 });
-		kickAnim.PushBack({ 269, 86 + 280 * phase, 61, 66 });
-
-
-		jumpAnim.PullBack(1);
-		jumpAnim.PushBack({ 7, 155 + 280 * phase, 40, 68 });
-	}
-	if (phase == 2) {
-
-		idleAnim.PullBack(1);
-		idleAnim.PushBack({ 40 , 579, 45 , 75 });
-		rightAnim.PullBack(3);
-		rightAnim.PushBack({ 85, 579, 44, 75 });
-		rightAnim.PushBack({ 135, 579, 44, 75 });
-		rightAnim.PushBack({ 180, 579, 44, 75 });
-		leftAnim.PullBack(3);
-		leftAnim.PushBack({ 85, 579, 44, 75 });
-		leftAnim.PushBack({ 135, 579, 44,75 });
-		leftAnim.PushBack({ 180, 579, 44, 75 });
-
-		punchAnim.PullBack(2);
-		punchAnim.PushBack({ 0, 657, 44, 75 });
-		punchAnim.PushBack({ 67, 657, 60, 75 });
-		
-		kickAnim.PullBack(3);
-		kickAnim.PushBack({ 167, 657, 44, 75 });
-		kickAnim.PushBack({ 228, 657, 44, 75 });
-		kickAnim.PushBack({ 272,657, 75, 75 });
-
-		downAnim.PullBack(1);
-		downAnim.PushBack({ 254, 747, 50, 43 });
-
-		jumpAnim.PullBack(1);
-		jumpAnim.PushBack({ 5, 735, 45, 55 });
-	}
-
-
+	
 
 	// If no up/down movement detected, set the current animation back to idle
 	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_IDLE
@@ -378,7 +340,9 @@ Update_Status ModulePlayer::Update()
 		&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE
 		&& playerState != state::PUNCH
 		&& playerState != state::KICK
-		&& playerState != state::JUMP)
+		&& playerState != state::JUMP
+		&& pad.l_x == 0
+		&& pad.l_y == 0)
 	{
 		currentAnimation = &idleAnim;
 		position.y = 150;
@@ -427,12 +391,70 @@ else if (secondscounter >50){
 	App->fonts->BlitText(200, 20, scoreFont, "insert coin");
 }
 
-	if (score >= 200) {
+	if (score >= 400) {
 		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
 		
 	}
 
 	return Update_Status::UPDATE_CONTINUE;
+}
+
+void ModulePlayer::phaseUpdate() {
+	if (phase == 1 || phase == 0) {
+		idleAnim.PullBack(1);
+		idleAnim.PushBack({ 35 , 12 + 280 * phase, 40, 73 });
+		rightAnim.PullBack(3);
+		rightAnim.PushBack({ 75, 12 + 280 * phase, 40, 73 });
+		rightAnim.PushBack({ 125, 12 + 280 * phase, 40, 73 });
+		rightAnim.PushBack({ 170, 12 + 280 * phase, 40, 73 });
+		leftAnim.PullBack(3);
+		leftAnim.PushBack({ 75, 12 + 280 * phase, 40, 73 });
+		leftAnim.PushBack({ 125, 12 + 280 * phase, 40,73 });
+		leftAnim.PushBack({ 170, 12 + 280 * phase, 40, 73 });
+		punchAnim.PullBack(3);
+		punchAnim.PushBack({ 7, 86 + 280 * phase, 52, 71 });
+		punchAnim.PushBack({ 66, 87 + 280 * phase, 35, 71 });
+		punchAnim.PushBack({ 107, 88 + 280 * phase, 61, 71 });
+		downAnim.PullBack(1);
+		downAnim.PushBack({ 183, 176 + 280 * phase , 35, 43 });
+
+		kickAnim.PullBack(3);
+		kickAnim.PushBack({ 174, 87 + 280 * phase, 46, 65 });
+		kickAnim.PushBack({ 227, 87 + 280 * phase, 36, 65 });
+		kickAnim.PushBack({ 269, 86 + 280 * phase, 61, 66 });
+
+
+		jumpAnim.PullBack(1);
+		jumpAnim.PushBack({ 7, 155 + 280 * phase, 40, 68 });
+	}
+	if (phase == 2) {
+
+		idleAnim.PullBack(1);
+		idleAnim.PushBack({ 40 , 579, 45 , 75 });
+		rightAnim.PullBack(3);
+		rightAnim.PushBack({ 85, 579, 44, 75 });
+		rightAnim.PushBack({ 135, 579, 44, 75 });
+		rightAnim.PushBack({ 180, 579, 44, 75 });
+		leftAnim.PullBack(3);
+		leftAnim.PushBack({ 85, 579, 44, 75 });
+		leftAnim.PushBack({ 135, 579, 44,75 });
+		leftAnim.PushBack({ 180, 579, 44, 75 });
+
+		punchAnim.PullBack(2);
+		punchAnim.PushBack({ 0, 657, 44, 75 });
+		punchAnim.PushBack({ 67, 657, 60, 75 });
+
+		kickAnim.PullBack(3);
+		kickAnim.PushBack({ 167, 657, 44, 75 });
+		kickAnim.PushBack({ 228, 657, 44, 75 });
+		kickAnim.PushBack({ 272,657, 75, 75 });
+
+		downAnim.PullBack(1);
+		downAnim.PushBack({ 254, 747, 50, 43 });
+
+		jumpAnim.PullBack(1);
+		jumpAnim.PushBack({ 5, 735, 45, 55 });
+	}
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
@@ -468,5 +490,14 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
 		
 		destroyed = true;
+	}
+
+	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ITEM) {
+		App->audio->PlayFx(powerUpFx);
+		if (phase < 3) {
+			phase++;
+		}
+		phaseUpdate();
+		
 	}
 }

@@ -13,6 +13,9 @@ enum class Enemy_Type
 	MECH,
 	ZOMBIE,
 	NO_SKULL,
+	POWER_UP,
+	WOLF,
+	WOLF_BLUE,
 
 };
 
@@ -81,6 +84,9 @@ private:
 	// The enemies sprite sheet
 	SDL_Texture* Enemy1 = nullptr;
 	SDL_Texture* Enemy2 = nullptr;
+	SDL_Texture* Wolf = nullptr;
+	SDL_Texture* Wolf_Blue = nullptr;
+	SDL_Texture* Item = nullptr;
 
 	// The audio fx for destroying an enemy
 	int enemyDestroyedFx = 0;
