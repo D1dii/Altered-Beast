@@ -50,10 +50,12 @@ public:
 
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* texture = nullptr;
-	
+	SDL_Texture* uiTexture = nullptr;
+
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
 	Animation* currentAnimation = nullptr;
+	Animation* currentLifeAnimation = nullptr;
 
 	// A set of animations
 	Animation idleAnim;
@@ -65,6 +67,7 @@ public:
 	Animation crouchpunchAnim;
 	Animation crouchkickAnim;
 	Animation jumpAnim;
+	Animation scoreAnim[4];
 
 	//States of Player
 
@@ -82,7 +85,10 @@ public:
 
 	state playerState = state::IDLE;
 
+	bool damaged = false;
 	int frame = 0;
+	int numLifes = 2;
+	int lifeNodes = 12;
 
 	// The player's collider
 	Collider* collider = nullptr;
@@ -92,7 +98,7 @@ public:
 
 	// A flag to detect when the player has been destroyed
 	bool destroyed = false;
-	
+
 	// A flag to detect if the player is flipped
 	bool flipType;
 
@@ -108,7 +114,7 @@ public:
 	uint score = 000;
 	int scoreFont = -1;
 	char scoreText[10] = { "\0" };
-    int secondscounter = 0;
+	int secondscounter = 0;
 };
 
 #endif //!__MODULE_PLAYER_H__
