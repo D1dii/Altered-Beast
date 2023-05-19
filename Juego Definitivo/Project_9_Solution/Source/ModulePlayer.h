@@ -50,6 +50,7 @@ public:
 
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* texture = nullptr;
+	SDL_Texture* nodesTexture = nullptr;
 	SDL_Texture* uiTexture = nullptr;
 
 	// The pointer to the current player animation
@@ -67,7 +68,8 @@ public:
 	Animation crouchpunchAnim;
 	Animation crouchkickAnim;
 	Animation jumpAnim;
-	Animation scoreAnim[4];
+	Animation nodesAnim[4];
+	Animation lifesAnim[3];
 
 	//States of Player
 

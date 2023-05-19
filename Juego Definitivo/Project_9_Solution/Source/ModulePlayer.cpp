@@ -20,10 +20,16 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	// jump animation
 	jumpAnim.PushBack({ 7, 155 + 280 * phase, 40, 68 });
 
-	scoreAnim[0].PushBack({ 0, 0, 45, 28 });
-	scoreAnim[1].PushBack({ 0, 28, 45, 28 });
-	scoreAnim[2].PushBack({ 0, 28 * 2, 45, 28 });
-	scoreAnim[3].PushBack({ 0, 28 * 3, 45, 28 });
+	//Nodes anim
+	nodesAnim[0].PushBack({ 0, 0, 23, 14 });
+	nodesAnim[1].PushBack({ 0, 14, 23, 14 });
+	nodesAnim[2].PushBack({ 0, 14 * 2, 23, 14 });
+	nodesAnim[3].PushBack({ 0, 14 * 3, 23, 14 });
+
+	//lifes anim
+	lifesAnim[0].PushBack({ 14, 22, 63, 33});
+	lifesAnim[1].PushBack({ 14, 139, 63, 33 });
+	lifesAnim[2].PushBack({ 14, 219, 63, 33 });
 
 	// Move down
 	downAnim.PushBack({ 183, 176, 34, 43 });
@@ -82,7 +88,8 @@ bool ModulePlayer::Start()
 	lifeNodes = 12;
 
 	texture = App->textures->Load("Assets/Sprites/protagonist.png");
-	uiTexture = App->textures->Load("Assets/Sprites/lifeSprite.png");
+	nodesTexture = App->textures->Load("Assets/Sprites/lifeSprite2.png");
+	uiTexture = App->textures->Load("Assets/Sprites/lifes.png");
 	currentAnimation = &idleAnim;
 
 	laserFx = App->audio->LoadFx("Assets/Fx/laser.wav");
@@ -379,35 +386,51 @@ Update_Status ModulePlayer::Update()
 Update_Status ModulePlayer::PostUpdate()
 {
 
-	int blueNodes = lifeNodes >> 2;
+	
 	if (!destroyed)
 	{
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
 		App->render->Blit(texture, position.x, position.y, &rect, speed, flipType);
 	}
-	//Draw Lifes
+	//Draw Nodes
+	int blueNodes = lifeNodes >> 2;
 	for (int i = 0; i < blueNodes; i++)
 	{
-		SDL_Rect rect = scoreAnim[0].GetCurrentFrame();
-		App->render->Blit(uiTexture, 45 * i, 200, &rect, NULL, NULL, true);
+		SDL_Rect rect = nodesAnim[0].GetCurrentFrame();
+		App->render->Blit(nodesTexture, 50+ 25 * i, 230, &rect, NULL, NULL, true);
 	}
 	if (lifeNodes % 4 == 3)
 	{
-		SDL_Rect rect = scoreAnim[1].GetCurrentFrame();
-		App->render->Blit(uiTexture, 45 * (blueNodes), 200, &rect, NULL, NULL, true);
+		SDL_Rect rect = nodesAnim[1].GetCurrentFrame();
+		App->render->Blit(nodesTexture, 50 + 25 * (blueNodes), 230, &rect, NULL, NULL, true);
 	}
-	if (lifeNodes % 4 == 2)
+	else if (lifeNodes % 4 == 2)
 	{
-		SDL_Rect rect = scoreAnim[2].GetCurrentFrame();
-		App->render->Blit(uiTexture, 45 * (blueNodes), 200, &rect, NULL, NULL, true);
+		SDL_Rect rect = nodesAnim[2].GetCurrentFrame();
+		App->render->Blit(nodesTexture, 50 + 25 * (blueNodes), 230, &rect, NULL, NULL, true);
 	}
-	if (lifeNodes % 4 == 1)
+	else if (lifeNodes % 4 == 1)
 	{
-		SDL_Rect rect = scoreAnim[3].GetCurrentFrame();
-		App->render->Blit(uiTexture, 45 * (blueNodes), 200, &rect, NULL, NULL, true);
+		SDL_Rect rect = nodesAnim[3].GetCurrentFrame();
+		App->render->Blit(nodesTexture, 50 + 25 * (blueNodes), 230, &rect, NULL, NULL, true);
 	}
 
-
+	//Draw Lifes
+	if (numLifes == 2)
+	{
+		SDL_Rect rect = lifesAnim[0].GetCurrentFrame();
+		App->render->Blit(uiTexture, 10,50, &rect, NULL, NULL, true);
+	}
+	else if (numLifes == 1)
+	{
+		SDL_Rect rect = lifesAnim[1].GetCurrentFrame();
+		App->render->Blit(uiTexture, 10, 50, &rect, NULL, NULL, true);
+	}
+	else if (numLifes == 0)
+	{
+		SDL_Rect rect = lifesAnim[2].GetCurrentFrame();
+		App->render->Blit(uiTexture, 10, 50, &rect, NULL, NULL, true);
+	}
 	
 
 	// Draw UI (score) --------------------------------------
