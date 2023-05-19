@@ -37,16 +37,16 @@ bool SceneLevel1::Start()
 	bgleft = App->collisions->AddCollider({ 0, 0, 10, 240 }, Collider::Type::SCREEN_LEFT);
 
 	//First two columns colliders
-	App->collisions->AddCollider({ 1375, 0, 111, 96 }, Collider::Type::WALL);
-	App->collisions->AddCollider({ 1375, 145, 111, 96 }, Collider::Type::WALL);
+	//App->collisions->AddCollider({ 1375, 0, 111, 96 }, Collider::Type::WALL);
+	//App->collisions->AddCollider({ 1375, 145, 111, 96 }, Collider::Type::WALL);
 
 	// Enemies ---
 	
-	//App->enemies->AddEnemy(Enemy_Type::NO_SKULL, 400, 156);
-	//App->enemies->AddEnemy(Enemy_Type::ZOMBIE, 400, 158);
+	App->enemies->AddEnemy(Enemy_Type::NO_SKULL, 400, 156);
+	App->enemies->AddEnemy(Enemy_Type::ZOMBIE, 800, 158);
 	//App->enemies->AddEnemy(Enemy_Type::POWER_UP, 300, 150);
-	//App->enemies->AddEnemy(Enemy_Type::WOLF, 600, 177);
-	App->enemies->AddEnemy(Enemy_Type::WOLF_BLUE, 400, 177);
+	App->enemies->AddEnemy(Enemy_Type::WOLF, 1200, 177);
+	App->enemies->AddEnemy(Enemy_Type::WOLF_BLUE, 1600, 177);
 
 	
 
@@ -86,10 +86,10 @@ bool SceneLevel1::CleanUp()
 	App->collisions->RemoveCollider(bgleft);
 	App->collisions->RemoveCollider(bgright);
 	App->collisions->RemoveCollider(bgfront);
+	App->enemies->RemoveColliders();
 	
 	
 
-	// TODO 5 (old): Remove All Memory Leaks - no solution here guys ;)
-
+	
 	return true;
 }

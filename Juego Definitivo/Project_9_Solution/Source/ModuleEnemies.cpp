@@ -7,9 +7,6 @@
 #include "ModuleAudio.h"
 
 #include "Enemy.h"
-#include "Enemy_RedBird.h"
-#include "Enemy_BrownShip.h"
-#include "Enemy_Mech.h"
 #include "Enemy_Zombie.h"
 #include "Enemy_NoSkull.h"
 #include "Spirit_Ball.h"
@@ -166,15 +163,6 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 		{
 			switch (info.type)
 			{
-				case Enemy_Type::REDBIRD:
-					enemies[i] = new Enemy_RedBird(info.x, info.y);
-					break;
-				case Enemy_Type::BROWNSHIP:
-					enemies[i] = new Enemy_BrownShip(info.x, info.y);
-					break;
-				case Enemy_Type::MECH:
-					enemies[i] = new Enemy_Mech(info.x, info.y);
-					break;
 				case Enemy_Type::ZOMBIE:
 					enemies[i] = new Enemy_Zombie(info.x, info.y);
 					enemies[i]->texture = Enemy1;
@@ -211,6 +199,20 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 		{
 			enemies[i]->OnCollision(c2); //Notify the enemy of a collision
 			break;
+		}
+	}
+}
+
+void ModuleEnemies::RemoveColliders() 
+{
+	for (uint i = 0; i < MAX_ENEMIES; ++i) {
+		if (enemies[i] != nullptr) {
+
+			delete enemies[i]->receiveDmg;
+			delete enemies[i]->afflictDmg;
+			enemies[i]->receiveDmg = nullptr;
+			enemies[i]->afflictDmg = nullptr;
+
 		}
 	}
 }

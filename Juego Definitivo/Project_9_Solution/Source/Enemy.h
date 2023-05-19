@@ -46,6 +46,10 @@ public:
 	// A flag for the enemy removal. Important! We do not delete objects instantly
 	bool pendingToDelete = false;
 
+	// The enemy's collider
+	Collider* receiveDmg = nullptr;
+	Collider* afflictDmg = nullptr;
+
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
@@ -54,8 +58,7 @@ protected:
 
 	int EnemyType = 0;
 
-	// The enemy's collider
-	Collider* collider = nullptr;
+	
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;

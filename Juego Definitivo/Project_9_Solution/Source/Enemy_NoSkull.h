@@ -25,8 +25,7 @@ private:
 
 	bool touch = true;
 
-	Collider* attack = nullptr;
-	Collider* collision = nullptr;
+	Collider* punchAttack = nullptr;
 
 	// Zombie animations
 	Animation walking;

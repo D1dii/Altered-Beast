@@ -23,9 +23,9 @@ Enemy_NoSkull::Enemy_NoSkull(int x, int y) : Enemy(x, y) {
 
 	path.PushBack({ -0.15f, 0.0f }, 150, &walking);
 
-	collider = App->collisions->AddCollider({ position.x - 10, position.y - 10, 40, 70 }, Collider::Type::ENEMY, (Module*)App->enemies);
-	attack = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
-	collision = App->collisions->AddCollider({ 0, 0, 16, 40 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
+	receiveDmg = App->collisions->AddCollider({ position.x - 10, position.y - 10, 40, 70 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	punchAttack = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
+	afflictDmg = App->collisions->AddCollider({ 0, 0, 16, 40 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 
 }
 
@@ -42,15 +42,15 @@ void Enemy_NoSkull::Update() {
 		break;
 	case state::PUNCH_ZOMBIE:
 		punchFrame++;
-		attack->SetPos(position.x, position.y - 5);
-		attack->rect.w = 30;
-		attack->rect.h = 15;
+		punchAttack->SetPos(position.x, position.y - 5);
+		punchAttack->rect.w = 30;
+		punchAttack->rect.h = 15;
 		if (punchFrame <= 15) {
 			currentAnim = &punchZombie;
 			punchZombie.Update();
 		}
 		else if (punchFrame > 15) {
-			App->collisions->RemoveCollider(attack);
+			App->collisions->RemoveCollider(punchAttack);
 		}
 		break;
 	case state::WALK_2:
@@ -72,8 +72,8 @@ void Enemy_NoSkull::Update() {
 
 
 	Enemy::Update();
-	collision->SetPos(position.x + 5, position.y + 7);
-	collider->SetPos(position.x - 10, position.y - 10);
+	afflictDmg->SetPos(position.x + 5, position.y + 7);
+	receiveDmg->SetPos(position.x - 10, position.y - 10);
 }
 
 void Enemy_NoSkull::OnCollision(Collider* col) {
@@ -87,7 +87,7 @@ void Enemy_NoSkull::OnCollision(Collider* col) {
 	else if (col->type == col->PLAYER_ATTACK && zombieState == state::WALK_2 && touch == true) {
 		App->audio->PlayFx(destroyedFx);
 		App->player->score += 100;
-		App->collisions->RemoveCollider(collision);
+		App->collisions->RemoveCollider(afflictDmg);
 		SetToDelete();
 	}
 	else if (col->type == col->PLAYER && zombieState == state::WALK) {
@@ -103,6 +103,8 @@ void Enemy_NoSkull::OnCollision(Collider* col) {
 
 void Enemy_NoSkull::SetToDelete() {
 	pendingToDelete = true;
-	if (collider != nullptr)
-		collider->pendingToDelete = true;
+	if (receiveDmg != nullptr)
+		receiveDmg->pendingToDelete = true;
+	if (afflictDmg != nullptr)
+		afflictDmg->pendingToDelete = true;
 }

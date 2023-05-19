@@ -29,8 +29,8 @@ Enemy_Wolf::Enemy_Wolf(int x, int y) : Enemy(x, y) {
 	path.PushBack({ -1.5f, 1.5f }, 20, &jumpDown);
 	path.PushBack({ 0.0f, 0.0f }, 40, &idle);
 
-	collider = App->collisions->AddCollider({ 0, 0, 75, 30 }, Collider::Type::ENEMY, (Module*)App->enemies);
-	collision = App->collisions->AddCollider({ 0, 0, 45, 20 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
+	receiveDmg = App->collisions->AddCollider({ 0, 0, 75, 30 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	afflictDmg = App->collisions->AddCollider({ 0, 0, 45, 20 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 
 }
 
@@ -62,8 +62,8 @@ void Enemy_Wolf::Update() {
 	}
 
 	Enemy::Update();
-	collider->SetPos(position.x - 5, position.y + 10);
-	collision->SetPos(position.x + 10, position.y + 15);
+	receiveDmg->SetPos(position.x - 5, position.y + 10);
+	afflictDmg->SetPos(position.x + 10, position.y + 15);
 }
 
 void Enemy_Wolf::OnCollision(Collider* col) {
@@ -71,12 +71,14 @@ void Enemy_Wolf::OnCollision(Collider* col) {
 		App->player->score += 100;
 		WolfState = state::DEAD;
 		touch = false;
-		App->collisions->RemoveCollider(collision);
+		App->collisions->RemoveCollider(afflictDmg);
 	}
 }
 
 void Enemy_Wolf::SetToDelete() {
 	pendingToDelete = true;
-	if (collider != nullptr)
-		collider->pendingToDelete = true;
+	if (receiveDmg != nullptr)
+		receiveDmg->pendingToDelete = true;
+	if (afflictDmg != nullptr)
+		afflictDmg->pendingToDelete = true;
 }

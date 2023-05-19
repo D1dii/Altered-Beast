@@ -14,13 +14,15 @@ Enemy::Enemy(int x, int y) : position(x, y)
 
 Enemy::~Enemy()
 {
-	if (collider != nullptr)
-		collider->pendingToDelete = true;
+	if (receiveDmg != nullptr)
+		receiveDmg->pendingToDelete = true;
+	if (afflictDmg != nullptr)
+		afflictDmg->pendingToDelete = true;
 }
 
 const Collider* Enemy::GetCollider() const
 {
-	return collider;
+	return receiveDmg;
 }
 
 void Enemy::Update()
@@ -28,8 +30,8 @@ void Enemy::Update()
 	if (currentAnim != nullptr)
 		currentAnim->Update();
 
-	if (collider != nullptr)
-		collider->SetPos(position.x, position.y);
+	if (receiveDmg != nullptr)
+		receiveDmg->SetPos(position.x, position.y);
 }
 
 void Enemy::Draw()
@@ -41,16 +43,13 @@ void Enemy::Draw()
 void Enemy::OnCollision(Collider* collider)
 {
 	
-		//App->particles->AddParticle(App->particles->explosion, position.x, position.y);
-		//App->audio->PlayFx(destroyedFx);
-	
-
-	//SetToDelete();
 }
 
 void Enemy::SetToDelete()
 {
 	pendingToDelete = true;
-	if (collider != nullptr)
-		collider->pendingToDelete = true;
+	if (receiveDmg != nullptr)
+		receiveDmg->pendingToDelete = true;
+	if (afflictDmg != nullptr)
+		afflictDmg->pendingToDelete = true;
 }

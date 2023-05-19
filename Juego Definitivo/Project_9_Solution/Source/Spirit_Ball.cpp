@@ -18,7 +18,7 @@ Spirit_Ball::Spirit_Ball(int x, int y) : Enemy(x, y) {
 	path.PushBack({ -0.5f, 0.0f }, 75, &idle);
 	path.PushBack({ 1.5f, 0.0f }, 75, &idle);
 
-	collider = App->collisions->AddCollider({ 0, 0, 16, 17 }, Collider::Type::ITEM, (Module*)App->enemies);
+	receiveDmg = App->collisions->AddCollider({ 0, 0, 16, 17 }, Collider::Type::ITEM, (Module*)App->enemies);
 }
 
 void Spirit_Ball::Update() {
@@ -38,6 +38,6 @@ void Spirit_Ball::OnCollision(Collider* col) {
 
 void Spirit_Ball::SetToDelete() {
 	pendingToDelete = true;
-	if (collider != nullptr)
-		collider->pendingToDelete = true;
+	if (receiveDmg != nullptr)
+		receiveDmg->pendingToDelete = true;
 }
