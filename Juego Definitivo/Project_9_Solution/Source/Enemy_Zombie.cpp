@@ -56,9 +56,11 @@ Enemy_Zombie::Enemy_Zombie(int x, int y) : Enemy(x,y) {
 
 	path.PushBack({ -0.15f, 0.0f }, 150, &walking);
 
+
 	receiveDmg = App->collisions->AddCollider({ position.x - 10, position.y - 10, 40, 70 }, Collider::Type::ENEMY, (Module*)App->enemies);
-	explosion = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 	afflictDmg = App->collisions->AddCollider({ 0, 0, 16, 40 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
+	explosion = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
+	
 	
 }
 

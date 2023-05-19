@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
+#include "ModuleCollisions.h"
 
 #include "Enemy.h"
 #include "Enemy_Zombie.h"
@@ -208,10 +209,8 @@ void ModuleEnemies::RemoveColliders()
 	for (uint i = 0; i < MAX_ENEMIES; ++i) {
 		if (enemies[i] != nullptr) {
 
-			delete enemies[i]->receiveDmg;
-			delete enemies[i]->afflictDmg;
-			enemies[i]->receiveDmg = nullptr;
-			enemies[i]->afflictDmg = nullptr;
+			App->collisions->RemoveCollider(enemies[i]->receiveDmg);
+			App->collisions->RemoveCollider(enemies[i]->afflictDmg);
 
 		}
 	}
