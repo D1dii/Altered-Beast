@@ -1,9 +1,8 @@
-﻿  ModulePlayer.cpp
+﻿  Enemy_Dragon.cpp
 C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
 C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\didacgp\Desktop\SpriteSDL-master\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\ModulePlayer.cpp(404,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Generating code
-  1 of 196 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+  1 of 204 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

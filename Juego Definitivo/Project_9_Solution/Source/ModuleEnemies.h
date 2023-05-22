@@ -16,6 +16,8 @@ enum class Enemy_Type
 	POWER_UP,
 	WOLF,
 	WOLF_BLUE,
+	DRAGON,
+
 
 };
 
@@ -89,6 +91,7 @@ private:
 	SDL_Texture* Enemy2 = nullptr;
 	SDL_Texture* Wolf = nullptr;
 	SDL_Texture* Wolf_Blue = nullptr;
+	SDL_Texture* Dragon = nullptr;
 	SDL_Texture* Item = nullptr;
 
 	// The audio fx for destroying an enemy

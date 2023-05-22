@@ -13,6 +13,7 @@
 #include "Spirit_Ball.h"
 #include "Enemy_Wolf.h"
 #include "Enemy_Wolf_Blue.h"
+#include "Enemy_Dragon.h"
 
 #define SPAWN_MARGIN 50
 
@@ -34,6 +35,7 @@ bool ModuleEnemies::Start()
 	Enemy2 = App->textures->Load("Assets/Sprites/NoSkull.png");
 	Wolf = App->textures->Load("Assets/Sprites/Wolf.png");
 	Wolf_Blue = App->textures->Load("Assets/Sprites/Wolf_Blue.png");
+	Dragon = App->textures->Load("Assets/Sprites/Yellow_Dragon.png");
 	Item = App->textures->Load("Assets/Sprites/protagonist.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
@@ -184,6 +186,9 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					enemies[i] = new Enemy_Wolf_Blue(info.x, info.y);
 					enemies[i]->texture = Wolf_Blue;
 					break;
+				case Enemy_Type::DRAGON:
+					enemies[i] = new Enemy_Dragon(info.x, info.y);
+					enemies[i]->texture = Dragon;
 			}
 			
 			enemies[i]->destroyedFx = enemyDestroyedFx;
