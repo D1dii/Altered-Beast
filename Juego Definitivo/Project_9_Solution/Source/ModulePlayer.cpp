@@ -165,15 +165,7 @@ Update_Status ModulePlayer::Update()
 
 	switch (playerState) {
 	case state::IDLE:
-		punch->rect.w = 0;
-		punch->rect.h = 0;
-		punch->SetPos(position.x + 20, 0);
-		kick->rect.w = 0;
-		kick->rect.h = 0;
-		kick->SetPos(position.x + 20, 0);
-		crouchkick->rect.w = 0;
-		crouchkick->rect.h = 0;
-		crouchkick->SetPos(position.x + 20, 0);
+		
 		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN || pad.x == 1) {
 			punchAnim.Reset();
 			playerState = state::PUNCH;
@@ -295,6 +287,12 @@ Update_Status ModulePlayer::Update()
 		position.y = 153;
 		punch->rect.w = 42;
 		punch->rect.h = 10;
+		if (flipType) {
+			punch->SetPos(position.x - 2, position.y + 8);
+		}
+		else {
+			punch->SetPos(position.x + 20, position.y + 8);
+		}
 		if (frame >= 20)
 		{
 			playerState = state::IDLE;
@@ -309,8 +307,12 @@ Update_Status ModulePlayer::Update()
 		position.y = 152;
 		kick->rect.w = 45;
 		kick->rect.h = 20;
-		kick->rect.x = position.x + 20;
-		kick->rect.y = position.y + 35;
+		if (flipType) {
+			kick->SetPos(position.x - 5, position.y + 35);
+		}
+		else {
+			kick->SetPos(position.x + 20, position.y + 35);
+		}
 		if (frame >= 30)
 		{
 			playerState = state::IDLE;
@@ -324,6 +326,12 @@ Update_Status ModulePlayer::Update()
 		position.y = 180;
 		punch->rect.w = 40;
 		punch->rect.h = 10;
+		if (flipType) {
+			punch->SetPos(position.x - 2, position.y + 8);
+		}
+		else {
+			punch->SetPos(position.x + 20, position.y + 8);
+		}
 		if (frame >= 10) {
 			playerState = state::CROUCH;
 			frame = 0;
@@ -334,10 +342,14 @@ Update_Status ModulePlayer::Update()
 		crouchkickAnim.Update();
 		frame++;
 		position.y = 165;
-		crouchkick->rect.x = position.x + 25;
-		crouchkick->rect.y = position.y - 2;
 		crouchkick->rect.w = 18;
 		crouchkick->rect.h = 40;
+		if (flipType) {
+			crouchkick->SetPos(position.x + 3, position.y - 2);
+		}
+		else {
+			crouchkick->SetPos(position.x + 25, position.y - 2);
+		}
 		if (frame >= 30)
 		{
 			playerState = state::CROUCH;
@@ -363,20 +375,19 @@ Update_Status ModulePlayer::Update()
 		position.y = 150;
 		collider->rect.h = 50;
 		playerState = state::IDLE;
+		punch->rect.w = 0;
+		punch->rect.h = 0;
+		punch->SetPos(position.x + 20, 0);
+		kick->rect.w = 0;
+		kick->rect.h = 0;
+		kick->SetPos(position.x + 20, 0);
+		crouchkick->rect.w = 0;
+		crouchkick->rect.h = 0;
+		crouchkick->SetPos(position.x + 20, 0);
 	}
 	//If Punch state / crounch / punch crounch / crounch kick
 
 	collider->SetPos(position.x + 8, position.y + 8);
-	if (flipType) {
-		punch->SetPos(position.x - 2, position.y + 8);
-		crouchkick->SetPos(position.x + 3, position.y - 2);
-		kick->SetPos(position.x - 5, position.y + 35);
-	}
-	else {
-		punch->SetPos(position.x + 20, position.y + 8);
-		crouchkick->SetPos(position.x + 25, position.y - 2);
-		kick->SetPos(position.x + 20, position.y + 35);
-	}
 
 	currentAnimation->Update();
 
@@ -545,7 +556,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ENEMY_SHOT && destroyed == false)
 	{
-		c2->pendingToDelete = true;
+		//c2->pendingToDelete = true;
 		lifeNodes--;
 		if (lifeNodes < 0)
 		{
