@@ -396,7 +396,13 @@ Update_Status ModulePlayer::Update()
 
 Update_Status ModulePlayer::PostUpdate()
 {
-
+	if (damaged) {
+		waitForDmg++;
+		if (waitForDmg >= 10) {
+			damaged = false;
+			touch = true;
+		}
+	}
 	
 	if (!destroyed)
 	{
@@ -554,10 +560,12 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		//score += 23;
 	}
 
-	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ENEMY_SHOT && destroyed == false)
+	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ENEMY_SHOT && destroyed == false && touch == true)
 	{
 		//c2->pendingToDelete = true;
 		lifeNodes--;
+		damaged = true;
+		touch = false;
 		if (lifeNodes < 0)
 		{
 			lifeNodes = 3;

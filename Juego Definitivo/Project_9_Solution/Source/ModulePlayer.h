@@ -88,7 +88,9 @@ public:
 	state playerState = state::IDLE;
 
 	bool damaged = false;
+	bool touch = true;
 	int frame = 0;
+	int waitForDmg = 0;
 	int numLifes = 2;
 	int lifeNodes = 12;
 

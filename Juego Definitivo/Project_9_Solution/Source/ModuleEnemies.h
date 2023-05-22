@@ -75,6 +75,14 @@ public:
 	// Delete all colliders
 	void RemoveColliders();
 
+	// The enemies sprite sheet
+	SDL_Texture* Enemy1 = nullptr;
+	SDL_Texture* Enemy2 = nullptr;
+	SDL_Texture* Wolf = nullptr;
+	SDL_Texture* Wolf_Blue = nullptr;
+	SDL_Texture* Dragon = nullptr;
+	SDL_Texture* Item = nullptr;
+
 private:
 	// Spawns a new enemy using the data from the queue
 	void SpawnEnemy(const EnemySpawnpoint& info);
@@ -86,13 +94,7 @@ private:
 	// All spawned enemies in the scene
 	Enemy* enemies[MAX_ENEMIES] = { nullptr };
 
-	// The enemies sprite sheet
-	SDL_Texture* Enemy1 = nullptr;
-	SDL_Texture* Enemy2 = nullptr;
-	SDL_Texture* Wolf = nullptr;
-	SDL_Texture* Wolf_Blue = nullptr;
-	SDL_Texture* Dragon = nullptr;
-	SDL_Texture* Item = nullptr;
+	
 
 	// The audio fx for destroying an enemy
 	int enemyDestroyedFx = 0;

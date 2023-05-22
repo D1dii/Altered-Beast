@@ -24,13 +24,16 @@ public:
 private:
 
 	Path path;
+	Path path2;
 	Path attackPath;
-
-	bool attacking = false;
+	Path attackPath2;
+	Path deathPath;
+	Path repositionPath;
 
 	bool touch = true;
 
-	Collider* explosion = nullptr;
+	int loop = 1;
+
 
 	// Zombie animations
 	Animation flying;
@@ -40,10 +43,14 @@ private:
 	{
 		FLY,
 		ATTACK,
-		DEAD
+		DEAD,
+		REPOSITION,
+
 	};
 
 	state dragonState = state::FLY;
+
+	
 
 	int life = 2;
 
