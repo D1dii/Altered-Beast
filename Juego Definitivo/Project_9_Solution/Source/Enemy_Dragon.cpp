@@ -32,7 +32,7 @@ Enemy_Dragon::Enemy_Dragon(int x, int y) : Enemy(x, y) {
 
 	deathPath.PushBack({ -1.5f, -1.0f }, 30, &dead);
 
-	repositionPath.PushBack({ 0.0f, -0.5f }, 30, &flying);
+	repositionPath.PushBack({ 1.0f, -0.5f }, 30, &flying);
 
 	receiveDmg = App->collisions->AddCollider({ position.x - 10, position.y - 10, 45, 70 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	afflictDmg = App->collisions->AddCollider({ 0, 0, 35, 45 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
