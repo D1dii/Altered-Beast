@@ -56,9 +56,11 @@ Enemy_Zombie::Enemy_Zombie(int x, int y) : Enemy(x,y) {
 
 	path.PushBack({ -0.15f, 0.0f }, 150, &walking);
 
-	collider = App->collisions->AddCollider({ position.x - 10, position.y - 10, 40, 70 }, Collider::Type::ENEMY, (Module*)App->enemies);
+
+	receiveDmg = App->collisions->AddCollider({ position.x - 10, position.y - 10, 40, 70 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	afflictDmg = App->collisions->AddCollider({ 0, 0, 16, 40 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 	explosion = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
-	collision = App->collisions->AddCollider({ 0, 0, 16, 40 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
+	
 	
 }
 
@@ -129,8 +131,8 @@ void Enemy_Zombie::Update() {
 	
 
 	Enemy::Update();
-	collision->SetPos(position.x + 5, position.y + 7);
-	collider->SetPos(position.x - 10, position.y - 10);
+	afflictDmg->SetPos(position.x + 5, position.y + 7);
+	receiveDmg->SetPos(position.x - 10, position.y - 10);
 }
 
 void Enemy_Zombie::OnCollision(Collider* col) {
@@ -145,16 +147,16 @@ void Enemy_Zombie::OnCollision(Collider* col) {
 		App->audio->PlayFx(destroyedFx);
 		App->player->score += 100;
 		SetToDelete();
-		App->collisions->RemoveCollider(collision);
+		App->collisions->RemoveCollider(afflictDmg);
 	}
 	else if (col->type == col->PLAYER && zombieState == state::WALK) {
 		zombieState = state::EXPLOSIONHEAD;
-		App->collisions->RemoveCollider(collision);
+		App->collisions->RemoveCollider(afflictDmg);
 	}
 	else if (col->type == col->PLAYER && zombieState == state::NO_HEAD) {
 		frame = 0;
 		zombieState = state::EXPLOSION_NO_HEAD;
-		App->collisions->RemoveCollider(collision);
+		App->collisions->RemoveCollider(afflictDmg);
 	}
 
 	
@@ -162,7 +164,9 @@ void Enemy_Zombie::OnCollision(Collider* col) {
 
 void Enemy_Zombie::SetToDelete() {
 	pendingToDelete = true;
-	if (collider != nullptr)
-		collider->pendingToDelete = true;
+	if (receiveDmg != nullptr)
+		receiveDmg->pendingToDelete = true;
+	if (afflictDmg != nullptr)
+		afflictDmg->pendingToDelete = true;
 }
 	

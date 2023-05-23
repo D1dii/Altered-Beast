@@ -5,16 +5,15 @@
 #include "ModuleRender.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
+#include "ModuleCollisions.h"
 
 #include "Enemy.h"
-#include "Enemy_RedBird.h"
-#include "Enemy_BrownShip.h"
-#include "Enemy_Mech.h"
 #include "Enemy_Zombie.h"
 #include "Enemy_NoSkull.h"
 #include "Spirit_Ball.h"
 #include "Enemy_Wolf.h"
 #include "Enemy_Wolf_Blue.h"
+#include "Enemy_Dragon.h"
 
 #define SPAWN_MARGIN 50
 
@@ -36,6 +35,7 @@ bool ModuleEnemies::Start()
 	Enemy2 = App->textures->Load("Assets/Sprites/NoSkull.png");
 	Wolf = App->textures->Load("Assets/Sprites/Wolf.png");
 	Wolf_Blue = App->textures->Load("Assets/Sprites/Wolf_Blue.png");
+	Dragon = App->textures->Load("Assets/Sprites/Yellow_Dragon.png");
 	Item = App->textures->Load("Assets/Sprites/protagonist.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
@@ -166,15 +166,6 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 		{
 			switch (info.type)
 			{
-				case Enemy_Type::REDBIRD:
-					enemies[i] = new Enemy_RedBird(info.x, info.y);
-					break;
-				case Enemy_Type::BROWNSHIP:
-					enemies[i] = new Enemy_BrownShip(info.x, info.y);
-					break;
-				case Enemy_Type::MECH:
-					enemies[i] = new Enemy_Mech(info.x, info.y);
-					break;
 				case Enemy_Type::ZOMBIE:
 					enemies[i] = new Enemy_Zombie(info.x, info.y);
 					enemies[i]->texture = Enemy1;
@@ -195,6 +186,9 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					enemies[i] = new Enemy_Wolf_Blue(info.x, info.y);
 					enemies[i]->texture = Wolf_Blue;
 					break;
+				case Enemy_Type::DRAGON:
+					enemies[i] = new Enemy_Dragon(info.x, info.y);
+					enemies[i]->texture = Dragon;
 			}
 			
 			enemies[i]->destroyedFx = enemyDestroyedFx;
@@ -211,6 +205,18 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 		{
 			enemies[i]->OnCollision(c2); //Notify the enemy of a collision
 			break;
+		}
+	}
+}
+
+void ModuleEnemies::RemoveColliders() 
+{
+	for (uint i = 0; i < MAX_ENEMIES; ++i) {
+		if (enemies[i] != nullptr) {
+
+			App->collisions->RemoveCollider(enemies[i]->receiveDmg);
+			App->collisions->RemoveCollider(enemies[i]->afflictDmg);
+
 		}
 	}
 }

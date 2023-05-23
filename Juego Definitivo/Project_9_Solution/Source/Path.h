@@ -32,6 +32,9 @@ public:
 	// Resets the path to the first step
 	void Reset();
 
+	// The position relative to the start of the path
+	fPoint relativePosition = fPoint(0.0f, 0.0f);
+
 public:
 	// Defines wether the path should go back to the beginning when finished
 	bool loop = true;
@@ -46,8 +49,7 @@ private:
 	// Current frame from the current step
 	uint currentStepFrame = 0;
 
-	// The position relative to the start of the path
-	fPoint relativePosition = fPoint(0.0f, 0.0f);
+	
 
 	// The current step in the path
 	uint currentStep = 0;

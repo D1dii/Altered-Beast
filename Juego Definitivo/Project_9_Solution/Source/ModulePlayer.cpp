@@ -20,6 +20,17 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	// jump animation
 	jumpAnim.PushBack({ 7, 155 + 280 * phase, 40, 68 });
 
+	//Nodes anim
+	nodesAnim[0].PushBack({ 0, 0, 23, 14 });
+	nodesAnim[1].PushBack({ 0, 14, 23, 14 });
+	nodesAnim[2].PushBack({ 0, 14 * 2, 23, 14 });
+	nodesAnim[3].PushBack({ 0, 14 * 3, 23, 14 });
+
+	//lifes anim
+	lifesAnim[0].PushBack({ 14, 22, 63, 33});
+	lifesAnim[1].PushBack({ 14, 139, 63, 33 });
+	lifesAnim[2].PushBack({ 14, 219, 63, 33 });
+
 	// Move down
 	downAnim.PushBack({ 183, 176, 34, 43 });
 	downAnim.loop = false;
@@ -73,8 +84,12 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 
 	bool ret = true;
+	numLifes = 2;
+	lifeNodes = 12;
 
 	texture = App->textures->Load("Assets/Sprites/protagonist.png");
+	nodesTexture = App->textures->Load("Assets/Sprites/lifeSprite2.png");
+	uiTexture = App->textures->Load("Assets/Sprites/lifes.png");
 	currentAnimation = &idleAnim;
 
 	laserFx = App->audio->LoadFx("Assets/Fx/laser.wav");
@@ -150,15 +165,7 @@ Update_Status ModulePlayer::Update()
 
 	switch (playerState) {
 	case state::IDLE:
-		punch->rect.w = 0;
-		punch->rect.h = 0;
-		punch->SetPos(position.x + 20, 0);
-		kick->rect.w = 0;
-		kick->rect.h = 0;
-		kick->SetPos(position.x + 20, 0);
-		crouchkick->rect.w = 0;
-		crouchkick->rect.h = 0;
-		crouchkick->SetPos(position.x + 20, 0);
+		
 		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN || pad.x == 1) {
 			punchAnim.Reset();
 			playerState = state::PUNCH;
@@ -280,6 +287,12 @@ Update_Status ModulePlayer::Update()
 		position.y = 153;
 		punch->rect.w = 42;
 		punch->rect.h = 10;
+		if (flipType) {
+			punch->SetPos(position.x - 2, position.y + 8);
+		}
+		else {
+			punch->SetPos(position.x + 20, position.y + 8);
+		}
 		if (frame >= 20)
 		{
 			playerState = state::IDLE;
@@ -294,8 +307,12 @@ Update_Status ModulePlayer::Update()
 		position.y = 152;
 		kick->rect.w = 45;
 		kick->rect.h = 20;
-		kick->rect.x = position.x + 20;
-		kick->rect.y = position.y + 35;
+		if (flipType) {
+			kick->SetPos(position.x - 5, position.y + 35);
+		}
+		else {
+			kick->SetPos(position.x + 20, position.y + 35);
+		}
 		if (frame >= 30)
 		{
 			playerState = state::IDLE;
@@ -309,6 +326,12 @@ Update_Status ModulePlayer::Update()
 		position.y = 180;
 		punch->rect.w = 40;
 		punch->rect.h = 10;
+		if (flipType) {
+			punch->SetPos(position.x - 2, position.y + 8);
+		}
+		else {
+			punch->SetPos(position.x + 20, position.y + 8);
+		}
 		if (frame >= 10) {
 			playerState = state::CROUCH;
 			frame = 0;
@@ -319,10 +342,14 @@ Update_Status ModulePlayer::Update()
 		crouchkickAnim.Update();
 		frame++;
 		position.y = 165;
-		crouchkick->rect.x = position.x + 25;
-		crouchkick->rect.y = position.y - 2;
 		crouchkick->rect.w = 18;
 		crouchkick->rect.h = 40;
+		if (flipType) {
+			crouchkick->SetPos(position.x + 3, position.y - 2);
+		}
+		else {
+			crouchkick->SetPos(position.x + 25, position.y - 2);
+		}
 		if (frame >= 30)
 		{
 			playerState = state::CROUCH;
@@ -348,20 +375,19 @@ Update_Status ModulePlayer::Update()
 		position.y = 150;
 		collider->rect.h = 50;
 		playerState = state::IDLE;
+		punch->rect.w = 0;
+		punch->rect.h = 0;
+		punch->SetPos(position.x + 20, 0);
+		kick->rect.w = 0;
+		kick->rect.h = 0;
+		kick->SetPos(position.x + 20, 0);
+		crouchkick->rect.w = 0;
+		crouchkick->rect.h = 0;
+		crouchkick->SetPos(position.x + 20, 0);
 	}
 	//If Punch state / crounch / punch crounch / crounch kick
 
 	collider->SetPos(position.x + 8, position.y + 8);
-	if (flipType) {
-		punch->SetPos(position.x - 2, position.y + 8);
-		crouchkick->SetPos(position.x + 3, position.y - 2);
-		kick->SetPos(position.x - 5, position.y + 35);
-	}
-	else {
-		punch->SetPos(position.x + 20, position.y + 8);
-		crouchkick->SetPos(position.x + 25, position.y - 2);
-		kick->SetPos(position.x + 20, position.y + 35);
-	}
 
 	currentAnimation->Update();
 
@@ -370,11 +396,59 @@ Update_Status ModulePlayer::Update()
 
 Update_Status ModulePlayer::PostUpdate()
 {
+	if (damaged) {
+		waitForDmg++;
+		if (waitForDmg >= 10) {
+			damaged = false;
+			touch = true;
+		}
+	}
+	
 	if (!destroyed)
 	{
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
 		App->render->Blit(texture, position.x, position.y, &rect, speed, flipType);
 	}
+	//Draw Nodes
+	int blueNodes = lifeNodes >> 2;
+	for (int i = 0; i < blueNodes; i++)
+	{
+		SDL_Rect rect = nodesAnim[0].GetCurrentFrame();
+		App->render->Blit(nodesTexture, 50+ 25 * i, 230, &rect, NULL, NULL, true);
+	}
+	if (lifeNodes % 4 == 3)
+	{
+		SDL_Rect rect = nodesAnim[1].GetCurrentFrame();
+		App->render->Blit(nodesTexture, 50 + 25 * (blueNodes), 230, &rect, NULL, NULL, true);
+	}
+	else if (lifeNodes % 4 == 2)
+	{
+		SDL_Rect rect = nodesAnim[2].GetCurrentFrame();
+		App->render->Blit(nodesTexture, 50 + 25 * (blueNodes), 230, &rect, NULL, NULL, true);
+	}
+	else if (lifeNodes % 4 == 1)
+	{
+		SDL_Rect rect = nodesAnim[3].GetCurrentFrame();
+		App->render->Blit(nodesTexture, 50 + 25 * (blueNodes), 230, &rect, NULL, NULL, true);
+	}
+
+	//Draw Lifes
+	if (numLifes == 2)
+	{
+		SDL_Rect rect = lifesAnim[0].GetCurrentFrame();
+		App->render->Blit(uiTexture, 10,50, &rect, NULL, NULL, true);
+	}
+	else if (numLifes == 1)
+	{
+		SDL_Rect rect = lifesAnim[1].GetCurrentFrame();
+		App->render->Blit(uiTexture, 10, 50, &rect, NULL, NULL, true);
+	}
+	else if (numLifes == 0)
+	{
+		SDL_Rect rect = lifesAnim[2].GetCurrentFrame();
+		App->render->Blit(uiTexture, 10, 50, &rect, NULL, NULL, true);
+	}
+	
 
 	// Draw UI (score) --------------------------------------
 	sprintf_s(scoreText, 10, "%7d", score);
@@ -486,10 +560,23 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		//score += 23;
 	}
 
-	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ENEMY_SHOT && destroyed == false) {
-		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
-		
-		destroyed = true;
+	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ENEMY_SHOT && destroyed == false && touch == true)
+	{
+		//c2->pendingToDelete = true;
+		lifeNodes--;
+		damaged = true;
+		touch = false;
+		if (lifeNodes < 0)
+		{
+			lifeNodes = 3;
+			numLifes--;
+			if (numLifes < 0)
+			{
+				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
+				destroyed = true;
+			}
+		}
+
 	}
 
 	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ITEM) {
