@@ -14,6 +14,7 @@
 #include "Enemy_Wolf.h"
 #include "Enemy_Wolf_Blue.h"
 #include "Enemy_Dragon.h"
+#include "Enemy_Orco.h"
 
 #define SPAWN_MARGIN 50
 
@@ -36,6 +37,7 @@ bool ModuleEnemies::Start()
 	Wolf = App->textures->Load("Assets/Sprites/Wolf.png");
 	Wolf_Blue = App->textures->Load("Assets/Sprites/Wolf_Blue.png");
 	Dragon = App->textures->Load("Assets/Sprites/Yellow_Dragon.png");
+	Orco = App->textures->Load("Assets/Sprites/Orco.png");
 	Item = App->textures->Load("Assets/Sprites/protagonist.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
@@ -189,6 +191,11 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 				case Enemy_Type::DRAGON:
 					enemies[i] = new Enemy_Dragon(info.x, info.y);
 					enemies[i]->texture = Dragon;
+					break;
+				case Enemy_Type::ORCO:
+					enemies[i] = new Enemy_Orco(info.x, info.y);
+					enemies[i]->texture = Orco;
+					break;
 			}
 			
 			enemies[i]->destroyedFx = enemyDestroyedFx;

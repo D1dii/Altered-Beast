@@ -562,7 +562,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ENEMY_SHOT && destroyed == false && touch == true)
 	{
-		//c2->pendingToDelete = true;
+		c2->pendingToDelete = true;
 		lifeNodes--;
 		damaged = true;
 		touch = false;

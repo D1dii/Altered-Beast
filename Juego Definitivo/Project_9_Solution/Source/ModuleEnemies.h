@@ -17,6 +17,8 @@ enum class Enemy_Type
 	WOLF,
 	WOLF_BLUE,
 	DRAGON,
+	ORCO,
+
 
 
 };
@@ -81,6 +83,7 @@ public:
 	SDL_Texture* Wolf = nullptr;
 	SDL_Texture* Wolf_Blue = nullptr;
 	SDL_Texture* Dragon = nullptr;
+	SDL_Texture* Orco = nullptr;
 	SDL_Texture* Item = nullptr;
 
 private:

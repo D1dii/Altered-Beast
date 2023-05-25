@@ -47,7 +47,8 @@ bool SceneLevel1::Start()
 	//App->enemies->AddEnemy(Enemy_Type::POWER_UP, 300, 150);
 	//App->enemies->AddEnemy(Enemy_Type::WOLF, 1200, 177);
 	//App->enemies->AddEnemy(Enemy_Type::WOLF_BLUE, 1600, 177);
-	App->enemies->AddEnemy(Enemy_Type::DRAGON, 250, 15);
+	//App->enemies->AddEnemy(Enemy_Type::DRAGON, 250, 15);
+	App->enemies->AddEnemy(Enemy_Type::ORCO, 250, 150);
 
 	
 
