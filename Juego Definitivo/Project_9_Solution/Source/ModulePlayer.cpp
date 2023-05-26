@@ -9,6 +9,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleFonts.h"
+#include "ModuleEnemies.h"
 
 #include <stdio.h>
 
@@ -161,6 +162,31 @@ Update_Status ModulePlayer::Update()
 		App->audio->PlayFx(powerUpFx);
 		phase = 2;
 		phaseUpdate();
+	}
+
+	// Spawn Enemies
+	if (App->input->keys[SDL_SCANCODE_F6] == Key_State::KEY_DOWN) {
+		App->enemies->AddEnemy(Enemy_Type::ZOMBIE, position.x + 200, 158);
+	}
+
+	if (App->input->keys[SDL_SCANCODE_F7] == Key_State::KEY_DOWN) {
+		App->enemies->AddEnemy(Enemy_Type::NO_SKULL, position.x + 200, 156);
+	}
+
+	if (App->input->keys[SDL_SCANCODE_F8] == Key_State::KEY_DOWN) {
+		App->enemies->AddEnemy(Enemy_Type::WOLF, position.x + 200, 177);
+	}
+
+	if (App->input->keys[SDL_SCANCODE_F9] == Key_State::KEY_DOWN) {
+		App->enemies->AddEnemy(Enemy_Type::WOLF_BLUE, position.x + 200, 177);
+	}
+
+	if (App->input->keys[SDL_SCANCODE_F10] == Key_State::KEY_DOWN) {
+		App->enemies->AddEnemy(Enemy_Type::DRAGON, position.x + 200, 15);
+	}
+
+	if (App->input->keys[SDL_SCANCODE_F11] == Key_State::KEY_DOWN) {
+		App->enemies->AddEnemy(Enemy_Type::ORCO, position.x + 200, 150);
 	}
 
 	switch (playerState) {
@@ -391,18 +417,21 @@ Update_Status ModulePlayer::Update()
 
 	currentAnimation->Update();
 
+	if (damaged) {
+		waitForDmg++;
+		if (waitForDmg >= 30) {
+			damaged = false;
+			PlayerTouch = true;
+			waitForDmg = 0;
+		}
+	}
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 Update_Status ModulePlayer::PostUpdate()
 {
-	if (damaged) {
-		waitForDmg++;
-		if (waitForDmg >= 10) {
-			damaged = false;
-			touch = true;
-		}
-	}
+	
 	
 	if (!destroyed)
 	{
@@ -465,7 +494,7 @@ else if (secondscounter >50){
 	App->fonts->BlitText(200, 20, scoreFont, "insert coin");
 }
 
-	if (score >= 400) {
+	if (score >= 4000) {
 		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
 		
 	}
@@ -529,6 +558,19 @@ void ModulePlayer::phaseUpdate() {
 		jumpAnim.PullBack(1);
 		jumpAnim.PushBack({ 5, 735, 45, 55 });
 	}
+
+	if (phase == 0) {
+		damage = 1;
+	}
+	else if (phase == 1) {
+		damage = 2;
+	}
+	else if (phase == 2) {
+		damage = 3;
+	}
+	else if (phase == 4) {
+		damage = 4;
+	}
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
@@ -560,12 +602,12 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		//score += 23;
 	}
 
-	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ENEMY_SHOT && destroyed == false && touch == true)
+	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ENEMY_SHOT && destroyed == false && PlayerTouch == true)
 	{
-		c2->pendingToDelete = true;
+		//c2->pendingToDelete = true;
 		lifeNodes--;
 		damaged = true;
-		touch = false;
+		PlayerTouch = false;
 		if (lifeNodes < 0)
 		{
 			lifeNodes = 3;

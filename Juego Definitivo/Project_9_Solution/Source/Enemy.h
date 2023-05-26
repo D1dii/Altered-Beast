@@ -49,6 +49,7 @@ public:
 	// The enemy's collider
 	Collider* receiveDmg = nullptr;
 	Collider* afflictDmg = nullptr;
+	Collider* punchAttack = nullptr;
 
 protected:
 	// A ptr to the current animation

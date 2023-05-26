@@ -48,6 +48,9 @@ public:
 	// Player Form
 	int phase = 0;
 
+	// Attacks Damage
+	int damage = 1;
+
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* texture = nullptr;
 	SDL_Texture* nodesTexture = nullptr;
@@ -88,7 +91,7 @@ public:
 	state playerState = state::IDLE;
 
 	bool damaged = false;
-	bool touch = true;
+	bool PlayerTouch = true;
 	int frame = 0;
 	int waitForDmg = 0;
 	int numLifes = 2;

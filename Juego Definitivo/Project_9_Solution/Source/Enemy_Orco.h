@@ -25,8 +25,6 @@ private:
 
 	bool touch = true;
 
-	Collider* punchAttack = nullptr;
-
 	// Zombie animations
 	Animation walking;
 	Animation punchOrco;
@@ -45,7 +43,7 @@ private:
 
 	state orcoState = state::WALK;
 
-	int life = 2;
+	int life = 3;
 
 	int frame = 0;
 	int punchFrame = 0;

@@ -141,6 +141,13 @@ void Enemy_Zombie::OnCollision(Collider* col) {
 		currentAnim = &firstHit;
 		zombieState = state::NO_HEAD;
 		touch = false;
+		life -= App->player->damage;
+		if (life <= 0) {
+			App->audio->PlayFx(destroyedFx);
+			App->player->score += 100;
+			SetToDelete();
+			App->collisions->RemoveCollider(afflictDmg);
+		}
 		
 	}
 	else if (col->type == col->PLAYER_ATTACK && zombieState == state::NO_HEAD && touch == true) {

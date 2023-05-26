@@ -51,7 +51,7 @@ void Enemy_NoSkull::Update() {
 			
 		}
 		else if (punchFrame > 15) {
-			App->collisions->RemoveCollider(punchAttack);
+			punchAttack->SetPos(position.x, -20);
 			zombieState = state::WALK;
 		}
 		break;
@@ -80,13 +80,23 @@ void Enemy_NoSkull::Update() {
 
 void Enemy_NoSkull::OnCollision(Collider* col) {
 
-	if (col->type == col->PLAYER_ATTACK && zombieState == state::WALK) {
+	if (col->type == col->PLAYER_ATTACK && zombieState == state::WALK && touch == true) {
 		currentAnim = &firstHit;
-		zombieState = state::WALK_2;
 		touch = false;
+		life -= App->player->damage;
+		if (life <= 0) {
+			App->audio->PlayFx(destroyedFx);
+			App->player->score += 100;
+			App->collisions->RemoveCollider(afflictDmg);
+			SetToDelete();
+		}
+		else {
+			zombieState = state::WALK_2;
+		}
 
 	}
-	else if (col->type == col->PLAYER_ATTACK && zombieState == state::WALK_2 && touch == true) {
+	
+	if (col->type == col->PLAYER_ATTACK && zombieState == state::WALK_2 && touch == true) {
 		App->audio->PlayFx(destroyedFx);
 		App->player->score += 100;
 		App->collisions->RemoveCollider(afflictDmg);

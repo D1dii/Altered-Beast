@@ -9,21 +9,20 @@
 Enemy_Orco::Enemy_Orco(int x, int y) : Enemy(x, y){
 
 	// Walk animation
-	walking.PushBack({ 57, 13, 35, 70 });
-	walking.PushBack({ 112, 12, 23, 71 });
-	walking.PushBack({ 145, 10, 34, 70 });
+	walking.PushBack({ 41, 13, 51, 70 });
+	walking.PushBack({ 93, 12, 42, 71 });
+	walking.PushBack({ 136, 10, 43, 70 });
 	walking.speed = 0.1f;
 
 	// Idle
 
-	idle.PushBack({ 112, 12, 23, 71 });
+	idle.PushBack({ 151, 97, 44, 70 });
 
 	// Punch animation
 	punchOrco.PushBack({ 3, 99, 63, 70 });
 	punchOrco.PushBack({ 272, 11, 62, 70 });
 	punchOrco.PushBack({ 151, 97, 44, 70 });
-	punchOrco.PushBack({ 198, 13, 58, 70 });
-	punchOrco.speed = 0.05f;
+	punchOrco.speed = 0.1f;
 
 	// Hit animation
 	Hit.PushBack({ 86, 101, 45, 62 });
@@ -40,6 +39,8 @@ Enemy_Orco::Enemy_Orco(int x, int y) : Enemy(x, y){
 }
 
 void Enemy_Orco::Update() {
+
+	position = spawnPos + path.GetRelativePosition();
 
 	switch (orcoState)
 	{
@@ -60,19 +61,19 @@ void Enemy_Orco::Update() {
 		break;
 	case Enemy_Orco::state::PUNCH_ORCO:
 		punchFrame++;
-		punchAttack->SetPos(position.x - 15, position.y);
+		punchAttack->SetPos(position.x - 5, position.y + 5);
 		punchAttack->rect.w = 30;
 		punchAttack->rect.h = 15;
-		if (punchFrame <= 40) {
+		if (punchFrame <= 15) {
 			currentAnim = &punchOrco;
 			punchOrco.Update();
 		}
-		else if (punchFrame > 40 && punchFrame <= 50) {
-			App->collisions->RemoveCollider(punchAttack);
+		else if (punchFrame > 15 && punchFrame <= 25) {
+			punchAttack->SetPos(position.x - 5, -20);
 			currentAnim = &idle;
 			idle.Update();
 		}
-		else if (punchFrame > 50) {
+		else if (punchFrame > 25) {
 			orcoState = state::WALK;
 			punchFrame = 0;
 		}
@@ -88,21 +89,21 @@ void Enemy_Orco::Update() {
 	}
 
 	Enemy::Update();
-	afflictDmg->SetPos(position.x + 5, position.y + 7);
-	receiveDmg->SetPos(position.x - 10, position.y - 10);
+	afflictDmg->SetPos(position.x + 20, position.y + 7);
+	receiveDmg->SetPos(position.x + 10, position.y - 10);
 }
 
 void Enemy_Orco::OnCollision(Collider* col) {
-	if (col->type == col->PLAYER_ATTACK && touch == true && life > 0) {
+	if (col->type == col->PLAYER_ATTACK && touch == true) {
 		orcoState = state::HIT;
 		touch = false;
-		life--;
-	}
-
-	if (col->type == col->PLAYER_ATTACK && touch == true && life <= 0) {
-		orcoState = state::DEATH;
-		App->player->score += 300;
-		touch = false;
+		life -= App->player->damage;
+		if (life <= 0) {
+			orcoState = state::DEATH;
+			App->audio->PlayFx(destroyedFx);
+			App->player->score += 300;
+			App->collisions->RemoveCollider(punchAttack);
+		}
 	}
 
 	if (col->type == col->PLAYER) {

@@ -223,6 +223,7 @@ void ModuleEnemies::RemoveColliders()
 
 			App->collisions->RemoveCollider(enemies[i]->receiveDmg);
 			App->collisions->RemoveCollider(enemies[i]->afflictDmg);
+			App->collisions->RemoveCollider(enemies[i]->punchAttack);
 
 		}
 	}
