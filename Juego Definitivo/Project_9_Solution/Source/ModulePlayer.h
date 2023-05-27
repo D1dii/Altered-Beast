@@ -50,7 +50,7 @@ public:
 
 	// Attacks Damage
 	int damage = 1;
-
+	
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* texture = nullptr;
 	SDL_Texture* nodesTexture = nullptr;
@@ -87,9 +87,10 @@ public:
 		KICK,
 		CROUCH_KICK
 	};
-
+	
 	state playerState = state::IDLE;
 
+	bool GODMODE = false;
 	bool damaged = false;
 	bool PlayerTouch = true;
 	int frame = 0;
@@ -108,6 +109,7 @@ public:
 
 	// A flag to detect if the player is flipped
 	bool flipType;
+	
 
 	// Sound effects indices
 	uint laserFx = 0;

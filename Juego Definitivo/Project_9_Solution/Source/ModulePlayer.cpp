@@ -382,11 +382,22 @@ Update_Status ModulePlayer::Update()
 			frame = 0;
 		}
 	}
-
+	if (App->input->keys[SDL_SCANCODE_F2] == Key_State::KEY_DOWN) {
+		GODMODE = !GODMODE;
+	}
 	
 	//This is for loading the new animations 
 	
+	if (App->input->keys[SDL_SCANCODE_M] == Key_State::KEY_DOWN) {
+		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 90);
 
+	}
+	if (App->input->keys[SDL_SCANCODE_B] == Key_State::KEY_DOWN) {
+		App->audio->PlayFx(playerDeathFx);
+		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 90);
+		
+
+	}
 	// If no up/down movement detected, set the current animation back to idle
 	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE
@@ -416,8 +427,10 @@ Update_Status ModulePlayer::Update()
 	collider->SetPos(position.x + 8, position.y + 8);
 
 	currentAnimation->Update();
-
-	if (damaged) {
+	if (GODMODE == true) {
+		App->player->collider->NONE;
+	}
+	else {
 		waitForDmg++;
 		if (waitForDmg >= 30) {
 			damaged = false;
