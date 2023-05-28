@@ -20,6 +20,7 @@ struct Collider
 		SCREEN_LEFT,
 		SCREEN_RIGHT,
 		ITEM,
+		COLUMNS,
 
 		MAX
 	};

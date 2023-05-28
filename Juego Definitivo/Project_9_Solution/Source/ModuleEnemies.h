@@ -18,7 +18,7 @@ enum class Enemy_Type
 	WOLF_BLUE,
 	DRAGON,
 	ORCO,
-
+	COLUMN,
 
 
 };
@@ -85,6 +85,8 @@ public:
 	SDL_Texture* Dragon = nullptr;
 	SDL_Texture* Orco = nullptr;
 	SDL_Texture* Item = nullptr;
+	SDL_Texture* Column = nullptr;
+
 
 private:
 	// Spawns a new enemy using the data from the queue

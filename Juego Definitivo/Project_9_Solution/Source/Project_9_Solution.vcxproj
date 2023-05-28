@@ -77,6 +77,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="Columns.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enemy_Dragon.h" />
     <ClInclude Include="Enemy_NoSkull.h" />
@@ -109,6 +110,7 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="Columns.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Enemy_Dragon.cpp" />
     <ClCompile Include="Enemy_NoSkull.cpp" />

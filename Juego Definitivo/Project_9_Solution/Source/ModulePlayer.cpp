@@ -28,9 +28,9 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	nodesAnim[3].PushBack({ 0, 14 * 3, 23, 14 });
 
 	//lifes anim
-	lifesAnim[0].PushBack({ 14, 22, 63, 33});
-	lifesAnim[1].PushBack({ 14, 139, 63, 33 });
-	lifesAnim[2].PushBack({ 14, 219, 63, 33 });
+	lifesAnim[0].PushBack({ 14, 22, 63, 33 });
+	lifesAnim[1].PushBack({ 14, 106, 63, 33 });
+	lifesAnim[2].PushBack({ 14, 186, 63, 33 });
 
 	// Move down
 	downAnim.PushBack({ 183, 176, 34, 43 });
@@ -105,7 +105,7 @@ bool ModulePlayer::Start()
 
 	destroyed = false;
 
-	collider = App->collisions->AddCollider({ position.x + 8, position.y + 8, 25, 50 }, Collider::Type::PLAYER, this);
+	collider = App->collisions->AddCollider({ position.x + 8, position.y + 8, 25, 70 }, Collider::Type::PLAYER, this);
 	punch = App->collisions->AddCollider({ position.x + 20, position.y + 8, 0, 0 }, Collider::Type::PLAYER_ATTACK, this);
 	kick = App->collisions->AddCollider({ position.x + 20, position.y + 8, 0, 0 }, Collider::Type::PLAYER_ATTACK, this);
 	crouchkick = App->collisions->AddCollider({ position.x + 20, position.y + 8, 0, 0 }, Collider::Type::PLAYER_ATTACK, this);
@@ -218,13 +218,35 @@ Update_Status ModulePlayer::Update()
 			playerState = state::JUMP;
 		}
 		break;
-
 	case state::MOVEMENT:
 		if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT || pad.l_x < 0) {
 			position.x -= speed;
-			position.y = 150;
-			collider->rect.h = 50;
-			if (currentAnimation != &leftAnim)
+			isInAColumn(62, 150, false);
+			collider->rect.h = 70;
+			if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN || pad.a == 1)
+			{
+				jumpAnim.Reset();
+				playerState = state::JUMP;
+			}
+			else if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN || pad.x == 1)
+			{
+				punchAnim.Reset();
+				playerState = state::PUNCH;
+				App->audio->PlayFx(punchFx);
+			}
+			else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN || pad.b == 1)
+			{
+				kickAnim.Reset();
+				playerState = state::KICK;
+				App->audio->PlayFx(punchFx);
+			}
+			else if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_DOWN
+				|| (pad.l_x > -0.2f && pad.l_x < 0.2f && pad.l_y > 0))
+			{
+				downAnim.Reset();
+				playerState = state::CROUCH;
+			}
+			else if (currentAnimation != &leftAnim)
 			{
 				leftAnim.Reset();
 				flipType = true;
@@ -234,31 +256,55 @@ Update_Status ModulePlayer::Update()
 		}
 		else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT || pad.l_x > 0) {
 			position.x += speed * 2;
-			position.y = 150;
-			collider->rect.h = 50;
-			if (currentAnimation != &rightAnim)
+			isInAColumn(62, 153, false);
+			collider->rect.h = 70;
+			if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN || pad.a == 1)
+			{
+				jumpAnim.Reset();
+				playerState = state::JUMP;
+			}
+			else if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN || pad.x == 1)
+			{
+				punchAnim.Reset();
+				playerState = state::PUNCH;
+				App->audio->PlayFx(punchFx);
+			}
+			else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN || pad.b == 1)
+			{
+				kickAnim.Reset();
+				playerState = state::KICK;
+				App->audio->PlayFx(punchFx);
+			}
+			else if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_DOWN
+				|| (pad.l_x > -0.2f && pad.l_x < 0.2f && pad.l_y > 0))
+			{
+				downAnim.Reset();
+				currentAnimation = &downAnim;
+				playerState = state::CROUCH;
+			}
+			else if (currentAnimation != &rightAnim)
 			{
 				rightAnim.Reset();
 				flipType = false;
 				currentAnimation = &rightAnim;
 			}
+			
 			rightAnim.Update();
-		} 
+		}
 		else if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE
 			|| App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE) {
 			playerState = state::IDLE;
 		}
 		break;
 	case state::CROUCH:
-		position.y = 175;
-		collider->rect.h = 25;
+		isInAColumn(90, 175, true);
+		collider->rect.h = 45;
 		if (currentAnimation != &downAnim)
 		{
 			downAnim.Reset();
 			currentAnimation = &downAnim;
 		}
 		downAnim.Update();
-		
 		punch->rect.w = 0;
 		punch->rect.h = 0;
 		punch->SetPos(position.x + 20, 0);
@@ -280,37 +326,78 @@ Update_Status ModulePlayer::Update()
 			playerState = state::CROUCH_KICK;
 			App->audio->PlayFx(punchFx);
 		}
-		else if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN || pad.a == 1) {
+		else if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN || pad.a == 1) 
+		{
 			playerState = state::JUMP;
 		}
+		else if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT
+			|| pad.l_x < 0
+			|| App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT
+			|| pad.l_x > 0)
+		{
+			playerState = state::MOVEMENT;
+		}
+
 		break;
 	case state::JUMP:
 		collider->rect.h = 25;
 		if (currentAnimation != &jumpAnim)
 		{
+			App->audio->PlayFx(jumpFx);
 			jumpAnim.Reset();
 			currentAnimation = &jumpAnim;
 		}
 		jumpAnim.Update();
-		App->audio->PlayFx(jumpFx);
 		frame++;
+		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN || pad.x == 1)
+		{
+			currentAnimation = &punchAnim;
+			punchAnim.Update();
+			punch->rect.w = 42;
+			punch->rect.h = 10;
+			if (flipType) {
+				punch->SetPos(position.x - 2, position.y + 8);
+			}
+			else {
+				punch->SetPos(position.x + 20, position.y + 8);
+			}
+			if (frame >= 20)
+			{
+				playerState = state::JUMP;
+			}
+		}
+		else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN || pad.b == 1)
+		{
+			kickAnim.Reset();
+			playerState = state::KICK;
+			App->audio->PlayFx(punchFx);
+		}
+		if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT || pad.l_x < 0)
+		{
+			position.x -= 2;
+		}
+		if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT || pad.l_x > 0)
+		{
+			position.x += 2;
+		}
 		if (frame <= 32) {
 			position.y -= speedY;
 			speedY += gravity;
 		}
 		else {
+
 			frame = 0;
 			speedY = 16;
 			playerState = state::IDLE;
 		}
-			
-		
+
+
+
 		break;
 	case state::PUNCH:
 		currentAnimation = &punchAnim;
 		punchAnim.Update();
 		frame++;
-		position.y = 153;
 		punch->rect.w = 42;
 		punch->rect.h = 10;
 		if (flipType) {
@@ -324,13 +411,12 @@ Update_Status ModulePlayer::Update()
 			playerState = state::IDLE;
 			frame = 0;
 		}
-		
+
 		break;
 	case state::KICK:
 		currentAnimation = &kickAnim;
 		kickAnim.Update();
 		frame++;
-		position.y = 152;
 		kick->rect.w = 45;
 		kick->rect.h = 20;
 		if (flipType) {
@@ -349,7 +435,8 @@ Update_Status ModulePlayer::Update()
 		currentAnimation = &crouchpunchAnim;
 		crouchpunchAnim.Update();
 		frame++;
-		position.y = 180;
+		isInAColumn(90, 180, true);
+
 		punch->rect.w = 40;
 		punch->rect.h = 10;
 		if (flipType) {
@@ -367,13 +454,15 @@ Update_Status ModulePlayer::Update()
 		currentAnimation = &crouchkickAnim;
 		crouchkickAnim.Update();
 		frame++;
-		position.y = 165;
+		isInAColumn(80, 165, true);
 		crouchkick->rect.w = 18;
 		crouchkick->rect.h = 40;
-		if (flipType) {
+		if (flipType)
+		{
 			crouchkick->SetPos(position.x + 3, position.y - 2);
 		}
-		else {
+		else
+		{
 			crouchkick->SetPos(position.x + 25, position.y - 2);
 		}
 		if (frame >= 30)
@@ -409,8 +498,8 @@ Update_Status ModulePlayer::Update()
 		&& pad.l_y == 0)
 	{
 		currentAnimation = &idleAnim;
-		position.y = 150;
-		collider->rect.h = 50;
+		isInAColumn(62, 150, false);
+		collider->rect.h = 70;
 		playerState = state::IDLE;
 		punch->rect.w = 0;
 		punch->rect.h = 0;
@@ -603,16 +692,32 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	}
 	else if (c2->type == collider->SCREEN_LEFT)
 	{
-		position.x += 2;
+		position.x += 4;
 	}
 	else if (c2->type == collider->SCREEN_RIGHT)
 	{
-		position.x -= 2;
+		position.x -= 4;
 	}
 
 	if (c1->type == Collider::Type::PLAYER_ATTACK && c2->type == Collider::Type::ENEMY)
 	{
 		//score += 23;
+	}
+	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::COLUMNS)
+	{
+		if (position.y < 150)
+		{
+			inAColumn = true;
+		}
+		else if (position.x < c2->rect.x)
+		{
+			position.x -= 2;
+		}
+		else if (position.x > c2->rect.x)
+		{
+			position.x += 2;
+		}
+
 	}
 
 	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ENEMY_SHOT && destroyed == false && PlayerTouch == true)
@@ -621,9 +726,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		lifeNodes--;
 		damaged = true;
 		PlayerTouch = false;
-		if (lifeNodes < 0)
+		if (lifeNodes <= 0)
 		{
-			lifeNodes = 3;
+			lifeNodes = 12;
 			numLifes--;
 			if (numLifes < 0)
 			{
