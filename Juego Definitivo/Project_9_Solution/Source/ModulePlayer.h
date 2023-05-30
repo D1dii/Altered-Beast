@@ -58,7 +58,8 @@ public:
 
 	// The speed in which we move the player (pixels per frame)
 	int speed = 1;
-
+	int punchCounter = 0;
+	int kickCounter = 0;
 	// Jumping
 	int speedY = 16;
 	int gravity = -1;
@@ -103,7 +104,9 @@ public:
 		PUNCH,
 		CROUCH_PUNCH,
 		KICK,
-		CROUCH_KICK
+		CROUCH_KICK,
+		JUMP_PUNCH,
+		JUMP_KICK,
 	};
 	
 	state playerState = state::IDLE;
@@ -141,7 +144,7 @@ public:
 	uint score = 000;
 	int scoreFont = -1;
 	char scoreText[10] = { "\0" };
-	int secondscounter = 0;
+	int secondsCounter = 0;
 	bool inAColumn = false;
 };
 

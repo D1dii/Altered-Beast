@@ -343,34 +343,52 @@ Update_Status ModulePlayer::Update()
 		collider->rect.h = 25;
 		if (currentAnimation != &jumpAnim)
 		{
-			App->audio->PlayFx(jumpFx);
 			jumpAnim.Reset();
 			currentAnimation = &jumpAnim;
 		}
+		if (frame == 0) 
+		{
+			App->audio->PlayFx(jumpFx);
+		}
 		jumpAnim.Update();
 		frame++;
-		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN || pad.x == 1)
+		if ((App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT || pad.x == 1) && punchCounter < 3)
 		{
-			currentAnimation = &punchAnim;
-			punchAnim.Update();
-			punch->rect.w = 42;
-			punch->rect.h = 10;
-			if (flipType) {
-				punch->SetPos(position.x - 2, position.y + 8);
-			}
-			else {
-				punch->SetPos(position.x + 20, position.y + 8);
-			}
-			if (frame >= 20)
-			{
-				playerState = state::JUMP;
-			}
+				punchCounter++;
+				if (punchCounter == 1) {
+					App->audio->PlayFx(punchFx);
+				}
+				currentAnimation = &punchAnim;
+				punchAnim.Update();
+				punch->rect.w = 42;
+				punch->rect.h = 10;
+				if (flipType)
+				{
+					punch->SetPos(position.x - 2, position.y + 8);
+				}
+				else
+				{
+					punch->SetPos(position.x + 20, position.y + 8);
+				}
 		}
-		else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_DOWN || pad.b == 1)
+		else if ((App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT || pad.b == 1) && kickCounter < 3)
 		{
-			kickAnim.Reset();
-			playerState = state::KICK;
-			App->audio->PlayFx(punchFx);
+			kickCounter++;
+			if (kickCounter == 1) {
+				App->audio->PlayFx(punchFx);
+			}
+			currentAnimation = &kickAnim;
+			kickAnim.Update();  
+			kick->rect.w = 45;
+			kick->rect.h = 20;
+			if (flipType) 
+			{
+				kick->SetPos(position.x - 5, position.y + 35);
+			}
+			else 
+			{
+				kick->SetPos(position.x + 20, position.y + 35);
+			}
 		}
 		if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT || pad.l_x < 0)
 		{
@@ -385,7 +403,8 @@ Update_Status ModulePlayer::Update()
 			speedY += gravity;
 		}
 		else {
-
+			punchCounter = 0;
+			kickCounter = 0;
 			frame = 0;
 			speedY = 16;
 			playerState = state::IDLE;
@@ -587,12 +606,12 @@ Update_Status ModulePlayer::PostUpdate()
 	// TODO 3: Blit the text of the score in at the bottom of the screen
 	App->fonts->BlitText(0, 20, scoreFont, scoreText);
 	App->fonts->BlitText(100, 20, scoreFont, scoreText);
-    secondscounter++;
-if (secondscounter %100 ==0){
+    secondsCounter++;
+if (secondsCounter %100 ==0){
 
-	secondscounter=0;
+	secondsCounter=0;
 }
-else if (secondscounter >50){
+else if (secondsCounter >50){
 	App->fonts->BlitText(200, 20, scoreFont, "insert coin");
 }
 
