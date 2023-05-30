@@ -21,29 +21,32 @@ public:
 
 private:
 
-	Path path;
+	Path LaunchPath;
+	Path attackPath;
+
+	int randomPos;
+
+	int limitFrames;
 
 	bool touch = true;
 
 	// Zombie animations
-	Animation idleAnim;
+	Animation launchAnim;
 	Animation attackAnim;
-	Animation hitAnim;
 	Animation deathAnim;
 
 
 	enum class state
 	{
-		IDLE,
+		LAUNCH,
 		ATTACK,
-		GET_HIT,
 		DEATH,
 
 	};
 
-	state bossState = state::IDLE;
+	state headState = state::LAUNCH;
 
-	int life = 60;
+	int life = 1;
 
 	int frame = 0;
 	int punchFrame = 0;

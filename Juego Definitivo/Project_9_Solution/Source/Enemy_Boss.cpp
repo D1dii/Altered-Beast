@@ -5,6 +5,7 @@
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
+#include "ModuleEnemies.h"
 
 Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y) {
 
@@ -25,6 +26,8 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y) {
 
 void Enemy_Boss::Update() {
 
+
+
 	switch (bossState)
 	{
 	case Enemy_Boss::state::IDLE:
@@ -40,6 +43,12 @@ void Enemy_Boss::Update() {
 		currentAnim = &attackAnim;
 		attackAnim.Update();
 		frame++;
+		attackFrame++;
+		if (attackFrame >= 12) {
+			App->enemies->AddEnemy(Enemy_Type::BOSS_HEAD, position.x + 50, position.y + 5);
+			attackFrame = 0;
+		}
+
 		if (frame >= 48) {
 			bossState = state::IDLE;
 			frame = 0;

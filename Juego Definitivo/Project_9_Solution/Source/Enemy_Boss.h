@@ -19,6 +19,8 @@ public:
 
 	void SetToDelete() override;
 
+	void CheckRandomVal(int n, int randomPos[]);
+
 private:
 
 	Path path;
@@ -46,7 +48,8 @@ private:
 	int life = 60;
 
 	int frame = 0;
-	int punchFrame = 0;
+	int attackFrame = 0;
+	
 };
 
 
