@@ -1,10 +1,9 @@
-﻿  ModulePlayer.cpp
-C:\Users\Asus Rog Strix\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
-C:\Users\Asus Rog Strix\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\Asus Rog Strix\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\ModulePlayer.cpp(452,61): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+﻿  SceneLevel1.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
   Generando código
-  1 of 211 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+  1 of 226 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
-  Project_9_Solution.vcxproj -> C:\Users\Asus Rog Strix\Documents\GitHub\Altered-Beast\Juego Definitivo\Release\Project_9_Solution.exe
+  Project_9_Solution.vcxproj -> C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Release\Project_9_Solution.exe

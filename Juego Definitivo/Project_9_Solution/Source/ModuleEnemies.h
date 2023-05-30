@@ -19,6 +19,9 @@ enum class Enemy_Type
 	DRAGON,
 	ORCO,
 	COLUMN,
+	BOSS,
+	BOSS_HEAD,
+
 
 
 };
@@ -86,6 +89,7 @@ public:
 	SDL_Texture* Orco = nullptr;
 	SDL_Texture* Item = nullptr;
 	SDL_Texture* Column = nullptr;
+	SDL_Texture* Boss = nullptr;
 
 
 private:

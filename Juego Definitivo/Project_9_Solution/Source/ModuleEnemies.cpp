@@ -16,6 +16,8 @@
 #include "Enemy_Dragon.h"
 #include "Enemy_Orco.h"
 #include "Columns.h"
+#include "Enemy_Boss.h"
+#include "Boss_Head.h"
 
 #define SPAWN_MARGIN 50
 
@@ -41,6 +43,7 @@ bool ModuleEnemies::Start()
 	Orco = App->textures->Load("Assets/Sprites/Orco.png");
 	Item = App->textures->Load("Assets/Sprites/protagonist.png");
 	Column = App->textures->Load("Assets/Sprites/newIntroTutorial.png");
+	Boss = App->textures->Load("Assets/Sprites/Boss.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
 
@@ -202,6 +205,14 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 				case Enemy_Type::COLUMN:
 					enemies[i] = new Columns(info.x, info.y);
 					enemies[i]->texture = Column;
+					break;
+				case Enemy_Type::BOSS:
+					enemies[i] = new Enemy_Boss(info.x, info.y);
+					enemies[i]->texture = Boss;
+					break;
+				case Enemy_Type::BOSS_HEAD:
+					enemies[i] = new Boss_Head(info.x, info.y);
+					enemies[i]->texture = Boss;
 					break;
 			}
 			
