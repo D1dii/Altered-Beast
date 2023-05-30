@@ -13,7 +13,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 
 	matrix[Collider::Type::WALL][Collider::Type::WALL] = false;
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER] = false;
-	matrix[Collider::Type::WALL][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::WALL][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER_ATTACK] = false;
 	matrix[Collider::Type::WALL][Collider::Type::ENEMY_SHOT] = false;
 	matrix[Collider::Type::WALL][Collider::Type::SCREEN_LEFT] = false;

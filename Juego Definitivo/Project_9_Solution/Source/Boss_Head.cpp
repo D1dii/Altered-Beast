@@ -25,9 +25,13 @@ Boss_Head::Boss_Head(int x, int y) : Enemy(x, y) {
 	deathAnim.PushBack({ 200, 403, 54, 44 });
 	deathAnim.PushBack({ 199, 458, 54, 44 });
 	deathAnim.PushBack({ 203, 510, 54, 44 });
+	deathAnim.speed = 0.1f;
 
 	LaunchPath.PushBack({ -2.0f, -0.75f }, 30, &launchAnim);
 	attackPath.PushBack({ 0.0f, 1.5f }, 30, &attackAnim);
+
+	receiveDmg = App->collisions->AddCollider({ position.x - 4, position.y - 3, 50, 50 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	afflictDmg = App->collisions->AddCollider({ position.x + 5, position.y + 5, 35, 35 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 
 }
 
@@ -66,14 +70,30 @@ void Boss_Head::Update() {
 	case Boss_Head::state::DEATH:
 		currentAnim = &deathAnim;
 		deathAnim.Update();
+		deathFrame++;
+		if (deathFrame >= 15) {
+			SetToDelete();
+		}
 		break;
 	
 	}
 
+	Enemy::Update();
+	receiveDmg->SetPos(position.x - 4, position.y - 3);
+	afflictDmg->SetPos(position.x + 5, position.y + 5);
+
 }
 
 void Boss_Head::OnCollision(Collider* col) {
+	if (col->type == col->PLAYER_ATTACK && touch == true) {
+		headState = state::DEATH;
+		//App->collisions->RemoveCollider(afflictDmg);
+	}
 
+	if (col->type == col->WALL) {
+		headState = state::DEATH;
+		//App->collisions->RemoveCollider(afflictDmg);
+	}
 }
 
 void Boss_Head::SetToDelete() {

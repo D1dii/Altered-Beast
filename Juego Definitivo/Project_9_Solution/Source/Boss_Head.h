@@ -49,7 +49,7 @@ private:
 	int life = 1;
 
 	int frame = 0;
-	int punchFrame = 0;
+	int deathFrame = 0;
 };
 
 

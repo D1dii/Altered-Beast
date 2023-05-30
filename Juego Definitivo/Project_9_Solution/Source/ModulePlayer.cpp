@@ -522,13 +522,13 @@ Update_Status ModulePlayer::Update()
 		playerState = state::IDLE;
 		punch->rect.w = 0;
 		punch->rect.h = 0;
-		punch->SetPos(position.x + 20, 0);
+		punch->SetPos(position.x + 20, -30);
 		kick->rect.w = 0;
 		kick->rect.h = 0;
-		kick->SetPos(position.x + 20, 0);
+		kick->SetPos(position.x + 20, -30);
 		crouchkick->rect.w = 0;
 		crouchkick->rect.h = 0;
-		crouchkick->SetPos(position.x + 20, 0);
+		crouchkick->SetPos(position.x + 20, -30);
 	}
 	//If Punch state / crounch / punch crounch / crounch kick
 
