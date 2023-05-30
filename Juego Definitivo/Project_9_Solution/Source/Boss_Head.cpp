@@ -10,6 +10,7 @@
 #include <iostream>
 #include <random>
 #include <chrono>
+#include "Windows.h"
 
 Boss_Head::Boss_Head(int x, int y) : Enemy(x, y) {
 
@@ -40,16 +41,6 @@ void Boss_Head::Update() {
 	std::uniform_int_distribution<int> distribution(30, 900);
 
 	int random_number = distribution(generator);
-	
-	if (random_number <= 300) {
-		limitFrames = 50;
-	}
-	else if (random_number <= 600 && random_number > 300) {
-		limitFrames = 75;
-	}
-	else if (random_number <= 900 && random_number > 600) {
-		limitFrames = 100;
-	}
 
 	switch (headState)
 	{
