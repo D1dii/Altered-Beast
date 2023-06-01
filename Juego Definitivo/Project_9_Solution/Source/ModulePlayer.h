@@ -81,15 +81,15 @@ public:
 	Animation* currentLifeAnimation = nullptr;
 
 	// A set of animations
-	Animation idleAnim;
-	Animation downAnim;
-	Animation leftAnim;
-	Animation rightAnim;
-	Animation punchAnim;
-	Animation kickAnim;
-	Animation crouchpunchAnim;
-	Animation crouchkickAnim;
-	Animation jumpAnim;
+	Animation idleAnim[3];
+	Animation downAnim[3];
+	Animation leftAnim[3];
+	Animation rightAnim[3];
+	Animation punchAnim[3];
+	Animation kickAnim[3];
+	Animation crouchpunchAnim[3];
+	Animation crouchkickAnim[3];
+	Animation jumpAnim[3];
 	Animation nodesAnim[4];
 	Animation lifesAnim[3];
 
