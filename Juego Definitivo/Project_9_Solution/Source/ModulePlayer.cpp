@@ -796,70 +796,20 @@ Update_Status ModulePlayer::PostUpdate()
 		App->fonts->BlitText(200, 20, scoreFont, "insert coin");
 	}
 
-	if (score >= 4000) {
-		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
+	if (score >= 1000000) {
+		//App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
+		position.x = 30;
 
+	}
+
+	if (LevelFinished) {
+		App->textures->Unload(texture);
 	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 void ModulePlayer::phaseUpdate() {
-	/*if (phase == 1 || phase == 0) {
-		idleAnim.PullBack(1);
-		idleAnim.PushBack({ 35 , 12 + 280 * phase, 40, 73 });
-		rightAnim.PullBack(3);
-		rightAnim.PushBack({ 75, 12 + 280 * phase, 40, 73 });
-		rightAnim.PushBack({ 125, 12 + 280 * phase, 40, 73 });
-		rightAnim.PushBack({ 170, 12 + 280 * phase, 40, 73 });
-		leftAnim.PullBack(3);
-		leftAnim.PushBack({ 75, 12 + 280 * phase, 40, 73 });
-		leftAnim.PushBack({ 125, 12 + 280 * phase, 40,73 });
-		leftAnim.PushBack({ 170, 12 + 280 * phase, 40, 73 });
-		punchAnim.PullBack(3);
-		punchAnim.PushBack({ 7, 86 + 280 * phase, 52, 71 });
-		punchAnim.PushBack({ 66, 87 + 280 * phase, 35, 71 });
-		punchAnim.PushBack({ 107, 88 + 280 * phase, 61, 71 });
-		downAnim.PullBack(1);
-		downAnim.PushBack({ 183, 176 + 280 * phase , 35, 43 });
-
-		kickAnim.PullBack(3);
-		kickAnim.PushBack({ 174, 87 + 280 * phase, 46, 65 });
-		kickAnim.PushBack({ 227, 87 + 280 * phase, 36, 65 });
-		kickAnim.PushBack({ 269, 86 + 280 * phase, 61, 66 });
-
-
-		jumpAnim.PullBack(1);
-		jumpAnim.PushBack({ 7, 155 + 280 * phase, 40, 68 });
-	}
-	if (phase == 2) {
-
-		idleAnim.PullBack(1);
-		idleAnim.PushBack({ 40 , 579, 45 , 75 });
-		rightAnim.PullBack(3);
-		rightAnim.PushBack({ 85, 579, 44, 75 });
-		rightAnim.PushBack({ 135, 579, 44, 75 });
-		rightAnim.PushBack({ 180, 579, 44, 75 });
-		leftAnim.PullBack(3);
-		leftAnim.PushBack({ 85, 579, 44, 75 });
-		leftAnim.PushBack({ 135, 579, 44,75 });
-		leftAnim.PushBack({ 180, 579, 44, 75 });
-
-		punchAnim.PullBack(2);
-		punchAnim.PushBack({ 0, 657, 44, 75 });
-		punchAnim.PushBack({ 67, 657, 60, 75 });
-
-		kickAnim.PullBack(3);
-		kickAnim.PushBack({ 167, 657, 44, 75 });
-		kickAnim.PushBack({ 228, 657, 44, 75 });
-		kickAnim.PushBack({ 272,657, 75, 75 });
-
-		downAnim.PullBack(1);
-		downAnim.PushBack({ 254, 747, 50, 43 });
-
-		jumpAnim.PullBack(1);
-		jumpAnim.PushBack({ 5, 735, 45, 55 });
-	}*/
 
 	if (phase == 0) {
 		damage = 1;

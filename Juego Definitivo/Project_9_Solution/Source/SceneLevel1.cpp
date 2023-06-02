@@ -49,6 +49,7 @@ bool SceneLevel1::Start()
 	App->enemies->AddEnemy(Enemy_Type::COLUMN, 400, 130);*/
 
 	App->enemies->AddEnemy(Enemy_Type::BOSS, 180, 65);
+	
 
 	
 

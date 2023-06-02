@@ -87,6 +87,7 @@
     <ClInclude Include="Enemy_Wolf.h" />
     <ClInclude Include="Enemy_Wolf_Blue.h" />
     <ClInclude Include="Enemy_Zombie.h" />
+    <ClInclude Include="Final_Cutscene.h" />
     <ClInclude Include="InitialScreen.h" />
     <ClInclude Include="ModuleAudio.h" />
     <ClInclude Include="ModuleCollisions.h" />
@@ -121,6 +122,7 @@
     <ClCompile Include="Enemy_Orco.cpp" />
     <ClCompile Include="Enemy_Wolf_Blue.cpp" />
     <ClCompile Include="Enemy_Zombie.cpp" />
+    <ClCompile Include="Final_Cutscene.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="InitialScreen.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />

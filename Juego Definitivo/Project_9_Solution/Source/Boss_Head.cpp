@@ -78,6 +78,10 @@ void Boss_Head::Update() {
 	
 	}
 
+	if (App->player->score >= 1000000) {
+		SetToDelete();
+	}
+
 	Enemy::Update();
 	receiveDmg->SetPos(position.x - 4, position.y - 3);
 	afflictDmg->SetPos(position.x + 5, position.y + 5);

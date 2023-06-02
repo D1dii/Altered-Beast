@@ -114,6 +114,7 @@ public:
 	bool GODMODE = false;
 	bool damaged = false;
 	bool PlayerTouch = true;
+	bool LevelFinished = false;
 	int frame = 0;
 	int waitForDmg = 0;
 	int numLifes = 2;

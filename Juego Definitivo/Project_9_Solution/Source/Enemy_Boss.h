@@ -19,8 +19,6 @@ public:
 
 	void SetToDelete() override;
 
-	void CheckRandomVal(int n, int randomPos[]);
-
 private:
 
 	Path path;
@@ -31,7 +29,9 @@ private:
 	Animation idleAnim;
 	Animation attackAnim;
 	Animation hitAnim;
+	Animation deathStartAnim;
 	Animation deathAnim;
+	Animation deathFinishAnim;
 	
 
 	enum class state
@@ -46,8 +46,9 @@ private:
 	state bossState = state::IDLE;
 
 	uint HitFx = 0;
+	uint DeathFx = 0;
 
-	int life = 60;
+	int life = 1;
 
 	int frame = 0;
 	int attackFrame = 0;
@@ -57,4 +58,4 @@ private:
 };
 
 
-#endif // __ENEMY_ORCO_H__
+#endif // __ENEMY_BOSS_H__
