@@ -81,17 +81,20 @@ public:
 	Animation* currentLifeAnimation = nullptr;
 
 	// A set of animations
-	Animation idleAnim[3];
-	Animation downAnim[3];
-	Animation leftAnim[3];
-	Animation rightAnim[3];
-	Animation punchAnim[3];
-	Animation kickAnim[3];
-	Animation crouchpunchAnim[3];
-	Animation crouchkickAnim[3];
-	Animation jumpAnim[3];
+	Animation idleAnim[4];
+	Animation downAnim[4];
+	Animation leftAnim[4];
+	Animation rightAnim[4];
+	Animation punchAnim[4];
+	Animation kickAnim[4];
+	Animation crouchpunchAnim[4];
+	Animation crouchkickAnim[4];
+	Animation jumpAnim[4];
+	Animation stunAnim[4];
+	Animation deathAnim[4];
 	Animation nodesAnim[4];
 	Animation lifesAnim[3];
+
 
 	//States of Player
 
@@ -107,6 +110,9 @@ public:
 		CROUCH_KICK,
 		JUMP_PUNCH,
 		JUMP_KICK,
+		STUNNED,
+		POWER_UP,
+		DEATH,
 	};
 	
 	state playerState = state::IDLE;
@@ -115,6 +121,11 @@ public:
 	bool damaged = false;
 	bool PlayerTouch = true;
 	bool LevelFinished = false;
+	int localJumpCounter = 0;
+	bool damagedInAir = false;
+	bool damagedCrouch = false;
+	bool diedInAir = false;
+	bool died = false;
 	int frame = 0;
 	int waitForDmg = 0;
 	int numLifes = 2;
