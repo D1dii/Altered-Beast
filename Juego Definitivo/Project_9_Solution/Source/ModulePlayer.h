@@ -159,6 +159,7 @@ public:
 	uint playerDeathFx = 0;
 	uint powerUpFx = 0;
 
+
 	// Font score index
 	uint score = 000;
 	int scoreFont = -1;

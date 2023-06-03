@@ -31,6 +31,8 @@ bool SceneLevel1::Start()
 
 	App->audio->PlayMusic("Assets/Music/round1.ogg", 1.0f);
 
+	beastHowl = App->audio->LoadFx("Assets/Fx/howl.ogg");
+
 	//Bottomside collider
 	bgfront = App->collisions->AddCollider({ 0, 217, 1600, 24 }, Collider::Type::WALL);
 	bgright = App->collisions->AddCollider({ 320, 0, 10, 240 }, Collider::Type::SCREEN_RIGHT);
@@ -44,11 +46,12 @@ bool SceneLevel1::Start()
 	App->enemies->AddEnemy(Enemy_Type::WOLF_BLUE, 1600, 177);
 	App->enemies->AddEnemy(Enemy_Type::DRAGON, 250, 15);
 	App->enemies->AddEnemy(Enemy_Type::ORCO, 2000, 150);
+	*/
 	App->enemies->AddEnemy(Enemy_Type::COLUMN, 300, 130);
 	App->enemies->AddEnemy(Enemy_Type::COLUMN, 350, 130);
-	App->enemies->AddEnemy(Enemy_Type::COLUMN, 400, 130);*/
+	App->enemies->AddEnemy(Enemy_Type::COLUMN, 400, 130);
 
-	App->enemies->AddEnemy(Enemy_Type::BOSS, 180, 65);
+	//App->enemies->AddEnemy(Enemy_Type::BOSS, 180, 65);
 	
 
 	
@@ -64,9 +67,14 @@ bool SceneLevel1::Start()
 
 Update_Status SceneLevel1::Update()
 {
-	//App->render->camera.x += 1;
+	App->render->camera.x += 1;
 	bgleft->SetPos(App->render->camera.x, 0);
 	bgright->SetPos(App->render->camera.x + 310, 0);
+	if (App->player->phase == 3 && !onBeastForm) {
+		App->audio->PlayFx(beastHowl);
+		App->audio->PlayMusic("Assets/Music/beastForm.ogg", 1.0f);
+		onBeastForm = true;
+	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }

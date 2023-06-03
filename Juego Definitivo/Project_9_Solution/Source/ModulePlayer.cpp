@@ -308,6 +308,7 @@ bool ModulePlayer::Start()
 	jumpFx = App->audio->LoadFx("Assets/Fx/jump.wav");
 	playerDeathFx = App->audio->LoadFx("Assets/Fx/screamPlayerDeath.ogg");
 	powerUpFx = App->audio->LoadFx("Assets/Fx/power.ogg");
+	
 
 	position.x = 20;
 	position.y = 150;
@@ -385,9 +386,10 @@ Update_Status ModulePlayer::Update()
 	}
 	if (App->input->keys[SDL_SCANCODE_3] == Key_State::KEY_REPEAT)
 	{
-		App->audio->PlayFx(powerUpFx);
 		phase = 3;
+	
 		phaseUpdate();
+		
 	}
 	// Spawn Enemies
 	if (App->input->keys[SDL_SCANCODE_F6] == Key_State::KEY_DOWN) {
@@ -745,14 +747,14 @@ Update_Status ModulePlayer::Update()
 						currentAnimation = &kickAnim[phase];
 						kickAnim[phase].Update();
 						kick->rect.w = 45;
-						kick->rect.h = 20;
+						kick->rect.h = 70;
 						if (flipType)
 						{
-							kick->SetPos(position.x - 5, position.y + 35);
+							kick->SetPos(position.x - 5, position.y);
 						}
 						else
 						{
-							kick->SetPos(position.x + 20, position.y + 35);
+							kick->SetPos(position.x + 20, position.y);
 						}
 					}
 					else
@@ -885,9 +887,10 @@ Update_Status ModulePlayer::Update()
 				kick->SetPos(position.x + 10, position.y + 35);
 			}
 			else if (phase == 3) {
+				kick->rect.h = 70;
 				position.x -= 2;
 				collider->SetPos(position.x + 50, position.y);
-				kick->SetPos(position.x + 10, position.y + 35);
+				kick->SetPos(position.x + 10, position.y);
 			}
 
 		}
@@ -907,6 +910,7 @@ Update_Status ModulePlayer::Update()
 				kick->rect.w = 60;
 			}
 			else if (phase == 3) {
+				kick->rect.h = 70;
 				position.x += 3;
 				collider->SetPos(position.x + 10, position.y);
 				kick->SetPos(position.x + 30, position.y);
@@ -917,6 +921,7 @@ Update_Status ModulePlayer::Update()
 		}
 		if (frame >= 30)
 		{
+			position.x += 10;
 			playerState = state::IDLE;
 			frame = 0;
 		}
@@ -1246,7 +1251,7 @@ void ModulePlayer::phaseUpdate() {
 	else if (phase == 2) {
 		damage = 3;
 	}
-	else if (phase == 4) {
+	else if (phase == 3) {
 		damage = 4;
 	}
 }

@@ -39,13 +39,18 @@ public:
 
 	// The sprite rectangle for the ground
 	SDL_Texture* starsTexture = nullptr;
-
+	
 	Collider* bgfront;
 	Collider* bgleft;
 	Collider* bgright;
 
+
+	uint beastHowl = 0;
+
+
 	//Screen scroll
 	int bg4counter = 639;
+	bool onBeastForm = false;
 };
 
 #endif
