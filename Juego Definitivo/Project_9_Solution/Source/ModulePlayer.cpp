@@ -35,7 +35,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	//// FASE 0 jump animation
 	jumpAnim[0].PushBack({ 1 + 25, 146, 96 - 50, 73 });
 
-	
+
 	// FASE 0 Move crouch 
 	downAnim[0].PushBack({ 288 + 25, 146 + 25, 96 - 50, 73 - 25 });
 	downAnim[0].speed = 0.1f;
@@ -127,7 +127,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	crouchpunchAnim[1].PushBack({ 384 + 25,438 + 30, 96 - 25, 73 - 30 });
 	crouchpunchAnim[1].speed = 0.1f;
 	crouchpunchAnim[1].loop = false;
-	
+
 	//// FASE 1 Kick Attack
 	kickAnim[1].PushBack({ 288 + 10,365 , 96, 73 });
 	kickAnim[1].PushBack({ 288 + 96 + 10, 365 , 96, 73 });
@@ -217,28 +217,25 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	deathAnim[2].PushBack({ 290, 805, 85, 73 });
 	deathAnim[2].speed = 0.02f;
 	deathAnim[2].loop = false;
-	
-
-
 
 
 	// FASE 3 idle animation 
 	idleAnim[3].PushBack({ 1 + 25 , 876, 96 - 50, 73 });
 
 	// FASE 3 jump animation
-	jumpAnim[3].PushBack({ 1 + 25, 730  , 96 , 73 });
+	jumpAnim[3].PushBack({ 96 * 3 + 25,   960, 96 - 50 , 1022 - 960 });
 
 	// FASE 3 Move crouch 
-	downAnim[3].PushBack({ 288,755, 52, 50 });
+	downAnim[3].PushBack({ 7, 985,83, 50 });
 	downAnim[3].speed = 0.1f;
 	downAnim[3].loop = false;
 
 	// FASE 3 Move right
 	rightAnim[3].PushBack({ 96 + 25,  876, 96 - 50, 73 });
-	rightAnim[3].PushBack({ 96*2 + 25,  876, 96 - 50 , 73 });
-	rightAnim[3].PushBack({ 96*3 + 25,   876, 96 - 50 , 73 });
-	rightAnim[3].PushBack({ 96*4 + 25,  876, 96 - 50 , 73 });
-	rightAnim[3].PushBack({ 96*5 + 25,   876, 96 - 50 , 73 });
+	rightAnim[3].PushBack({ 96 * 2 + 25,  876, 96 - 50 , 73 });
+	rightAnim[3].PushBack({ 96 * 3 + 25,   876, 96 - 50 , 73 });
+	rightAnim[3].PushBack({ 96 * 4 + 25,  876, 96 - 50 , 73 });
+	rightAnim[3].PushBack({ 96 * 5 + 25,   876, 96 - 50 , 73 });
 	rightAnim[3].speed = 0.1f;
 
 	// FASE 3 Move left 
@@ -250,42 +247,41 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	leftAnim[3].speed = 0.1f;
 
 	// FASE 3 Punch Attack
-	punchAnim[3].PushBack({ 0 + 96*6, 584, 96, 73 });
-	punchAnim[3].PushBack({ 0 + 96*7 + 25,  584, 96, 73 });
+	punchAnim[3].PushBack({ 0 + 96 * 6 + 25, 876, 96 - 25, 73 });
+	punchAnim[3].PushBack({ 0 + 96 * 7 + 25,  876, 96 - 25, 73 });
 	punchAnim[3].speed = 0.2f;
 	punchAnim[3].loop = false;
 
 	// FASE 3 Crouch Punch Attack
-	crouchpunchAnim[2].PushBack({ 384 , 730 + 30 , 96, 73 - 30 });
-	crouchpunchAnim[2].PushBack({ 384 + 96 , 730 + 30 , 96,73 - 30 });
-	crouchpunchAnim[2].speed = 0.2f;
-	crouchpunchAnim[2].loop = false;
+	crouchpunchAnim[3].PushBack({ 92, 985 , 210 - 95, 50 });
+	crouchpunchAnim[3].speed = 0.2f;
+	crouchpunchAnim[3].loop = false;
 
 	// FASE 3 Kick Attack
-	kickAnim[2].PushBack({ 288 + 10 - 96,657, 96, 73 });
-	kickAnim[2].PushBack({ 288 + 10, 657, 96, 73 });
-	kickAnim[2].PushBack({ 288 + 96 + 10, 657, 96, 73 });
-	kickAnim[2].speed = 0.2f;
-	kickAnim[2].loop = false;
+	kickAnim[3].PushBack({ 96 * 5 + 25,  950, 96 - 25 , 73 });
+	kickAnim[3].speed = 0.2f;
+	kickAnim[3].loop = false;
 
 	// FASE 3 Crouch Kick Attack 
-	crouchkickAnim[2].PushBack({ 576,730 + 15, 96 - 40, 73 });
-	crouchkickAnim[2].PushBack({ 576 + 96 , 730 + 15, 96 - 40, 73 });
-	crouchkickAnim[2].speed = 0.2f;
-	crouchkickAnim[2].loop = false;
+	crouchkickAnim[3].PushBack({ 96 * 5 + 25,  950, 96 - 25 , 73 });
+	crouchkickAnim[3].speed = 0.2f;
+	crouchkickAnim[3].loop = false;
 
 	//FASE 3 stun
-	stunAnim[2].PushBack({ 1 + 25, 220 + 292,  96 - 50, 73 });
-	stunAnim[2].PushBack({ 96 + 25, 220 + 292, 96 - 50, 73 });
-	stunAnim[2].speed = 0.05f;
-	stunAnim[2].loop = false;
+	stunAnim[3].PushBack({ 17, 1026,  53, 70 });
+	stunAnim[3].PushBack({ 96 * 4 + 17, 1026, 53, 70 });
+	stunAnim[3].speed = 0.05f;
+	stunAnim[3].loop = false;
 
 	//FASE 3 death
-	deathAnim[2].PushBack({ 1 + 25, 805,  96 - 50, 73 });
-	deathAnim[2].PushBack({ 200,  805, 80, 73 });
-	deathAnim[2].PushBack({ 290, 805, 85, 73 });
-	deathAnim[2].speed = 0.02f;
-	deathAnim[2].loop = false;
+	deathAnim[3].PushBack({ 17, 1026,  53, 70 });
+	deathAnim[3].PushBack({ 106,  1026, 177 - 106, 73 });
+	deathAnim[3].PushBack({ 205, 1026, 278 - 205, 73 });
+	deathAnim[3].speed = 0.02f;
+	deathAnim[3].loop = false;
+
+
+	punchWolfAnim.PushBack({ 0 + 96 * 6 + 25,950, 96 - 25 , 73 });
 }
 
 ModulePlayer::~ModulePlayer()
@@ -320,6 +316,7 @@ bool ModulePlayer::Start()
 
 	collider = App->collisions->AddCollider({ position.x + 8, position.y + 8, 25, 70 }, Collider::Type::PLAYER, this);
 	punch = App->collisions->AddCollider({ position.x + 20, position.y + 8, 0, 0 }, Collider::Type::PLAYER_ATTACK, this);
+	punchWolf = App->collisions->AddCollider({ position.x + 20, position.y + 8, 0, 0 }, Collider::Type::PLAYER_ATTACK, this);
 	kick = App->collisions->AddCollider({ position.x + 20, position.y + 8, 0, 0 }, Collider::Type::PLAYER_ATTACK, this);
 	crouchkick = App->collisions->AddCollider({ position.x + 20, position.y + 8, 0, 0 }, Collider::Type::PLAYER_ATTACK, this);
 
@@ -333,6 +330,14 @@ bool ModulePlayer::Start()
 
 	return ret;
 }
+
+void ModulePlayer::WolfPunchTrigger()
+{
+	wolfPunch = true;
+	punchWolfFlipType = flipType;
+	wolfPunchPosition = position;
+}
+
 
 Update_Status ModulePlayer::Update()
 {
@@ -384,7 +389,6 @@ Update_Status ModulePlayer::Update()
 		phase = 3;
 		phaseUpdate();
 	}
-
 	// Spawn Enemies
 	if (App->input->keys[SDL_SCANCODE_F6] == Key_State::KEY_DOWN) {
 		App->enemies->AddEnemy(Enemy_Type::ZOMBIE, position.x + 200, 158);
@@ -417,7 +421,25 @@ Update_Status ModulePlayer::Update()
 		playerState = state::DEATH;
 	}
 
-
+	if (wolfPunch) {
+		counterForWolfPunch++;
+		punchWolf->rect.w = 20;
+		punchWolf->rect.h = 35;
+		if (punchWolfFlipType)
+		{
+			punchWolf->SetPos(wolfPunchPosition.x + 40 - counterForWolfPunch * 2, wolfPunchPosition.y + 10);
+		}
+		else
+		{
+			punchWolf->SetPos(wolfPunchPosition.x + 15 + counterForWolfPunch * 6, wolfPunchPosition.y + 10);
+		}
+		if (counterForWolfPunch > 50) {
+			punchWolf->rect.w = 0;
+			punchWolf->rect.h = 0;
+			wolfPunch = false;
+			counterForWolfPunch = 0;
+		}
+	}
 
 	switch (playerState) {
 	case state::IDLE:
@@ -541,7 +563,7 @@ Update_Status ModulePlayer::Update()
 		}
 		break;
 	case state::CROUCH:
-		if (damagedCrouch ) {
+		if (damagedCrouch) {
 			isInAColumn(62, 150, true);
 			stunAnim[phase].Reset();
 			damagedCrouch = false;
@@ -549,9 +571,20 @@ Update_Status ModulePlayer::Update()
 			break;
 
 		}
-		collider->SetPos(position.x + 8, position.y + 10);
 		isInAColumn(90, 175, true);
-		collider->rect.h = 45;
+		if (phase == 3) {
+			collider->SetPos(position.x, position.y + 10);
+			collider->rect.h = 45;
+			collider->rect.w = 80;
+
+		}
+		else
+		{
+			collider->SetPos(position.x + 8, position.y + 10);
+
+			collider->rect.h = 45;
+		}
+
 		if (currentAnimation != &downAnim[phase])
 		{
 			downAnim[phase].Reset();
@@ -606,6 +639,7 @@ Update_Status ModulePlayer::Update()
 			break;
 		}
 		collider->SetPos(position.x + 8, position.y + 25);
+		collider->rect.w = 25;
 		collider->rect.h = 25;
 		if (currentAnimation != &jumpAnim[phase])
 		{
@@ -650,11 +684,12 @@ Update_Status ModulePlayer::Update()
 						localJumpCounter = 0;
 
 					}
-
-
 				}
 				else
 				{
+					if (phase == 3) {
+						WolfPunchTrigger();
+					}
 					punchCounter++;
 					if (punchCounter == 1) {
 						App->audio->PlayFx(punchFx);
@@ -673,7 +708,7 @@ Update_Status ModulePlayer::Update()
 					}
 
 				}
-				
+
 			}
 			else if ((App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT || pad.b == 1) && kickCounter < 3)
 			{
@@ -693,12 +728,12 @@ Update_Status ModulePlayer::Update()
 				}
 				else
 				{
-					if (phase == 2)
+					kickCounter++;
+					if (kickCounter == 1) {
+						App->audio->PlayFx(punchFx);
+					}
+					if (phase == 3)
 					{
-						kickCounter++;
-						if (kickCounter == 1) {
-							App->audio->PlayFx(punchFx);
-						}
 						if (flipType) {
 							position.x -= 7;
 						}
@@ -722,10 +757,6 @@ Update_Status ModulePlayer::Update()
 					}
 					else
 					{
-						kickCounter++;
-						if (kickCounter == 1) {
-							App->audio->PlayFx(punchFx);
-						}
 						currentAnimation = &kickAnim[phase];
 						kickAnim[phase].Update();
 						kick->rect.w = 45;
@@ -741,7 +772,7 @@ Update_Status ModulePlayer::Update()
 					}
 
 				}
-				
+
 
 			}
 			if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT || pad.l_x < 0)
@@ -790,9 +821,19 @@ Update_Status ModulePlayer::Update()
 				punch->SetPos(position.x - 2, position.y + 12);
 			}
 			else if (phase == 2) {
+				collider->SetPos(position.x + 40, position.y);
+				punch->SetPos(position.x - 2, position.y + 12);
+			}
+			else if (phase == 3) {
 
 				collider->SetPos(position.x + 40, position.y);
-				punch->SetPos(position.x - frame * 2, position.y + 9);
+				punch->SetPos(position.x - 2, position.y + 12);
+				if (!wolfPunch)
+				{
+					WolfPunchTrigger();
+				}
+
+
 			}
 
 
@@ -801,8 +842,17 @@ Update_Status ModulePlayer::Update()
 			if (phase == 0 || phase == 1) {
 				punch->SetPos(position.x + 20, position.y + 12);
 			}
-			else if (phase == 2) {
-				punch->SetPos(position.x + frame * 6, position.y + 12);
+			else if (phase == 2)
+			{
+				punch->SetPos(position.x + 20, position.y + 12);
+			}
+			else if (phase == 3)
+			{
+				punch->SetPos(position.x + 20, position.y + 12);
+				if (!wolfPunch)
+				{
+					WolfPunchTrigger();
+				}
 			}
 
 		}
@@ -831,7 +881,11 @@ Update_Status ModulePlayer::Update()
 
 			}
 			else if (phase == 2) {
-				position.x -= 1;
+				collider->SetPos(position.x + 50, position.y);
+				kick->SetPos(position.x + 10, position.y + 35);
+			}
+			else if (phase == 3) {
+				position.x -= 2;
 				collider->SetPos(position.x + 50, position.y);
 				kick->SetPos(position.x + 10, position.y + 35);
 			}
@@ -847,10 +901,17 @@ Update_Status ModulePlayer::Update()
 				kick->rect.w = 60;
 			}
 			else if (phase == 2) {
-				position.x += 3;
+
 				collider->SetPos(position.x + 10, position.y);
 				kick->SetPos(position.x + 30, position.y + 35);
 				kick->rect.w = 60;
+			}
+			else if (phase == 3) {
+				position.x += 3;
+				collider->SetPos(position.x + 10, position.y);
+				kick->SetPos(position.x + 30, position.y);
+				kick->rect.w = 30;
+				kick->rect.h = 70;
 			}
 
 		}
@@ -890,6 +951,14 @@ Update_Status ModulePlayer::Update()
 				punch->rect.h = 14;
 				punch->SetPos(position.x - 2, position.y + 2);
 			}
+			else if (phase == 3) {
+				collider->SetPos(position.x + 30, position.y + 10);
+				punch->SetPos(position.x - 20, position.y + 2);
+				if (!wolfPunch)
+				{
+					WolfPunchTrigger();
+				}
+			}
 
 		}
 		else {
@@ -905,6 +974,15 @@ Update_Status ModulePlayer::Update()
 				punch->rect.w = 50;
 				punch->rect.h = 14;
 				punch->SetPos(position.x + 50, position.y + 2);
+			}
+			else if (phase == 3) {
+
+				collider->SetPos(position.x + 30, position.y + 10);
+				punch->SetPos(position.x + 70, position.y + 2);
+				if (!wolfPunch)
+				{
+					WolfPunchTrigger();
+				}
 			}
 
 		}
@@ -941,6 +1019,7 @@ Update_Status ModulePlayer::Update()
 			playerState = state::CROUCH;
 			frame = 0;
 		}
+		break;
 	case state::STUNNED:
 		currentAnimation = &stunAnim[phase];
 		stunAnim[phase].Update();
@@ -998,7 +1077,7 @@ Update_Status ModulePlayer::Update()
 		}
 
 		break;
-	
+
 
 	}
 	if (App->input->keys[SDL_SCANCODE_F2] == Key_State::KEY_DOWN) {
@@ -1017,7 +1096,7 @@ Update_Status ModulePlayer::Update()
 
 
 	}
-	
+
 	// If no up/down movement detected, set the current animation back to idle
 	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE
@@ -1068,7 +1147,19 @@ Update_Status ModulePlayer::Update()
 
 Update_Status ModulePlayer::PostUpdate()
 {
+	if (wolfPunch && phase == 3)
+	{
+		printf("wolfPunchBlit  %d", counterForWolfPunch);
+		SDL_Rect rect = punchWolfAnim.GetCurrentFrame();
+		if (punchWolfFlipType) {
+			App->render->Blit(texture, wolfPunchPosition.x - counterForWolfPunch * 2, wolfPunchPosition.y - 10, &rect, speed, punchWolfFlipType);
+		}
+		else
+		{
+			App->render->Blit(texture, wolfPunchPosition.x + counterForWolfPunch * 6, wolfPunchPosition.y - 10, &rect, speed, punchWolfFlipType);
+		}
 
+	}
 
 	if (!destroyed)
 	{
@@ -1214,8 +1305,18 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		PlayerTouch = false;
 		if (lifeNodes <= 0)
 		{
-			
-			if (playerState == state::JUMP) {
+			lifeNodes = 12;
+			numLifes--;
+			if (numLifes < 0)
+			{
+
+				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
+				died = false;
+				diedInAir = false;
+				playerState = state::IDLE;
+				destroyed = true;
+			}
+			else if (playerState == state::JUMP) {
 				diedInAir = true;
 			}
 			else
@@ -1224,22 +1325,16 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 				deathAnim[phase].Reset();
 				playerState = state::DEATH;
 			}
-			lifeNodes = 12;
-			numLifes--;
-			if (numLifes < 0)
-			{
-				died = false;
-				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
-				destroyed = true;
-			}
+
+
 		}
 		else
 		{
-			if (playerState == state::JUMP) 
+			if (playerState == state::JUMP)
 			{
 				damagedInAir = true;
 			}
-			else if (playerState == state::CROUCH || playerState == state::CROUCH_KICK || playerState == state::CROUCH_PUNCH ) {
+			else if (playerState == state::CROUCH || playerState == state::CROUCH_KICK || playerState == state::CROUCH_PUNCH) {
 				damagedCrouch = true;
 			}
 			else

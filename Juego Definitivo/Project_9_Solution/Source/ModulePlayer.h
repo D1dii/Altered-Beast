@@ -52,9 +52,11 @@ public:
 
 	}
 
+	void WolfPunchTrigger();
 public:
 	// Position of the player in the map
 	iPoint position;
+	iPoint wolfPunchPosition;
 
 	// The speed in which we move the player (pixels per frame)
 	int speed = 1;
@@ -69,7 +71,7 @@ public:
 
 	// Attacks Damage
 	int damage = 1;
-	
+
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* texture = nullptr;
 	SDL_Texture* nodesTexture = nullptr;
@@ -92,6 +94,7 @@ public:
 	Animation jumpAnim[4];
 	Animation stunAnim[4];
 	Animation deathAnim[4];
+	Animation punchWolfAnim;
 	Animation nodesAnim[4];
 	Animation lifesAnim[3];
 
@@ -114,7 +117,7 @@ public:
 		POWER_UP,
 		DEATH,
 	};
-	
+
 	state playerState = state::IDLE;
 
 	bool GODMODE = false;
@@ -122,8 +125,10 @@ public:
 	bool PlayerTouch = true;
 	bool LevelFinished = false;
 	int localJumpCounter = 0;
+	int counterForWolfPunch = 0;
 	bool damagedInAir = false;
 	bool damagedCrouch = false;
+	bool wolfPunch = false;
 	bool diedInAir = false;
 	bool died = false;
 	int frame = 0;
@@ -134,6 +139,7 @@ public:
 	// The player's collider
 	Collider* collider = nullptr;
 	Collider* punch = nullptr;
+	Collider* punchWolf = nullptr;
 	Collider* crouchkick = nullptr;
 	Collider* kick = nullptr;
 
@@ -142,7 +148,8 @@ public:
 
 	// A flag to detect if the player is flipped
 	bool flipType;
-	
+	bool punchWolfFlipType;
+
 
 	// Sound effects indices
 	uint laserFx = 0;
