@@ -134,7 +134,10 @@
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Final_Cutscene.h">
-      <Filter>Source Files\Entities\Enemies</Filter>
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Initial_Cutscene.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -235,7 +238,10 @@
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Final_Cutscene.cpp">
-      <Filter>Source Files\Entities\Enemies</Filter>
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Initial_Cutscene.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
