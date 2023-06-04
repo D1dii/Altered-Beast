@@ -39,15 +39,14 @@ private:
 
 	state invocadorState = state::IDLE;
 
-	uint HitFx = 0;
-	uint DeathFx = 0;
+	uint welcomeFx = 0;
+	
 
 	int life = 60;
 
 	int frame = 0;
-	int attackFrame = 0;
-	int deathFrame = 0;
-	int touchFrame = 0;
+	int waitFrame = 0;
+	
 
 	bool defeated = false;
 

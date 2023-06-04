@@ -20,7 +20,9 @@ Invocador_Boss::Invocador_Boss(int x, int y) : Enemy(x, y) {
 	invocarBoss.PushBack({ 88 - 79, 84 - 75, 79, 75 });
 	invocarBoss.speed = 0.2f;
 
-	receiveDmg = App->collisions->AddCollider({ position.x - 70, 0, 10, 240 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	welcomeFx = App->audio->LoadFx("Assets/Fx/welcome.ogg");
+
+	receiveDmg = App->collisions->AddCollider({ position.x - 50, 0, 10, 240 }, Collider::Type::ENEMY, (Module*)App->enemies);
 }
 
 void Invocador_Boss::Update() {
@@ -30,14 +32,21 @@ void Invocador_Boss::Update() {
 	case Invocador_Boss::state::IDLE:
 		currentAnim = &idleAnim;
 		idleAnim.Update();
+		waitFrame++;
+		if (waitFrame == 150) {
+			App->sceneLevel_1->isBoss = true;
+		}
 		break;
 	case Invocador_Boss::state::INVOCAR:
 		currentAnim = &invocarBoss;
 		invocarBoss.Update();
 		frame++;
-		if (frame >= 30) {
+		if (frame == 10) {
+			App->audio->PlayFx(welcomeFx);
+		}
+		if (frame >= 100) {
 			App->enemies->AddEnemy(Enemy_Type::BOSS, App->render->camera.x + 180, 65);
-			App->sceneLevel_1->isBoss = true;
+			
 			SetToDelete();
 		}
 		break;
