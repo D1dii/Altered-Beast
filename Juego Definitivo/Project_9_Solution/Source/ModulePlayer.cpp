@@ -312,6 +312,7 @@ bool ModulePlayer::Start()
 	bool ret = true;
 	numLifes = 2;
 	lifeNodes = 12;
+	onBeastForm = false;
 
 	texture = App->textures->Load("Assets/Sprites/fixedprotagonist+.png");
 	nodesTexture = App->textures->Load("Assets/Sprites/lifeSprite2.png");
@@ -401,7 +402,6 @@ Update_Status ModulePlayer::Update()
 	}
 	if (App->input->keys[SDL_SCANCODE_3] == Key_State::KEY_REPEAT)
 	{
-		App->audio->PlayFx(powerUpFx);
 		phase = 3;
 		phaseUpdate();
 	}
@@ -760,15 +760,15 @@ Update_Status ModulePlayer::Update()
 
 						currentAnimation = &kickAnim[phase];
 						kickAnim[phase].Update();
-						kick->rect.w = 45;
-						kick->rect.h = 20;
+						kick->rect.w = 30;
+						kick->rect.h = 70;
 						if (flipType)
 						{
-							kick->SetPos(position.x - 5, position.y + 35);
+							kick->SetPos(position.x - 5, position.y );
 						}
 						else
 						{
-							kick->SetPos(position.x + 20, position.y + 35);
+							kick->SetPos(position.x + 20, position.y );
 						}
 					}
 					else
@@ -903,7 +903,9 @@ Update_Status ModulePlayer::Update()
 			else if (phase == 3) {
 				position.x -= 2;
 				collider->SetPos(position.x + 50, position.y);
-				kick->SetPos(position.x + 10, position.y + 35);
+				kick->SetPos(position.x + 25, position.y );
+				kick->rect.w = 30;
+				kick->rect.h = 70;
 			}
 
 		}
@@ -933,6 +935,9 @@ Update_Status ModulePlayer::Update()
 		}
 		if (frame >= 30)
 		{
+			if (phase == 3) {
+				position.x += 10;
+			}
 			playerState = state::IDLE;
 			frame = 0;
 		}
@@ -1019,19 +1024,34 @@ Update_Status ModulePlayer::Update()
 		currentAnimation = &crouchkickAnim[phase];
 		crouchkickAnim[phase].Update();
 		frame++;
-		isInAColumn(80, 165, true);
-		crouchkick->rect.w = 18;
-		crouchkick->rect.h = 40;
-		if (flipType)
+		
+		if (phase == 3) 
 		{
-			crouchkick->SetPos(position.x + 3, position.y - 2);
+			collider->rect.w = 25;
+			collider->rect.h = 70;
+			isInAColumn(62, 150, true);
+			playerState = state::KICK;
+			break;
 		}
 		else
 		{
-			crouchkick->SetPos(position.x + 25, position.y - 2);
-		}
+			isInAColumn(80, 165, true);
+			crouchkick->rect.w = 18;
+			crouchkick->rect.h = 40;
+			if (flipType)
+			{
+				crouchkick->SetPos(position.x + 3, position.y - 2);
+			}
+			else
+			{
+				crouchkick->SetPos(position.x + 25, position.y - 2);
+			}
+		}	
 		if (frame >= 30)
 		{
+			if (phase == 3) {
+				position.x -= 10;
+			}
 			playerState = state::CROUCH;
 			frame = 0;
 		}
@@ -1165,7 +1185,6 @@ Update_Status ModulePlayer::PostUpdate()
 {
 	if (wolfPunch && phase == 3)
 	{
-		printf("wolfPunchBlit  %d", counterForWolfPunch);
 		SDL_Rect rect = punchWolfAnim.GetCurrentFrame();
 		if (punchWolfFlipType) {
 			App->render->Blit(texture, wolfPunchPosition.x - counterForWolfPunch * 2, wolfPunchPosition.y - 10, &rect, speed, punchWolfFlipType);
@@ -1225,10 +1244,11 @@ Update_Status ModulePlayer::PostUpdate()
 
 	// Draw UI (score) --------------------------------------
 	sprintf_s(scoreText, 10, "%7d", score);
+	sprintf_s(highScoreText, 10, "%7d", highScore);
 
 	// TODO 3: Blit the text of the score in at the bottom of the screen
 	App->fonts->BlitText(0, 20, scoreFont, scoreText);
-	App->fonts->BlitText(100, 20, scoreFont, scoreText);
+	App->fonts->BlitText(100, 20, scoreFont, highScoreText);
 	secondsCounter++;
 	if (secondsCounter % 100 == 0) {
 
@@ -1315,7 +1335,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ENEMY_SHOT && destroyed == false && PlayerTouch == true)
 	{
 		//c2->pendingToDelete = true;
-		lifeNodes--;
+		lifeNodes-= 12;
 
 		damaged = true;
 		PlayerTouch = false;
@@ -1327,6 +1347,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			{
 
 				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
+				if (score > highScore) {
+					highScore = score;
+				}
 				died = false;
 				diedInAir = false;
 				playerState = state::IDLE;

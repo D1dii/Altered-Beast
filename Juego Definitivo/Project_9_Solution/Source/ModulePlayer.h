@@ -131,10 +131,12 @@ public:
 	bool wolfPunch = false;
 	bool diedInAir = false;
 	bool died = false;
+	bool onBeastForm;
 	int frame = 0;
 	int waitForDmg = 0;
 	int numLifes = 2;
 	int lifeNodes = 12;
+
 
 	// The player's collider
 	Collider* collider = nullptr;
@@ -162,8 +164,10 @@ public:
 
 	// Font score index
 	uint score = 000;
+	uint highScore = 000;
 	int scoreFont = -1;
 	char scoreText[10] = { "\0" };
+	char highScoreText[10] = { "\0" };
 	int secondsCounter = 0;
 	bool inAColumn = false;
 };

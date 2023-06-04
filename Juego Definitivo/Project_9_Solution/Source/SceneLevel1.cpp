@@ -24,6 +24,7 @@ bool SceneLevel1::Start()
 	LOG("Loading background assets");
 
 	bool ret = true;
+	bool onBeastForm = false;
 
 	bgbackTexture = App->textures->Load("Assets/Sprites/backbg.png");
 	bgfrontTexture = App->textures->Load("Assets/Sprites/frontbg.png");
@@ -40,8 +41,8 @@ bool SceneLevel1::Start()
 
 	// Enemies ---
 	
-	/*App->enemies->AddEnemy(Enemy_Type::NO_SKULL, 400, 156);
-	App->enemies->AddEnemy(Enemy_Type::ZOMBIE, 800, 158);
+	App->enemies->AddEnemy(Enemy_Type::NO_SKULL, 400, 156);
+	/*App->enemies->AddEnemy(Enemy_Type::ZOMBIE, 800, 158);
 	App->enemies->AddEnemy(Enemy_Type::WOLF, 1200, 177);
 	App->enemies->AddEnemy(Enemy_Type::WOLF_BLUE, 1600, 177);
 	App->enemies->AddEnemy(Enemy_Type::DRAGON, 250, 15);
@@ -70,10 +71,10 @@ Update_Status SceneLevel1::Update()
 	App->render->camera.x += 1;
 	bgleft->SetPos(App->render->camera.x, 0);
 	bgright->SetPos(App->render->camera.x + 310, 0);
-	if (App->player->phase == 3 && !onBeastForm) {
+	if (App->player->phase == 3 && !App->player->onBeastForm) {
 		App->audio->PlayFx(beastHowl);
 		App->audio->PlayMusic("Assets/Music/beastForm.ogg", 1.0f);
-		onBeastForm = true;
+		App->player->onBeastForm = true;
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

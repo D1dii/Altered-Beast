@@ -50,7 +50,6 @@ public:
 
 	//Screen scroll
 	int bg4counter = 639;
-	bool onBeastForm = false;
 };
 
 #endif
