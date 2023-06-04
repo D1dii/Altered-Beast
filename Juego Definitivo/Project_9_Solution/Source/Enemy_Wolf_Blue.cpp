@@ -63,7 +63,7 @@ void Enemy_Wolf_Blue::Update() {
 		}
 	}
 
-	Enemy::Update();
+	
 	receiveDmg->SetPos(position.x - 5, position.y + 10);
 	afflictDmg->SetPos(position.x + 10, position.y + 15);
 }

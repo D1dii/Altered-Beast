@@ -1,4 +1,11 @@
-﻿  Invocador_Boss.cpp
+﻿  Initial_Cutscene.cpp
 C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
 C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  ModulePlayer.cpp
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(59,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\Animation.h(61,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\ModulePlayer.cpp(1201,111): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\ModulePlayer.cpp(1205,111): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Project_9_Solution\Source\ModulePlayer.cpp(1213,61): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+  Generando código...
   Project_9_Solution.vcxproj -> C:\Users\didac\Documents\GitHub\Altered-Beast\Juego Definitivo\Debug\Project_9_Solution.exe

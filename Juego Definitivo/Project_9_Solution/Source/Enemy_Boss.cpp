@@ -91,7 +91,7 @@ void Enemy_Boss::Update() {
 			touch = true;
 			touchFrame = 0;
 		}
-		if (frame >= 50) {
+		if (frame >= 75) {
 			bossState = state::ATTACK;
 			frame = 0;
 		}
@@ -102,7 +102,7 @@ void Enemy_Boss::Update() {
 		frame++;
 		attackFrame++;
 		touchFrame++;
-		if (attackFrame >= 12) {
+		if (attackFrame >= 15) {
 			App->enemies->AddEnemy(Enemy_Type::BOSS_HEAD, position.x + 50, position.y + 5);
 			attackFrame = 0;
 		}
@@ -110,7 +110,7 @@ void Enemy_Boss::Update() {
 			touch = true;
 			touchFrame = 0;
 		}
-		if (frame >= 48) {
+		if (frame >= 45) {
 			bossState = state::IDLE;
 			frame = 0;
 		}

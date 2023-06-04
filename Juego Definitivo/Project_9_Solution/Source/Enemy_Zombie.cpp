@@ -131,7 +131,7 @@ void Enemy_Zombie::Update() {
 
 	
 
-	Enemy::Update();
+	
 	afflictDmg->SetPos(position.x + 5, position.y + 7);
 	receiveDmg->SetPos(position.x - 10, position.y - 10);
 }

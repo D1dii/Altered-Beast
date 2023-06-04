@@ -88,7 +88,7 @@ void Enemy_Orco::Update() {
 		break;
 	}
 
-	Enemy::Update();
+	
 	afflictDmg->SetPos(position.x + 20, position.y + 7);
 	receiveDmg->SetPos(position.x + 10, position.y - 10);
 }

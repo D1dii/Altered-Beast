@@ -81,7 +81,8 @@ void Enemy_Dragon::Update() {
 		}
 	}
 
-	Enemy::Update();
+	
+	receiveDmg->SetPos(position.x, position.y);
 	afflictDmg->SetPos(position.x + 5, position.y + 15);
 
 }

@@ -82,7 +82,7 @@ void Boss_Head::Update() {
 		SetToDelete();
 	}
 
-	Enemy::Update();
+	
 	receiveDmg->SetPos(position.x - 4, position.y - 3);
 	afflictDmg->SetPos(position.x + 5, position.y + 5);
 
@@ -94,7 +94,7 @@ void Boss_Head::OnCollision(Collider* col) {
 		//App->collisions->RemoveCollider(afflictDmg);
 	}
 
-	if (col->type == col->WALL) {
+	if (col->type == col->WALL || App->player->damaged == true) {
 		headState = state::DEATH;
 		//App->collisions->RemoveCollider(afflictDmg);
 	}

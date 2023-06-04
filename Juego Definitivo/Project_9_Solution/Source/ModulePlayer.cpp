@@ -460,7 +460,21 @@ Update_Status ModulePlayer::Update()
 
 	switch (playerState) {
 	case state::IDLE:
-
+		currentAnimation = &idleAnim[phase];
+		isInAColumn(62, 150, false);
+		punch->rect.w = 0;
+		punch->rect.h = 0;
+		punch->SetPos(position.x + 20, -30);
+		kick->rect.w = 0;
+		kick->rect.h = 0;
+		kick->SetPos(position.x + 20, -30);
+		crouchkick->rect.w = 0;
+		crouchkick->rect.h = 0;
+		crouchkick->SetPos(position.x + 20, -30);
+		collider->rect.w = 25;
+		collider->rect.h = 70;
+		collider->SetPos(position.x + 8, position.y);
+		App->player->collider->PLAYER;
 		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN || pad.x == 1) {
 			punchAnim[phase].Reset();
 			playerState = state::PUNCH;
@@ -613,13 +627,13 @@ Update_Status ModulePlayer::Update()
 		downAnim[phase].Update();
 		punch->rect.w = 0;
 		punch->rect.h = 0;
-		punch->SetPos(position.x + 20, 0);
+		punch->SetPos(position.x + 20, -30);
 		kick->rect.w = 0;
 		kick->rect.h = 0;
-		kick->SetPos(position.x + 20, 0);
+		kick->SetPos(position.x + 20, -30);
 		crouchkick->rect.w = 0;
 		crouchkick->rect.h = 0;
-		crouchkick->SetPos(position.x + 20, 0);
+		crouchkick->SetPos(position.x + 20, -30);
 		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN || pad.x == 1)
 		{
 			crouchpunchAnim[phase].Reset();
@@ -1089,8 +1103,7 @@ Update_Status ModulePlayer::Update()
 		punch->rect.h = 0;
 		kick->rect.w = 0;
 		kick->rect.h = 0;
-		collider->rect.w = 0;
-		collider->rect.h = 0;
+		App->player->collider->NONE;
 
 		frame++;
 		if (frame < 10) {
@@ -1156,21 +1169,8 @@ Update_Status ModulePlayer::Update()
 		&& pad.l_x == 0
 		&& pad.l_y == 0)
 	{
-		currentAnimation = &idleAnim[phase];
-		isInAColumn(62, 150, false);
 		playerState = state::IDLE;
-		punch->rect.w = 0;
-		punch->rect.h = 0;
-		punch->SetPos(position.x + 20, -30);
-		kick->rect.w = 0;
-		kick->rect.h = 0;
-		kick->SetPos(position.x + 20, -30);
-		crouchkick->rect.w = 0;
-		crouchkick->rect.h = 0;
-		crouchkick->SetPos(position.x + 20, -30);
-		collider->rect.w = 25;
-		collider->rect.h = 70;
-		collider->SetPos(position.x + 8, position.y);
+		
 	}
 	//If Punch state / crounch / punch crounch / crounch kick
 
@@ -1270,7 +1270,6 @@ Update_Status ModulePlayer::PostUpdate()
 	}
 
 	if (score >= 1000000) {
-		//App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
 		position.x = 30;
 
 	}
@@ -1345,8 +1344,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ENEMY_SHOT && destroyed == false && PlayerTouch == true)
 	{
-		//c2->pendingToDelete = true;
-		lifeNodes-= 12;
+		
+		lifeNodes--;
 
 		damaged = true;
 		PlayerTouch = false;

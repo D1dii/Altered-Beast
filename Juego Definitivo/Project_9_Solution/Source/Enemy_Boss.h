@@ -48,7 +48,7 @@ private:
 	uint HitFx = 0;
 	uint DeathFx = 0;
 
-	int life = 60;
+	int life = 40;
 
 	int frame = 0;
 	int attackFrame = 0;

@@ -6,6 +6,7 @@
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
 #include "ModuleEnemies.h"
+#include "ModuleFadeToBlack.h"
 
 Final_Cutscene::Final_Cutscene(int x, int y) : Enemy(x, y) {
 
@@ -140,6 +141,7 @@ void Final_Cutscene::Update() {
 
 	if (frame >= 550) {
 		SetToDelete();
+		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
 	}
 	
 }
