@@ -19,6 +19,7 @@
 #include "Enemy_Boss.h"
 #include "Boss_Head.h"
 #include "Final_Cutscene.h"
+#include "Invocador_Boss.h"
 
 
 #define SPAWN_MARGIN 50
@@ -48,6 +49,7 @@ bool ModuleEnemies::Start()
 	BossHead = App->textures->Load("Assets/Sprites/Boss.png");
 	Boss = App->textures->Load("Assets/Sprites/Boss_Animation.png");
 	FinalScene = App->textures->Load("Assets/Sprites/Final_Cutscene.png");
+	Invocador = App->textures->Load("Assets/Sprites/Invocador.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
 
@@ -221,6 +223,10 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 				case Enemy_Type::FINAL_SCENE:
 					enemies[i] = new Final_Cutscene(info.x, info.y);
 					enemies[i]->texture = FinalScene;
+					break;
+				case Enemy_Type::INVOCADOR:
+					enemies[i] = new Invocador_Boss(info.x, info.y);
+					enemies[i]->texture = Invocador;
 					break;
 
 			}

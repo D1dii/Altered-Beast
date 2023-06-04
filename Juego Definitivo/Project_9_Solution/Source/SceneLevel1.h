@@ -47,6 +47,8 @@ public:
 
 	uint beastHowl = 0;
 
+	bool isBoss = false;
+
 
 	//Screen scroll
 	int bg4counter = 639;

@@ -46,8 +46,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER_ATTACK][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::PLAYER_ATTACK][Collider::Type::PLAYER_ATTACK] = false;
 	matrix[Collider::Type::PLAYER_ATTACK][Collider::Type::ENEMY_SHOT] = false;
-	matrix[Collider::Type::PLAYER_ATTACK][Collider::Type::SCREEN_LEFT] = true;
-	matrix[Collider::Type::PLAYER_ATTACK][Collider::Type::SCREEN_RIGHT] = true;
+	matrix[Collider::Type::PLAYER_ATTACK][Collider::Type::SCREEN_LEFT] = false;
+	matrix[Collider::Type::PLAYER_ATTACK][Collider::Type::SCREEN_RIGHT] = false;
 	matrix[Collider::Type::PLAYER_ATTACK][Collider::Type::ITEM] = false;
 	matrix[Collider::Type::PLAYER_ATTACK][Collider::Type::COLUMNS] = true;
 

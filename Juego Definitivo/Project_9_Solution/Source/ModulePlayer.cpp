@@ -10,6 +10,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleFonts.h"
 #include "ModuleEnemies.h"
+#include "SceneLevel1.h"
 
 #include <stdio.h>
 
@@ -489,6 +490,9 @@ Update_Status ModulePlayer::Update()
 		break;
 	case state::MOVEMENT:
 		collider->SetPos(position.x + 8, position.y);
+		punch->SetPos(position.x + 20, -30);
+		kick->SetPos(position.x + 20, -30);
+		crouchkick->SetPos(position.x + 20, -30);
 		if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT || pad.l_x < 0) {
 			punch->rect.w = 0;
 			punch->rect.h = 0;
@@ -855,6 +859,7 @@ Update_Status ModulePlayer::Update()
 
 		}
 		else {
+			collider->SetPos(position.x + 10, position.y);
 			if (phase == 0 || phase == 1) {
 				punch->SetPos(position.x + 20, position.y + 12);
 			}
@@ -910,6 +915,7 @@ Update_Status ModulePlayer::Update()
 
 		}
 		else {
+			collider->SetPos(position.x + 10, position.y);
 			if (phase == 0) {
 				kick->SetPos(position.x + 20, position.y + 35);
 			}
@@ -983,6 +989,7 @@ Update_Status ModulePlayer::Update()
 
 		}
 		else {
+			collider->SetPos(position.x + 10, position.y);
 			if (phase == 0) {
 				punch->SetPos(position.x + 20, position.y + 8);
 			}
@@ -1044,6 +1051,7 @@ Update_Status ModulePlayer::Update()
 			}
 			else
 			{
+				collider->SetPos(position.x + 10, position.y);
 				crouchkick->SetPos(position.x + 25, position.y - 2);
 			}
 		}	
@@ -1070,7 +1078,10 @@ Update_Status ModulePlayer::Update()
 	case state::DEATH:
 		died = true;
 		currentAnimation = &deathAnim[phase];
-		App->render->camera.x -= 1;
+		if (App->sceneLevel_1->isBoss == false) {
+			App->render->camera.x -= 1;
+		}
+		
 		deathAnim[phase].Update();
 		crouchkick->rect.w = 0;
 		crouchkick->rect.h = 0;
@@ -1282,7 +1293,7 @@ void ModulePlayer::phaseUpdate() {
 	else if (phase == 2) {
 		damage = 3;
 	}
-	else if (phase == 4) {
+	else if (phase == 3) {
 		damage = 4;
 	}
 }
@@ -1388,7 +1399,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ITEM) {
 		App->audio->PlayFx(powerUpFx);
-		if (phase < 4) {
+		if (phase < 3) {
 			phase++;
 		}
 		phaseUpdate();

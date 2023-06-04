@@ -124,6 +124,7 @@ void Enemy_Zombie::Update() {
 			App->audio->PlayFx(destroyedFx);
 			SetToDelete();
 			App->collisions->RemoveCollider(explosion);
+			App->collisions->RemoveCollider(afflictDmg);
 		}
 		break;
 	}
@@ -158,12 +159,12 @@ void Enemy_Zombie::OnCollision(Collider* col) {
 	}
 	else if (col->type == col->PLAYER && zombieState == state::WALK) {
 		zombieState = state::EXPLOSIONHEAD;
-		App->collisions->RemoveCollider(afflictDmg);
+		
 	}
 	else if (col->type == col->PLAYER && zombieState == state::NO_HEAD) {
 		frame = 0;
 		zombieState = state::EXPLOSION_NO_HEAD;
-		App->collisions->RemoveCollider(afflictDmg);
+		
 	}
 
 	

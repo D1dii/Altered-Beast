@@ -90,6 +90,7 @@
     <ClInclude Include="Final_Cutscene.h" />
     <ClInclude Include="InitialScreen.h" />
     <ClInclude Include="Initial_Cutscene.h" />
+    <ClInclude Include="Invocador_Boss.h" />
     <ClInclude Include="ModuleAudio.h" />
     <ClInclude Include="ModuleCollisions.h" />
     <ClInclude Include="ModuleEnemies.h" />
@@ -127,6 +128,7 @@
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="InitialScreen.cpp" />
     <ClCompile Include="Initial_Cutscene.cpp" />
+    <ClCompile Include="Invocador_Boss.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleCollisions.cpp" />
     <ClCompile Include="ModuleEnemies.cpp" />

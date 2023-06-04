@@ -48,12 +48,14 @@ private:
 	uint HitFx = 0;
 	uint DeathFx = 0;
 
-	int life = 1;
+	int life = 60;
 
 	int frame = 0;
 	int attackFrame = 0;
 	int deathFrame = 0;
 	int touchFrame = 0;
+
+	bool defeated = false;
 	
 };
 

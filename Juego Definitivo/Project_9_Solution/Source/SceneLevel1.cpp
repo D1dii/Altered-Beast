@@ -27,6 +27,8 @@ bool SceneLevel1::Start()
 	bool onBeastForm = false;
 
 	bgbackTexture = App->textures->Load("Assets/Sprites/backbg.png");
+	App->player->Enable();
+	App->enemies->Enable();
 	bgfrontTexture = App->textures->Load("Assets/Sprites/frontbg.png");
 	zombie = App->textures->Load("Assets/Sprites/Zombie.png");
 
@@ -35,22 +37,54 @@ bool SceneLevel1::Start()
 	beastHowl = App->audio->LoadFx("Assets/Fx/howl.ogg");
 
 	//Bottomside collider
-	bgfront = App->collisions->AddCollider({ 0, 217, 1600, 24 }, Collider::Type::WALL);
+	//bgfront = App->collisions->AddCollider({ 0, 217, 1600, 24 }, Collider::Type::WALL);
 	bgright = App->collisions->AddCollider({ 320, 0, 10, 240 }, Collider::Type::SCREEN_RIGHT);
 	bgleft = App->collisions->AddCollider({ 0, 0, 10, 240 }, Collider::Type::SCREEN_LEFT);
 
 	// Enemies ---
 	
-	App->enemies->AddEnemy(Enemy_Type::NO_SKULL, 400, 156);
-	/*App->enemies->AddEnemy(Enemy_Type::ZOMBIE, 800, 158);
-	App->enemies->AddEnemy(Enemy_Type::WOLF, 1200, 177);
-	App->enemies->AddEnemy(Enemy_Type::WOLF_BLUE, 1600, 177);
-	App->enemies->AddEnemy(Enemy_Type::DRAGON, 250, 15);
-	App->enemies->AddEnemy(Enemy_Type::ORCO, 2000, 150);
-	*/
-	App->enemies->AddEnemy(Enemy_Type::COLUMN, 300, 130);
-	App->enemies->AddEnemy(Enemy_Type::COLUMN, 350, 130);
-	App->enemies->AddEnemy(Enemy_Type::COLUMN, 400, 130);
+	App->enemies->AddEnemy(Enemy_Type::ZOMBIE, 250, 158);
+	App->enemies->AddEnemy(Enemy_Type::ZOMBIE, 450, 158);
+	App->enemies->AddEnemy(Enemy_Type::ZOMBIE, 650, 158);
+
+	//Columns Declared
+	App->enemies->AddEnemy(Enemy_Type::COLUMN, 800, 130);
+	App->enemies->AddEnemy(Enemy_Type::COLUMN, 850, 130);
+	App->enemies->AddEnemy(Enemy_Type::COLUMN, 900, 130);
+
+	App->enemies->AddEnemy(Enemy_Type::WOLF_BLUE, 900, 177);
+
+	App->enemies->AddEnemy(Enemy_Type::NO_SKULL, 1000, 156);
+	App->enemies->AddEnemy(Enemy_Type::WOLF, 1150, 177);
+
+	App->enemies->AddEnemy(Enemy_Type::NO_SKULL, 1250, 156);
+	App->enemies->AddEnemy(Enemy_Type::NO_SKULL, 1325, 156);
+	App->enemies->AddEnemy(Enemy_Type::NO_SKULL, 1400, 156);
+
+	App->enemies->AddEnemy(Enemy_Type::WOLF_BLUE, 1500, 177);
+
+	App->enemies->AddEnemy(Enemy_Type::NO_SKULL, 1575, 156);
+	App->enemies->AddEnemy(Enemy_Type::ZOMBIE, 1600, 158);
+	App->enemies->AddEnemy(Enemy_Type::NO_SKULL, 1650, 156);
+
+	App->enemies->AddEnemy(Enemy_Type::WOLF, 1725, 177);
+	App->enemies->AddEnemy(Enemy_Type::NO_SKULL, 1775, 156);
+	App->enemies->AddEnemy(Enemy_Type::ZOMBIE, 1800, 158);
+
+	App->enemies->AddEnemy(Enemy_Type::WOLF_BLUE, 1900, 177);
+
+	App->enemies->AddEnemy(Enemy_Type::DRAGON, 1900, 15);
+
+	App->enemies->AddEnemy(Enemy_Type::INVOCADOR, 2200, 148);
+
+	//App->enemies->AddEnemy(Enemy_Type::NO_SKULL, 400, 156);
+	//App->enemies->AddEnemy(Enemy_Type::WOLF, 1200, 177);
+	//App->enemies->AddEnemy(Enemy_Type::WOLF_BLUE, 1600, 177);
+	//App->enemies->AddEnemy(Enemy_Type::DRAGON, 250, 15);
+	//App->enemies->AddEnemy(Enemy_Type::ORCO, 2000, 150);
+
+
+	
 
 	//App->enemies->AddEnemy(Enemy_Type::BOSS, 180, 65);
 	
@@ -60,15 +94,18 @@ bool SceneLevel1::Start()
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
-	App->player->Enable();
-	App->enemies->Enable();
+	
 
 	return ret;
 }
 
 Update_Status SceneLevel1::Update()
 {
-	App->render->camera.x += 1;
+	
+	if (!isBoss) {
+		App->render->camera.x += 1;
+	}
+	
 	bgleft->SetPos(App->render->camera.x, 0);
 	bgright->SetPos(App->render->camera.x + 310, 0);
 	if (App->player->phase == 3 && !App->player->onBeastForm) {

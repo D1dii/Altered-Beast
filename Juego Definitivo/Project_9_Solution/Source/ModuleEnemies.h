@@ -22,6 +22,7 @@ enum class Enemy_Type
 	BOSS,
 	BOSS_HEAD,
 	FINAL_SCENE,
+	INVOCADOR,
 
 
 
@@ -93,6 +94,7 @@ public:
 	SDL_Texture* BossHead = nullptr;
 	SDL_Texture* Boss = nullptr;
 	SDL_Texture* FinalScene = nullptr;
+	SDL_Texture* Invocador = nullptr;
 
 
 private:

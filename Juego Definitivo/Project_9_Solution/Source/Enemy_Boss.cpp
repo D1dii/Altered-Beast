@@ -6,6 +6,7 @@
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
 #include "ModuleEnemies.h"
+#include "ModuleRender.h"
 
 Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y) {
 
@@ -134,7 +135,7 @@ void Enemy_Boss::Update() {
 		}
 		else if (deathFrame > 342) {
 			SetToDelete();
-			App->enemies->AddEnemy(Enemy_Type::FINAL_SCENE, 30, 40);
+			App->enemies->AddEnemy(Enemy_Type::FINAL_SCENE, App->render->camera.x + 30, 40);
 			
 		}
 		break;
