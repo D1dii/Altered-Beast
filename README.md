@@ -2,6 +2,7 @@
 Repository of "Altered Beast" for Project 1
 
 GitHub link: https://github.com/D1dii/Altered-Beast
+
 Web Page: https://d1dii.github.io/Altered-Beast/
 
 Team members: 
