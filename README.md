@@ -2,6 +2,7 @@
 Repository of "Altered Beast" for Project 1
 
 GitHub link: https://github.com/D1dii/Altered-Beast
+Web Page: https://d1dii.github.io/Altered-Beast/
 
 Team members: 
 
@@ -13,6 +14,11 @@ David Lastra: https://github.com/DavidLastra8
 
 Samuel Martínez: https://github.com/Samu163
 
+Contributions:
+
+Dídac and Samuel were in charge of the toughest part of coding part, including enemies and gameplay mechanics.
+Oliver and David were more in charge of ripping sprites, testing and doing animations for the game. Besides the
+current responsibility, each team member has worked on the game's code.
 
 Description:
 
@@ -73,6 +79,10 @@ B: Autolose
 2: Phase 2 (2 powerups)
 
 3: Phase 3 (Final Werewolf form)
+
+Gameplay video explaining our features: https://www.youtube.com/watch?v=KiAZCn5_qAs&ab_channel=HesnaiperClips
+
+Release link for Download: https://github.com/D1dii/Altered-Beast/releases/tag/Alpha_Release
 
 The game ends when you defeat the Final Boss or you have no life left!
 Enjoy playing the Alpha of altered beast! :) 
