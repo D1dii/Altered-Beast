@@ -243,7 +243,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	jumpAnim[3].PushBack({ 96 * 3 + 25,   960, 96 - 50 , 1022 - 960 });
 
 	// FASE 3 Move crouch 
-	downAnim[3].PushBack({ 7, 985,83, 50 });
+	downAnim[3].PushBack({ 7, 985,83, 40 });
 	downAnim[3].speed = 0.1f;
 	downAnim[3].loop = false;
 
@@ -270,7 +270,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	punchAnim[3].loop = false;
 
 	// FASE 3 Crouch Punch Attack
-	crouchpunchAnim[3].PushBack({ 92, 985 , 210 - 95, 50 });
+	crouchpunchAnim[3].PushBack({ 92, 985 , 211-97, 50 });
 	crouchpunchAnim[3].speed = 0.2f;
 	crouchpunchAnim[3].loop = false;
 
@@ -324,6 +324,7 @@ bool ModulePlayer::Start()
 	died = false;
 	diedInAir = false;
 	restartLevel = false;
+	App->sceneLevel_1->isBoss = false;
 	playerState = state::IDLE;
 
 	texture = App->textures->Load("Assets/Sprites/fixedprotagonist+.png");
@@ -450,11 +451,11 @@ Update_Status ModulePlayer::Update()
 		punchWolf->rect.h = 35;
 		if (punchWolfFlipType)
 		{
-			punchWolf->SetPos(wolfPunchPosition.x + 40 - counterForWolfPunch * 2, wolfPunchPosition.y + 10);
+			punchWolf->SetPos(wolfPunchPosition.x + 20 - counterForWolfPunch * 6, wolfPunchPosition.y + 10);
 		}
 		else
 		{
-			punchWolf->SetPos(wolfPunchPosition.x + 15 + counterForWolfPunch * 6, wolfPunchPosition.y + 10);
+			punchWolf->SetPos(wolfPunchPosition.x + 40 + counterForWolfPunch * 6, wolfPunchPosition.y + 10);
 		}
 		if (counterForWolfPunch > 50) {
 			punchWolf->rect.w = 0;
@@ -617,7 +618,7 @@ Update_Status ModulePlayer::Update()
 		if (phase == 3) {
 			collider->SetPos(position.x, position.y + 10);
 			collider->rect.h = 45;
-			collider->rect.w = 80;
+			collider->rect.w = 60;
 
 		}
 		else
@@ -1103,18 +1104,21 @@ Update_Status ModulePlayer::Update()
 		if (App->sceneLevel_1->isBoss == false) {
 			App->render->camera.x -= 1;
 		}
-		
 		deathAnim[phase].Update();
-		crouchkick->rect.w = 0;
-		crouchkick->rect.h = 0;
-		punch->rect.w = 0;
-		punch->rect.h = 0;
-		kick->rect.w = 0;
-		kick->rect.h = 0;
 		App->player->collider->NONE;
 
 		frame++;
+		
 		if (frame < 10) {
+			crouchkick->rect.w = 0;
+			crouchkick->rect.h = 0;
+			punch->rect.w = 0;
+			punch->rect.h = 0;
+			kick->rect.w = 0;
+			kick->rect.h = 0;
+			collider->rect.w = 0;
+			collider->rect.h = 0;
+			collider->SetPos(0, 0);
 			position.y += 2;
 			if (flipType) {
 				position.x += 1;
@@ -1139,7 +1143,8 @@ Update_Status ModulePlayer::Update()
 		}
 		else if (frame >= 120)
 		{
-			if (gameOver) {
+			if (gameOver) 
+			{
 				playerState = state::DEATH;
 				frame = 20;
 				died = false;
@@ -1220,11 +1225,11 @@ Update_Status ModulePlayer::PostUpdate()
 	{
 		SDL_Rect rect = punchWolfAnim.GetCurrentFrame();
 		if (punchWolfFlipType) {
-			App->render->Blit(texture, wolfPunchPosition.x - counterForWolfPunch * 2, wolfPunchPosition.y - 10, &rect, speed, punchWolfFlipType);
+			App->render->Blit(texture, wolfPunchPosition.x-20 - counterForWolfPunch * 6, wolfPunchPosition.y - 10, &rect, speed, punchWolfFlipType);
 		}
 		else
 		{
-			App->render->Blit(texture, wolfPunchPosition.x + counterForWolfPunch * 6, wolfPunchPosition.y - 10, &rect, speed, punchWolfFlipType);
+			App->render->Blit(texture, wolfPunchPosition.x + 30 + counterForWolfPunch * 6, wolfPunchPosition.y - 10, &rect, speed, punchWolfFlipType);
 		}
 
 	}
