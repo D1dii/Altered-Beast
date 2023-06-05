@@ -28,14 +28,51 @@ power-ups.
 
 Controls:
 
-Left arrow: move character to the left
-Right arrow: move character to the right
-Down arrow: crouch
-A: punch
-D: jump
-S: kick
-1: first player stage
-2: second player stage
+Left arrow: move character to the left 
 
-The game ends when you reach the maximun points or you are killed by the enemies
-Enjoy playing the prototype of altered beast! :) 
+Right arrow: move character to the right
+
+Down arrow: crouch
+
+A: Punch / Meteor Punch in Werewolf form
+
+S: Kick / Dash attack in Werewolf form
+
+D: Jump
+
+Debug options:
+
+F1: Draw colliders
+
+F2: GODMODE (Player is invincible)
+
+F3: Direct Bossfight warp
+
+F6: Spawn Zombie
+
+F7: Spawn NoSkull
+
+F8: Spawn Wolf
+
+F9: Spawn Blue Wolf
+
+F10: Spawn Dragon
+
+F11: Spawn Orco
+
+Return: Restart the level
+
+M: Autowin
+
+B: Autolose
+
+0: Phase 0 (no powerups)
+
+1: Phase 1 (1 powerup)
+
+2: Phase 2 (2 powerups)
+
+3: Phase 3 (Final Werewolf form)
+
+The game ends when you defeat the Final Boss or you have no life left!
+Enjoy playing the Alpha of altered beast! :) 

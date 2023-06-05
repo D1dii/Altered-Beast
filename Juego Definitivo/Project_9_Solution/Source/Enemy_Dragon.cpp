@@ -7,6 +7,7 @@
 #include "ModulePlayer.h"
 #include "ModuleRender.h"
 #include "ModuleEnemies.h"
+#include "SceneLevel1.h"
 
 Enemy_Dragon::Enemy_Dragon(int x, int y) : Enemy(x, y) {
 
@@ -40,6 +41,10 @@ Enemy_Dragon::Enemy_Dragon(int x, int y) : Enemy(x, y) {
 }
 
 void Enemy_Dragon::Update() {
+
+	if (App->sceneLevel_1->isBoss == true) {
+		SetToDelete();
+	}
 
 	switch (dragonState)
 	{
@@ -81,7 +86,8 @@ void Enemy_Dragon::Update() {
 		}
 	}
 
-	Enemy::Update();
+	
+	receiveDmg->SetPos(position.x, position.y);
 	afflictDmg->SetPos(position.x + 5, position.y + 15);
 
 }

@@ -37,7 +37,7 @@ bool SceneLevel1::Start()
 	beastHowl = App->audio->LoadFx("Assets/Fx/howl.ogg");
 
 	//Bottomside collider
-	//bgfront = App->collisions->AddCollider({ 0, 217, 1600, 24 }, Collider::Type::WALL);
+	bgfront = App->collisions->AddCollider({ 0, 217, 3000, 24 }, Collider::Type::WALL);
 	bgright = App->collisions->AddCollider({ 320, 0, 10, 240 }, Collider::Type::SCREEN_RIGHT);
 	bgleft = App->collisions->AddCollider({ 0, 0, 10, 240 }, Collider::Type::SCREEN_LEFT);
 
@@ -75,18 +75,11 @@ bool SceneLevel1::Start()
 
 	App->enemies->AddEnemy(Enemy_Type::DRAGON, 1900, 15);
 
-	App->enemies->AddEnemy(Enemy_Type::INVOCADOR, 2200, 148);
+	App->enemies->AddEnemy(Enemy_Type::WOLF_BLUE, 2050, 177);
+	App->enemies->AddEnemy(Enemy_Type::WOLF, 2200, 177);
+	App->enemies->AddEnemy(Enemy_Type::WOLF_BLUE, 2350, 177);
 
-	//App->enemies->AddEnemy(Enemy_Type::NO_SKULL, 400, 156);
-	//App->enemies->AddEnemy(Enemy_Type::WOLF, 1200, 177);
-	//App->enemies->AddEnemy(Enemy_Type::WOLF_BLUE, 1600, 177);
-	//App->enemies->AddEnemy(Enemy_Type::DRAGON, 250, 15);
-	//App->enemies->AddEnemy(Enemy_Type::ORCO, 2000, 150);
-
-
-	
-
-	//App->enemies->AddEnemy(Enemy_Type::BOSS, 180, 65);
+	App->enemies->AddEnemy(Enemy_Type::INVOCADOR, 2550, 148);
 	
 
 	
@@ -102,7 +95,7 @@ bool SceneLevel1::Start()
 Update_Status SceneLevel1::Update()
 {
 	
-	if (!isBoss) {
+	if (App->render->camera.x < 2350 && isBoss == false) {
 		App->render->camera.x += 1;
 	}
 	

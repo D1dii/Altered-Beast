@@ -5,6 +5,7 @@
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
+#include "SceneLevel1.h"
 
 Enemy_Wolf::Enemy_Wolf(int x, int y) : Enemy(x, y) {
 
@@ -36,6 +37,9 @@ Enemy_Wolf::Enemy_Wolf(int x, int y) : Enemy(x, y) {
 
 void Enemy_Wolf::Update() {
 
+	if (App->sceneLevel_1->isBoss == true) {
+		SetToDelete();
+	}
 
 	switch (WolfState) {
 	case state::IDLE:
@@ -61,7 +65,7 @@ void Enemy_Wolf::Update() {
 		}
 	}
 
-	Enemy::Update();
+	
 	receiveDmg->SetPos(position.x - 5, position.y + 10);
 	afflictDmg->SetPos(position.x + 10, position.y + 15);
 }

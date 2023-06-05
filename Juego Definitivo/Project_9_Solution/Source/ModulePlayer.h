@@ -76,6 +76,7 @@ public:
 	SDL_Texture* texture = nullptr;
 	SDL_Texture* nodesTexture = nullptr;
 	SDL_Texture* uiTexture = nullptr;
+	SDL_Texture* gameOverTexture = nullptr;
 
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
@@ -97,6 +98,7 @@ public:
 	Animation punchWolfAnim;
 	Animation nodesAnim[4];
 	Animation lifesAnim[3];
+	Animation gameOverAnim;
 
 
 	//States of Player
@@ -131,6 +133,7 @@ public:
 	bool wolfPunch = false;
 	bool diedInAir = false;
 	bool died = false;
+	bool gameOver = false;
 	bool onBeastForm;
 	int frame = 0;
 	int waitForDmg = 0;
@@ -160,6 +163,7 @@ public:
 	uint jumpFx = 0;
 	uint playerDeathFx = 0;
 	uint powerUpFx = 0;
+	uint stunFx = 0;
 
 
 	// Font score index
@@ -169,6 +173,7 @@ public:
 	char scoreText[10] = { "\0" };
 	char highScoreText[10] = { "\0" };
 	int secondsCounter = 0;
+	int gameOverCounter = 0;
 	bool inAColumn = false;
 };
 

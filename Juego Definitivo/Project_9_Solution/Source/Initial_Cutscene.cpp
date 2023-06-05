@@ -28,6 +28,7 @@ void Initial_Cutscene::Update() {
 	}
 
 	if (frame >= 550) {
+		App->player->LevelFinished = false;
 		SetToDelete();
 	}
 

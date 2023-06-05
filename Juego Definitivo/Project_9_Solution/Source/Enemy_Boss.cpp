@@ -7,6 +7,7 @@
 #include "ModulePlayer.h"
 #include "ModuleEnemies.h"
 #include "ModuleRender.h"
+#include "SceneLevel1.h"
 
 Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y) {
 
@@ -78,7 +79,7 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y) {
 
 void Enemy_Boss::Update() {
 
-
+	App->sceneLevel_1->isBoss = true;
 
 	switch (bossState)
 	{
@@ -91,7 +92,7 @@ void Enemy_Boss::Update() {
 			touch = true;
 			touchFrame = 0;
 		}
-		if (frame >= 50) {
+		if (frame >= 75) {
 			bossState = state::ATTACK;
 			frame = 0;
 		}
@@ -102,7 +103,7 @@ void Enemy_Boss::Update() {
 		frame++;
 		attackFrame++;
 		touchFrame++;
-		if (attackFrame >= 12) {
+		if (attackFrame >= 15) {
 			App->enemies->AddEnemy(Enemy_Type::BOSS_HEAD, position.x + 50, position.y + 5);
 			attackFrame = 0;
 		}
@@ -110,7 +111,7 @@ void Enemy_Boss::Update() {
 			touch = true;
 			touchFrame = 0;
 		}
-		if (frame >= 48) {
+		if (frame >= 45) {
 			bossState = state::IDLE;
 			frame = 0;
 		}
