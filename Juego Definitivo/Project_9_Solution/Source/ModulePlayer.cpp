@@ -299,6 +299,10 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 
 
 	punchWolfAnim.PushBack({ 0 + 96 * 6 + 25,950, 96 - 25 , 73 });
+
+
+
+	gameOverAnim.PushBack({ 0 , 0 , 252, 44 });
 }
 
 ModulePlayer::~ModulePlayer()
@@ -314,10 +318,15 @@ bool ModulePlayer::Start()
 	numLifes = 2;
 	lifeNodes = 12;
 	onBeastForm = false;
+	gameOver = false;
+	died = false;
+	diedInAir = false;
+	playerState = state::IDLE;
 
 	texture = App->textures->Load("Assets/Sprites/fixedprotagonist+.png");
 	nodesTexture = App->textures->Load("Assets/Sprites/lifeSprite2.png");
 	uiTexture = App->textures->Load("Assets/Sprites/lifes.png");
+	gameOverTexture = App->textures->Load("Assets/Sprites/endsCreen.png");
 	currentAnimation = &idleAnim[0];
 
 	laserFx = App->audio->LoadFx("Assets/Fx/laser.wav");
@@ -326,6 +335,7 @@ bool ModulePlayer::Start()
 	jumpFx = App->audio->LoadFx("Assets/Fx/jump.wav");
 	playerDeathFx = App->audio->LoadFx("Assets/Fx/screamPlayerDeath.ogg");
 	powerUpFx = App->audio->LoadFx("Assets/Fx/power.ogg");
+	stunFx = App->audio->LoadFx("Assets/Fx/grunt.ogg");
 
 	position.x = 20;
 	position.y = 150;
@@ -431,7 +441,16 @@ Update_Status ModulePlayer::Update()
 		App->enemies->AddEnemy(Enemy_Type::ORCO, position.x + 200, 150);
 	}
 
+	//If Intro is pressed then restart the level
+	if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN && gameOver)
+	{
+		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
+		if (score > highScore) {
+			highScore = score;
+		}
+		destroyed = true;
 
+	}
 
 	//This is for checking if player is death (for no other imputs incoming)
 	if (died) {
@@ -457,6 +476,8 @@ Update_Status ModulePlayer::Update()
 			counterForWolfPunch = 0;
 		}
 	}
+
+	
 
 	switch (playerState) {
 	case state::IDLE:
@@ -778,15 +799,15 @@ Update_Status ModulePlayer::Update()
 
 						currentAnimation = &kickAnim[phase];
 						kickAnim[phase].Update();
-						kick->rect.w = 30;
-						kick->rect.h = 70;
+						kick->rect.w = 60;
+						kick->rect.h = 90;
 						if (flipType)
 						{
-							kick->SetPos(position.x - 5, position.y );
+							kick->SetPos(position.x + 10, position.y);
 						}
 						else
 						{
-							kick->SetPos(position.x + 20, position.y );
+							kick->SetPos(position.x, position.y);
 						}
 					}
 					else
@@ -922,9 +943,9 @@ Update_Status ModulePlayer::Update()
 			else if (phase == 3) {
 				position.x -= 2;
 				collider->SetPos(position.x + 50, position.y);
-				kick->SetPos(position.x + 25, position.y );
-				kick->rect.w = 30;
-				kick->rect.h = 70;
+				kick->SetPos(position.x + 20, position.y - 10);
+				kick->rect.w = 60;
+				kick->rect.h = 90;
 			}
 
 		}
@@ -947,9 +968,9 @@ Update_Status ModulePlayer::Update()
 			else if (phase == 3) {
 				position.x += 3;
 				collider->SetPos(position.x + 10, position.y);
-				kick->SetPos(position.x + 30, position.y);
-				kick->rect.w = 30;
-				kick->rect.h = 70;
+				kick->SetPos(position.x - 10, position.y - 10);
+				kick->rect.w = 60;
+				kick->rect.h = 90;
 			}
 
 		}
@@ -1131,9 +1152,18 @@ Update_Status ModulePlayer::Update()
 		}
 		else if (frame >= 120)
 		{
-			playerState = state::IDLE;
-			frame = 0;
-			died = false;
+			if (gameOver) {
+				playerState = state::DEATH;
+				frame = 20;
+				died = false;
+			}
+			else
+			{
+				playerState = state::IDLE;
+				frame = 0;
+				died = false;
+			}
+
 		}
 
 		break;
@@ -1269,6 +1299,25 @@ Update_Status ModulePlayer::PostUpdate()
 		App->fonts->BlitText(200, 20, scoreFont, "insert coin");
 	}
 
+
+	if (gameOver)
+	{
+		gameOverCounter++;
+		if (gameOverCounter % 200 == 0) {
+
+			gameOverCounter = 0;
+		}
+		else if (gameOverCounter > 60)
+		{
+			SDL_Rect rect = gameOverAnim.GetCurrentFrame();
+			App->render->Blit(gameOverTexture, 30, 50, &rect, NULL, NULL, true);
+		}
+
+	}
+
+
+
+
 	if (score >= 1000000) {
 		position.x = 30;
 
@@ -1344,28 +1393,21 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ENEMY_SHOT && destroyed == false && PlayerTouch == true)
 	{
-		
 		lifeNodes--;
 
 		damaged = true;
 		PlayerTouch = false;
 		if (lifeNodes <= 0)
 		{
+			App->audio->PlayFx(playerDeathFx);
 			lifeNodes = 12;
 			numLifes--;
 			if (numLifes < 0)
 			{
-
-				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
-				if (score > highScore) {
-					highScore = score;
-				}
-				died = false;
-				diedInAir = false;
-				playerState = state::IDLE;
-				destroyed = true;
+				gameOver = true;
 			}
-			else if (playerState == state::JUMP) {
+			if (playerState == state::JUMP)
+			{
 				diedInAir = true;
 			}
 			else
@@ -1379,6 +1421,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		}
 		else
 		{
+			App->audio->PlayFx(stunFx);
 			if (playerState == state::JUMP)
 			{
 				damagedInAir = true;
