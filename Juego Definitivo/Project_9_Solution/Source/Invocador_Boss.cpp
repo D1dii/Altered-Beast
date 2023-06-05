@@ -32,10 +32,6 @@ void Invocador_Boss::Update() {
 	case Invocador_Boss::state::IDLE:
 		currentAnim = &idleAnim;
 		idleAnim.Update();
-		waitFrame++;
-		if (waitFrame == 150) {
-			App->sceneLevel_1->isBoss = true;
-		}
 		break;
 	case Invocador_Boss::state::INVOCAR:
 		currentAnim = &invocarBoss;

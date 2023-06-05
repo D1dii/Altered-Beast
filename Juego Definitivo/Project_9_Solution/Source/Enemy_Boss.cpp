@@ -7,6 +7,7 @@
 #include "ModulePlayer.h"
 #include "ModuleEnemies.h"
 #include "ModuleRender.h"
+#include "SceneLevel1.h"
 
 Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y) {
 
@@ -78,7 +79,7 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y) {
 
 void Enemy_Boss::Update() {
 
-
+	App->sceneLevel_1->isBoss = true;
 
 	switch (bossState)
 	{

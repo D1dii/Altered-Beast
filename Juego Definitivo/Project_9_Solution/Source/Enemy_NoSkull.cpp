@@ -5,6 +5,7 @@
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
+#include "SceneLevel1.h"
 
 Enemy_NoSkull::Enemy_NoSkull(int x, int y) : Enemy(x, y) {
 
@@ -31,6 +32,9 @@ Enemy_NoSkull::Enemy_NoSkull(int x, int y) : Enemy(x, y) {
 
 void Enemy_NoSkull::Update() {
 
+	if (App->sceneLevel_1->isBoss == true) {
+		SetToDelete();
+	}
 
 	position = spawnPos + path.GetRelativePosition();
 

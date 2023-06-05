@@ -88,6 +88,7 @@
     <ClInclude Include="Enemy_Wolf_Blue.h" />
     <ClInclude Include="Enemy_Zombie.h" />
     <ClInclude Include="Final_Cutscene.h" />
+    <ClInclude Include="Final_Screen.h" />
     <ClInclude Include="InitialScreen.h" />
     <ClInclude Include="Initial_Cutscene.h" />
     <ClInclude Include="Invocador_Boss.h" />
@@ -125,6 +126,7 @@
     <ClCompile Include="Enemy_Wolf_Blue.cpp" />
     <ClCompile Include="Enemy_Zombie.cpp" />
     <ClCompile Include="Final_Cutscene.cpp" />
+    <ClCompile Include="Final_Screen.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="InitialScreen.cpp" />
     <ClCompile Include="Initial_Cutscene.cpp" />

@@ -375,23 +375,6 @@ Update_Status ModulePlayer::Update()
 
 	GamePad& pad = App->input->pads[0];
 
-	//Debug key for gamepad rumble testing purposes
-	if (App->input->keys[SDL_SCANCODE_1] == Key_State::KEY_DOWN)
-	{
-		App->input->ShakeController(0, 12, 0.33f);
-	}
-
-	//Debug key for gamepad rumble testing purposes
-	if (App->input->keys[SDL_SCANCODE_2] == Key_State::KEY_DOWN)
-	{
-		App->input->ShakeController(0, 36, 0.66f);
-	}
-
-	//Debug key for gamepad rumble testing purposes
-	if (App->input->keys[SDL_SCANCODE_3] == Key_State::KEY_DOWN)
-	{
-		App->input->ShakeController(0, 60, 1.0f);
-	}
 
 	if (App->input->keys[SDL_SCANCODE_0] == Key_State::KEY_REPEAT)
 	{
@@ -1173,19 +1156,22 @@ Update_Status ModulePlayer::Update()
 	if (App->input->keys[SDL_SCANCODE_F2] == Key_State::KEY_DOWN) {
 		GODMODE = !GODMODE;
 	}
-
-	//This is for loading the new animations 
+ 
 
 	if (App->input->keys[SDL_SCANCODE_M] == Key_State::KEY_DOWN) {
-		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 90);
+		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneFinal, 90);
 
 	}
 	if (App->input->keys[SDL_SCANCODE_B] == Key_State::KEY_DOWN) {
 		App->audio->PlayFx(playerDeathFx);
 		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 90);
-
-
 	}
+	if (App->input->keys[SDL_SCANCODE_F3] == Key_State::KEY_DOWN) {
+		App->sceneLevel_1->isBoss = true;
+		App->enemies->AddEnemy(Enemy_Type::BOSS, App->render->camera.x + 180, 65);
+		phase = 3;
+	}
+
 
 	// If no up/down movement detected, set the current animation back to idle
 	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_IDLE

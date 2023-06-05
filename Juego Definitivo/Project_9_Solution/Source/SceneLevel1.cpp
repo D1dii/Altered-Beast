@@ -80,17 +80,6 @@ bool SceneLevel1::Start()
 	App->enemies->AddEnemy(Enemy_Type::WOLF_BLUE, 2350, 177);
 
 	App->enemies->AddEnemy(Enemy_Type::INVOCADOR, 2550, 148);
-
-	//App->enemies->AddEnemy(Enemy_Type::NO_SKULL, 400, 156);
-	//App->enemies->AddEnemy(Enemy_Type::WOLF, 1200, 177);
-	//App->enemies->AddEnemy(Enemy_Type::WOLF_BLUE, 1600, 177);
-	//App->enemies->AddEnemy(Enemy_Type::DRAGON, 250, 15);
-	//App->enemies->AddEnemy(Enemy_Type::ORCO, 2000, 150);
-
-
-	
-
-	//App->enemies->AddEnemy(Enemy_Type::BOSS, 180, 65);
 	
 
 	
@@ -106,7 +95,7 @@ bool SceneLevel1::Start()
 Update_Status SceneLevel1::Update()
 {
 	
-	if (!isBoss) {
+	if (App->render->camera.x < 2350 && isBoss == false) {
 		App->render->camera.x += 1;
 	}
 	

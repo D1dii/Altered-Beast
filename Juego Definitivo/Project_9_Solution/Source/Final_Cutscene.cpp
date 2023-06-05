@@ -141,7 +141,7 @@ void Final_Cutscene::Update() {
 
 	if (frame >= 550) {
 		SetToDelete();
-		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
+		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneFinal, 60);
 	}
 	
 }
