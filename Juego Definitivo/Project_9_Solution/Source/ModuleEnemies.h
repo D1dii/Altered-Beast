@@ -23,6 +23,7 @@ enum class Enemy_Type
 	BOSS_HEAD,
 	FINAL_SCENE,
 	INVOCADOR,
+	INITIAL_SCENE,
 
 
 
@@ -95,7 +96,7 @@ public:
 	SDL_Texture* Boss = nullptr;
 	SDL_Texture* FinalScene = nullptr;
 	SDL_Texture* Invocador = nullptr;
-
+	SDL_Texture* InitialScene = nullptr;
 
 private:
 	// Spawns a new enemy using the data from the queue
