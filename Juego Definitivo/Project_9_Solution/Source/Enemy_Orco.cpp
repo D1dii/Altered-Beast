@@ -41,7 +41,7 @@ Enemy_Orco::Enemy_Orco(int x, int y) : Enemy(x, y){
 
 void Enemy_Orco::Update() {
 
-	if (App->sceneLevel_1->isBoss == true) {
+	if (App->sceneLevel_1->isBoss == true || App->player->restartLevel == true) {
 		SetToDelete();
 	}
 

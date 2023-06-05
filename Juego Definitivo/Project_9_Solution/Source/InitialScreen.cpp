@@ -6,6 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
+#include "ModulePlayer.h"
 
 InitialScreen::InitialScreen(bool startEnabled) : Module(startEnabled)
 {
@@ -39,6 +40,7 @@ Update_Status InitialScreen::Update()
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN || pad.y == 1)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 90);
+		
 		
 	}
 

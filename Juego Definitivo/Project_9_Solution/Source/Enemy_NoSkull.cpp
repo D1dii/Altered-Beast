@@ -32,7 +32,7 @@ Enemy_NoSkull::Enemy_NoSkull(int x, int y) : Enemy(x, y) {
 
 void Enemy_NoSkull::Update() {
 
-	if (App->sceneLevel_1->isBoss == true) {
+	if (App->sceneLevel_1->isBoss == true || App->player->restartLevel == true) {
 		SetToDelete();
 	}
 

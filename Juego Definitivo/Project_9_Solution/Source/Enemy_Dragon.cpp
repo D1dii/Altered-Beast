@@ -42,7 +42,7 @@ Enemy_Dragon::Enemy_Dragon(int x, int y) : Enemy(x, y) {
 
 void Enemy_Dragon::Update() {
 
-	if (App->sceneLevel_1->isBoss == true) {
+	if (App->sceneLevel_1->isBoss == true || App->player->restartLevel == true) {
 		SetToDelete();
 	}
 

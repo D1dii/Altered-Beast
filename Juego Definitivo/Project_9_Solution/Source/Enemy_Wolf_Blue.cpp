@@ -38,7 +38,7 @@ Enemy_Wolf_Blue::Enemy_Wolf_Blue(int x, int y) : Enemy(x, y) {
 
 void Enemy_Wolf_Blue::Update() {
 
-	if (App->sceneLevel_1->isBoss == true) {
+	if (App->sceneLevel_1->isBoss == true || App->player->restartLevel == true) {
 		SetToDelete();
 	}
 

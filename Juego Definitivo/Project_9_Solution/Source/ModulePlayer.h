@@ -135,6 +135,7 @@ public:
 	bool died = false;
 	bool gameOver = false;
 	bool onBeastForm;
+	bool restartLevel = false;
 	int frame = 0;
 	int waitForDmg = 0;
 	int numLifes = 2;

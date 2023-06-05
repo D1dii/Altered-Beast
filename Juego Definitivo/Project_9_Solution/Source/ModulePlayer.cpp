@@ -303,6 +303,8 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 
 
 	gameOverAnim.PushBack({ 0 , 0 , 252, 44 });
+
+	
 }
 
 ModulePlayer::~ModulePlayer()
@@ -321,6 +323,7 @@ bool ModulePlayer::Start()
 	gameOver = false;
 	died = false;
 	diedInAir = false;
+	restartLevel = false;
 	playerState = state::IDLE;
 
 	texture = App->textures->Load("Assets/Sprites/fixedprotagonist+.png");
@@ -425,13 +428,14 @@ Update_Status ModulePlayer::Update()
 	}
 
 	//If Intro is pressed then restart the level
-	if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN && gameOver)
+	if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN || pad.start == 1 && gameOver)
 	{
 		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
 		if (score > highScore) {
 			highScore = score;
 		}
 		destroyed = true;
+		restartLevel = true;
 
 	}
 
@@ -1163,8 +1167,10 @@ Update_Status ModulePlayer::Update()
 
 	}
 	if (App->input->keys[SDL_SCANCODE_B] == Key_State::KEY_DOWN) {
-		App->audio->PlayFx(playerDeathFx);
-		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 90);
+		gameOver = true;
+		died = true;
+		deathAnim[phase].Reset();
+		playerState = state::DEATH;
 	}
 	if (App->input->keys[SDL_SCANCODE_F3] == Key_State::KEY_DOWN) {
 		App->sceneLevel_1->isBoss = true;

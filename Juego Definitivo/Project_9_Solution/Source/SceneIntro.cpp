@@ -50,6 +50,7 @@ Update_Status SceneIntro::Update()
 		App->audio->PlayFx(coin);
 		App->player->score = 0;
 		App->player->phase = 0;
+		App->player->restartLevel = false;
 	}
 
 	return Update_Status::UPDATE_CONTINUE;
